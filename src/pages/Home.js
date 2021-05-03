@@ -28,10 +28,10 @@ export default function Home() {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <Link to="/login" className="button">Log In</Link>
+                <Link to="/login" className="button button-small">Log In</Link>
               </div>
               <div className="col-md-6">
-                <Link to="/signup" className="button">Sign Up</Link>
+                <Link to="/signup" className="button button-small                   ">Sign Up</Link>
               </div>
             </div>
           </div>

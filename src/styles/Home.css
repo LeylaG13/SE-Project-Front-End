@@ -35,6 +35,10 @@ h1 {
   border:none;
 }
 
+.button-small{
+  font-size: 1rem;
+}
+
 a {
   color: #ececec;
 }
