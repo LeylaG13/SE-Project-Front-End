@@ -1,5 +1,5 @@
 body {
-  text-align: center;
+  /* text-align: center; */
 /* 
   background: rgb(183, 9, 76);
   background: -moz-linear-gradient(
@@ -22,10 +22,15 @@ body {
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7094c",endColorstr="#0091ad",GradientType=1); */
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 100% 500%;
+  background-size: 200% 500%;
+}
+
+.about-header{
+  text-align: center;
 }
 
 .content{
+  text-align: left;
   color: rgb(255, 255, 255);
   font-size: 1.4rem;
   padding: 20px;
