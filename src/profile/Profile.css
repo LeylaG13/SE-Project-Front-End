@@ -1,0 +1,165 @@
+body {
+  background: linear-gradient(116.31deg, #b7094c 0%, #0091ad 99.82%);
+  background-size: 100% 110%;
+  background-attachment: fixed;
+}
+
+.container {
+  color: white;
+}
+
+.row{
+  /* margin: auto 0; */
+}
+.avatar {
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 20px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 200px;
+  /* margin-right: 25px; */
+  text-align: center;
+  
+}
+
+.stats {
+  width: 80%;
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 20px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
+  margin-right: 0;
+  /* display: flex; */
+}
+
+.stats-title{
+  /* flex: 100%; */
+}
+
+
+
+.stats h3{
+  text-align: center;
+  margin-top: 10px;
+}  
+
+.chart {
+  color: white;
+}
+
+.friends-list{
+  width: 80%;
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 20px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-right: 0;
+  margin-left: auto;
+  padding: 0;
+}
+
+.friends-list{
+  text-align: center;
+}
+
+.friends-list h3{
+  margin-top: 10px;
+}
+
+.friends-list div:hover{
+  background: #00778f;
+}
+
+.friends-list-button{
+  width: 50%;
+  height: 20px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.avatar > .row {
+  margin-bottom: 15px;
+}
+
+.row.name {
+  margin: 5px;
+}
+
+.row.email {
+  margin: 5px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 0.8rem;
+}
+h3{
+  font-size: 1.5rem;
+}
+.avatar-image {
+  /* border-radius: 50%;
+  border: 2px solid aqua; */
+  /* height: 100px; */
+  /* width: 100%; */
+}
+
+.avatar-image img {
+  width: 100%;
+}
+
+
+
+.shape {
+  /* padding: 15px; */
+  border-radius: 30px;
+}
+
+
+
+
+
+@media(max-width: 780px){
+  body{
+    background-size: 100% 110%;
+  }
+  .avatar{
+    margin: auto;
+  }
+
+  .avatar img{
+    width: 300%;
+    /* margin:  0 auto; */
+  }
+
+  .avatar > .row{
+    margin: ;
+  }
+
+  .stats {
+    margin: auto;
+    margin-top: 30px;
+  }
+
+  .friends-list{
+    margin: auto;
+    margin-top: 30px;
+  }
+  h1{
+    font-size: 2rem;
+  }
+  h2{
+    font-size: 0.5rem;
+  }
+  h3{
+    font-size: 1rem;
+  }
+}

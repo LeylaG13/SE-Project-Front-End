@@ -4,13 +4,13 @@ html {
 
 body {
   min-height: 100%;
-  /* text-align: center; */
+  text-align: center;
   font-family: "Kanit", sans-serif;
 }
 
 h1 {
   font-family: "Luckiest Guy", cursive;
-  font-size: 5rem;
+  font-size: 550%;
   margin: 0;
   color: white;
 }
@@ -24,19 +24,15 @@ h1 {
   padding: 1rem;
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(8.5px);
   -webkit-backdrop-filter: blur(8.5px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.button:hover{
+.button:hover {
   background: rgba(255, 180, 180, 0.3);
-  border:none;
-}
-
-.button-small{
-  font-size: 1rem;
+  border: none;
 }
 
 a {
@@ -52,7 +48,12 @@ a:hover {
   margin-top: 35%;
   margin-bottom: 20%;
 }
-.image-box img {
+
+.image-box1 img {
+  width: 21rem;
+}
+
+.image-box2 img {
   width: 18rem;
 }
 
@@ -67,16 +68,15 @@ body {
 }
 
 .test {
-  text-align: center;
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   color: #fff;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 500% 500%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
   animation: Gradient 15s ease infinite;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
 }
 
@@ -119,4 +119,8 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.firstrow {
+  margin-top: 0%;
 }

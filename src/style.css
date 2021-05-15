@@ -25,13 +25,19 @@ body {
   -o-background-size: cover;
 }
 
-.content {
-  color: rgb(0, 0, 0);
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 5px 10px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(8.5px);
-  -webkit-backdrop-filter: blur(8.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+h1,
+h3 {
+  text-align: center;
+  margin: auto;
+  margin-top: 5% !important;
+  /* margin-bottom: 3.5% !important; */
+  font-family: "Luckiest Guy", cursive;
+  color: white;
+  font-size: 400%;
+}
+
+h3 {
+  font-size: 200%;
+  margin-top: 3%;
+  margin-left: 35%;
 }
