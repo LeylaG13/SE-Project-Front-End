@@ -1,0 +1,44 @@
+#registerdiv {
+  background: rgba(196, 196, 196, 0.24);
+  border: 1px solid #b1b1b1;
+  box-sizing: border-box;
+  backdrop-filter: blur(25px);
+
+  border-radius: 30px;
+  margin: auto;
+  margin-bottom: 10%;
+  width: 65%;
+  margin-top: 5rem;
+  padding-top: 3.5%;
+}
+
+.preg {
+  color: white;
+  font-family: "Luckiest Guy", cursive;
+  font-size: large;
+  margin-top: 3% !important;
+  margin-bottom: 2% !important;
+  margin-left: 10% !important;
+  margin-right: 3% !important;
+  font-size: 170%;
+  width: 10%;
+}
+
+button {
+  border-radius: 25px !important;
+  margin-top: 3% !important;
+  margin-bottom: 3% !important;
+  margin-left: 70% !important;
+}
+
+input {
+  background: rgba(196, 196, 196, 0.24);
+  border: 0.5px solid #b1b1b1;
+  box-sizing: border-box;
+  backdrop-filter: blur(25px);
+
+  border-radius: 30px;
+  margin-left: 5%;
+  font-size: 170%;
+  width: 60%;
+}

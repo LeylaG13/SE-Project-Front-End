@@ -1,0 +1,104 @@
+#gamepage {
+  text-align: center;
+
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    116.82deg,
+    #0a2468 0%,
+    #000000 0.01%,
+    rgba(6, 25, 74, 0.76) 100%
+  );
+  background: -webkit-linear-gradient(
+    116.82deg,
+    #0a2468 0%,
+    #000000 0.01%,
+    rgba(6, 25, 74, 0.76) 100%
+  );
+  background: linear-gradient(
+    116.82deg,
+    #0a2468 0%,
+    #000000 0.01%,
+    rgba(6, 25, 74, 0.76) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7094c",endColorstr="#0091ad",GradientType=1);
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#gamepage h1 {
+  margin-top: 0% !important;
+  padding-top: 6%;
+}
+
+.icon-image {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 15%;
+}
+
+.icon-image img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  border-radius: 25px;
+  box-sizing: border-box;
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(30px);
+
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+.game-info {
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: white;
+  border-radius: 20px;
+}
+
+.game-info p {
+  margin-bottom: 1%;
+}
+/* 
+.one {
+  background: rgba(0, 145, 173, 0.7);
+}
+
+.two {
+  background: #b7094c;
+} */
+
+.blue img {
+  background: rgba(0, 145, 173, 0.7);
+  border: 4px solid rgba(0, 214, 255, 0.7);
+  border-radius: 25px;
+}
+
+.red img {
+  background: #b7094c;
+  border: 4px solid #ff0062;
+  border-radius: 25px;
+}
+
+.black img {
+  background: #0a0325;
+  border: 4px solid #6b4e6b;
+  border-radius: 25px;
+}
+
+.grey img {
+  background: #919191;
+  border: 4px solid #ffffff;
+  border-radius: 25px;
+}
+
+h4 {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 300%;
+}
+
+.two.wide.column {
+  margin-top: 6%;
+}
