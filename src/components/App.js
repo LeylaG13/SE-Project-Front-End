@@ -9,6 +9,7 @@ import Rank from "../ranking/Rank";
 import GamePage from "../gamepage/GamePage";
 import Profile from "../profile/Profile";
 import Menu from "./Menu";
+import ProfileEdit from '../'
 
 export default class App extends Component {
   render() {

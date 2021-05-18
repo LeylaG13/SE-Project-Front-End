@@ -20,7 +20,6 @@ body {
   width: 200px;
   /* margin-right: 25px; */
   text-align: center;
-  
 }
 
 .stats {
@@ -41,11 +40,6 @@ body {
 
 
 
-.stats h3{
-  text-align: center;
-  margin-top: 10px;
-}  
-
 .chart {
   color: white;
 }
@@ -63,15 +57,20 @@ body {
   margin-bottom: 15px;
 }
 
-h1 {
+.name h1 {
   font-size: 3rem;
 }
 
-h2 {
+.email h2 {
   font-size: 0.8rem;
 }
-h3{
+
+.stats h3{
+  margin: 0;
   font-size: 1.5rem;
+}  
+.description p{
+  font-size: 0.9rem;
 }
 .avatar-image {
   /* border-radius: 50%;
@@ -92,7 +91,20 @@ h3{
 }
 
 
+.shape .chart{
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
+.shape .figures{
+  /* text-align: start; */
+  display: flex;
+  margin: 20px 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items:center;
+  flex-wrap: wrap;
+}
 
 
 @media(max-width: 780px){
@@ -117,13 +129,13 @@ h3{
     margin-top: 30px;
   }
 
-  h1{
+  .name h1{
     font-size: 2rem;
   }
-  h2{
+  .email h2{
     font-size: 0.5rem;
   }
-  h3{
+  .stats h3{
     font-size: 1rem;
   }
 }

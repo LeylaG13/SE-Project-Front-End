@@ -14,6 +14,7 @@ import {
   Tooltip,
   Area,
 } from "recharts";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   // const data = [
@@ -93,6 +94,23 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            <div className="row description">
+              <div className="col">
+                <div className="">
+                  <p>
+                    Irure deserunt nisi officia laborum ut sunt est tempor nulla
+                    qui proident.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row edit-button">
+              <div className="col">
+                <div className="">
+                  <Link to="/profile/edit"></Link>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="col-md-7 stats shape">
             <div className="stats-title">
@@ -116,8 +134,8 @@ const Profile = () => {
                   <stop offset="95%" stopColor="#ff0066" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" />
-              {/* <YAxis /> */}
+              <XAxis dataKey="name" tick={{ fill: 'white' }} />
+              <YAxis tick={{ fill: 'white' }}/>
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <Tooltip />
               <Area
@@ -135,45 +153,22 @@ const Profile = () => {
                 fill="url(#colorPv)"
               />
             </AreaChart>
-            {/* <div className="stats-games">
-            <h4>Total Games</h4>
-            <ul>
-              <li>241</li>
-            </ul>
-            <h4>Losses</h4>
-            <ul>
-              <li>239 </li>
-            </ul>
-            <h4>Wins</h4>
-            <ul>
-              <li>2 </li>
-            </ul>
+            <div className="figures">
+              <div>
+                <h6>Wins</h6>
+                <p>22</p>
+              </div>
+              <div>
+                <h6>Losses</h6>
+                <p>22</p>
+              </div>
+              <div>
+                <h6>Total games</h6>
+                <p>22</p>
+              </div>
+              
+            </div>
           </div>
-          <div className="stats-user">
-            <h4>Points</h4>
-            <h4>Rank</h4>
-            <h4>Leaderboard Place</h4>
-          </div> */}
-            {/* <VictoryBar
-            data={data}
-            // data accessor for x values
-            x="quarter"
-            // data accessor for y values
-            y="earnings"
-          /> */}
-          </div>
-          {/* DYNAMIC */}
-
-          {/* <div className="col-md-2 friends-list shape">
-            <h3>Friends (231)</h3>
-            <div className="friends-list-entry">Leyla</div>
-            <div className="friends-list-entry">Mahira</div>
-            <div className="friends-list-entry">Laman</div>
-            <div className="friends-list-entry">Maryam</div>
-            {/* <div className="button friends-list-button">
-            More
-          </div> */}
-          {/* </div> */}
         </div>
       </div>
     </div>
