@@ -94,7 +94,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-5 stats shape">
+          <div className="col-md-7 stats shape">
             <div className="stats-title">
               <h3>User Stats</h3>
             </div>
@@ -164,7 +164,7 @@ const Profile = () => {
           </div>
           {/* DYNAMIC */}
 
-          <div className="col-md-2 friends-list shape">
+          {/* <div className="col-md-2 friends-list shape">
             <h3>Friends (231)</h3>
             <div className="friends-list-entry">Leyla</div>
             <div className="friends-list-entry">Mahira</div>
@@ -173,7 +173,7 @@ const Profile = () => {
             {/* <div className="button friends-list-button">
             More
           </div> */}
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </div>
