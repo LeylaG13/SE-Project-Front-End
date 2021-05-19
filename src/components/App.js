@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { ProfileProvider } from "../context/ProfileContext";
+import { LoginProvider } from "../context/LoginContext";
 
 import "../style.css";
 import Home from "../pages/Home";
@@ -18,16 +19,18 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route exact path="/leaderboard" component={Rank} />
-          <Route path="/signup" component={Register} />
-          <Route path="/gamepage" component={GamePage} />
-          <ProfileProvider>
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/profile/edit" component={ProfileEdit} />
-          </ProfileProvider>
-          <Route path="/menu" component={Menu} />
+          <LoginProvider> /
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route exact path="/leaderboard" component={Rank} />
+            <Route path="/signup" component={Register} />
+            <Route path="/gamepage" component={GamePage} />
+            <ProfileProvider>
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/profile/edit" component={ProfileEdit} />
+            </ProfileProvider>
+            <Route path="/menu" component={Menu} />
+          </LoginProvider>
         </Switch>
       </BrowserRouter>
     );

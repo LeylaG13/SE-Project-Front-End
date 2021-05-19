@@ -1,5 +1,5 @@
-import React, {useContext} from "react";
-import {ProfileContext} from '../context/ProfileContext';
+import React, { useContext } from "react";
+import { ProfileContext } from "../context/ProfileContext";
 
 import Menu from "../components/Menu";
 import "./Profile.css";
@@ -16,7 +16,6 @@ import {
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-
   const [user, setUser] = useContext(ProfileContext);
 
   const data = [
@@ -63,54 +62,64 @@ const Profile = () => {
       amt: 2100,
     },
   ];
-  
+
   const handleName = (event) => {
-    setUser({name: event.target.value});
+    setUser({ name: event.target.value });
     console.log(event.target.value);
-  }
+  };
   const handleDescription = (event) => {
-    setUser({description: event.target.value});
+    setUser({ description: event.target.value });
     console.log(event.target.value);
-  }
+  };
+
+  const complete = (e) => {
+    e.preventDefault();
+
+  };
   return (
     <div>
       <Menu />
       <div className="container">
         <div className="row">
           <div className="col-md-4 col-s-12 avatar shape">
-            <div className="row">
-              <div className="col avatar-image">
-                <img src={avatarImage1} alt="user avatar" /> {/* DYNAMIC */}
-              </div>
-            </div>
-            <div className="row name">
-              <div className="col">
-                <div>
-                  <input value={user.name} onChange={handleName}/>
+            <for onSubmit={complete}>
+              <div className="row">
+                <div className="col avatar-image">
+                  <img src={avatarImage1} alt="user avatar" /> {/* DYNAMIC */}
                 </div>
               </div>
-            </div>
-            <div className="row email">
-              <div className="col">
-                <div className="">
-                  <h2>{user.email}</h2> {/* DYNAMIC */}
+              <div className="row name">
+                <div className="col">
+                  <div>
+                    <input value={user.name} onChange={handleName} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row description">
-              <div className="col">
-                <div className="">
-                  <input value={user.description} onChange={handleDescription}/>
+              <div className="row email">
+                <div className="col">
+                  <div className="">
+                    <h2>{user.email}</h2> {/* DYNAMIC */}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row edit-button">
-              <div className="col">
-                <div className="">
-                  <Link to="/profile">Complete</Link>
+              <div className="row description">
+                <div className="col">
+                  <div className="">
+                    <input
+                      value={user.description}
+                      onChange={handleDescription}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+              <div className="row edit-button">
+                <div className="col">
+                  <div className="">
+                    <Link to="/profile">Complete</Link>
+                  </div>
+                </div>
+              </div>
+            </for>
           </div>
           <div className="col-md-7 stats shape">
             <div className="stats-title">
@@ -134,8 +143,8 @@ const Profile = () => {
                   <stop offset="95%" stopColor="#ff0066" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" tick={{ fill: 'white' }} />
-              <YAxis tick={{ fill: 'white' }}/>
+              <XAxis dataKey="name" tick={{ fill: "white" }} />
+              <YAxis tick={{ fill: "white" }} />
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <Tooltip />
               <Area
@@ -166,7 +175,6 @@ const Profile = () => {
                 <h6>Total games</h6>
                 <p>{user.total}</p>
               </div>
-              
             </div>
           </div>
         </div>
