@@ -1,5 +1,5 @@
-import React, {useContext} from "react";
-import {ProfileContext} from '../context/ProfileContext';
+import React, { useContext } from "react";
+import { ProfileContext } from "../context/ProfileContext";
 
 import Menu from "../components/Menu";
 import "./Profile.css";
@@ -16,15 +16,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  // const data = [
-  //   { quarter: 1, earnings: 13000 },
-  //   { quarter: 2, earnings: 16500 },
-  //   { quarter: 3, earnings: 14250 },
-  //   { quarter: 4, earnings: 19000 },
-  // ];
-
   const [user, setUser] = useContext(ProfileContext);
-  console.log(user);
 
   const data = [
     {
@@ -71,47 +63,63 @@ const Profile = () => {
     },
   ];
 
+  const handleName = (event) => {
+    setUser({ name: event.target.value });
+    console.log(event.target.value);
+  };
+  const handleDescription = (event) => {
+    setUser({ description: event.target.value });
+    console.log(event.target.value);
+  };
+
+  const complete = (e) => {
+    e.preventDefault();
+
+  };
   return (
     <div>
       <Menu />
       <div className="container">
         <div className="row">
           <div className="col-md-4 col-s-12 avatar shape">
-            <div className="row">
-              <div className="col avatar-image">
-                <img src={avatarImage1} alt="user avatar" /> {/* DYNAMIC */}
-              </div>
-            </div>
-            <div className="row name">
-              <div className="col">
-                <div>
-                  <h1>{user.name}</h1> {/* DYNAMIC */}
+            <for onSubmit={complete}>
+              <div className="row">
+                <div className="col avatar-image">
+                  <img src={avatarImage1} alt="user avatar" /> {/* DYNAMIC */}
                 </div>
               </div>
-            </div>
-            <div className="row email">
-              <div className="col">
-                <div className="">
-                  <h2>{user.email}</h2> {/* DYNAMIC */}
+              <div className="row name">
+                <div className="col">
+                  <div>
+                    <input value={user.name} onChange={handleName} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row description">
-              <div className="col">
-                <div className="">
-                  <p>
-                    {user.description}
-                  </p>
+              <div className="row email">
+                <div className="col">
+                  <div className="">
+                    <h2>{user.email}</h2> {/* DYNAMIC */}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row edit-button">
-              <div className="col">
-                <div className="">
-                  <Link to="/profile/edit">Edit</Link>
+              <div className="row description">
+                <div className="col">
+                  <div className="">
+                    <input
+                      value={user.description}
+                      onChange={handleDescription}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+              <div className="row edit-button">
+                <div className="col">
+                  <div className="">
+                    <Link to="/profile">Complete</Link>
+                  </div>
+                </div>
+              </div>
+            </for>
           </div>
           <div className="col-md-7 stats shape">
             <div className="stats-title">
@@ -135,8 +143,8 @@ const Profile = () => {
                   <stop offset="95%" stopColor="#ff0066" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" tick={{ fill: 'white' }} />
-              <YAxis tick={{ fill: 'white' }}/>
+              <XAxis dataKey="name" tick={{ fill: "white" }} />
+              <YAxis tick={{ fill: "white" }} />
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <Tooltip />
               <Area
@@ -167,7 +175,6 @@ const Profile = () => {
                 <h6>Total games</h6>
                 <p>{user.total}</p>
               </div>
-              
             </div>
           </div>
         </div>

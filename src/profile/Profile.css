@@ -20,7 +20,6 @@ body {
   width: 200px;
   /* margin-right: 25px; */
   text-align: center;
-  
 }
 
 .stats {
@@ -41,45 +40,8 @@ body {
 
 
 
-.stats h3{
-  text-align: center;
-  margin-top: 10px;
-}  
-
 .chart {
   color: white;
-}
-
-.friends-list{
-  width: 80%;
-  background: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 8px 20px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  margin-right: 0;
-  margin-left: auto;
-  padding: 0;
-}
-
-.friends-list{
-  text-align: center;
-}
-
-.friends-list h3{
-  margin-top: 10px;
-}
-
-.friends-list div:hover{
-  background: #00778f;
-}
-
-.friends-list-button{
-  width: 50%;
-  height: 20px;
-  font-size: 1rem;
-  text-align: center;
 }
 
 .avatar > .row {
@@ -95,15 +57,20 @@ body {
   margin-bottom: 15px;
 }
 
-h1 {
+.name h1 {
   font-size: 3rem;
 }
 
-h2 {
+.email h2 {
   font-size: 0.8rem;
 }
-h3{
+
+.stats h3{
+  margin: 0;
   font-size: 1.5rem;
+}  
+.description p{
+  font-size: 0.9rem;
 }
 .avatar-image {
   /* border-radius: 50%;
@@ -124,7 +91,20 @@ h3{
 }
 
 
+.shape .chart{
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
+.shape .figures{
+  /* text-align: start; */
+  display: flex;
+  margin: 20px 0;
+  width: 100%;
+  justify-content: space-around;
+  align-items:center;
+  flex-wrap: wrap;
+}
 
 
 @media(max-width: 780px){
@@ -149,17 +129,13 @@ h3{
     margin-top: 30px;
   }
 
-  .friends-list{
-    margin: auto;
-    margin-top: 30px;
-  }
-  h1{
+  .name h1{
     font-size: 2rem;
   }
-  h2{
+  .email h2{
     font-size: 0.5rem;
   }
-  h3{
+  .stats h3{
     font-size: 1rem;
   }
 }
