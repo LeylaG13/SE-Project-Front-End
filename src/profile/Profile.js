@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+import {ProfileContext} from '../context/ProfileContext';
 
 import Menu from "../components/Menu";
 import "./Profile.css";
@@ -9,8 +10,6 @@ import {
   linearGradient,
   XAxis,
   YAxis,
-  CartesianAxis,
-  CartesianGrid,
   Tooltip,
   Area,
 } from "recharts";
@@ -23,6 +22,9 @@ const Profile = () => {
   //   { quarter: 3, earnings: 14250 },
   //   { quarter: 4, earnings: 19000 },
   // ];
+
+  const [user, setUser] = useContext(ProfileContext);
+  console.log(user);
 
   const data = [
     {
@@ -83,14 +85,14 @@ const Profile = () => {
             <div className="row name">
               <div className="col">
                 <div>
-                  <h1>Sarkhan</h1> {/* DYNAMIC */}
+                  <h1>{user.name}</h1> {/* DYNAMIC */}
                 </div>
               </div>
             </div>
             <div className="row email">
               <div className="col">
                 <div className="">
-                  <h2>sarkhanjafarli12@gmail.com</h2> {/* DYNAMIC */}
+                  <h2>{user.email}</h2> {/* DYNAMIC */}
                 </div>
               </div>
             </div>
@@ -98,8 +100,7 @@ const Profile = () => {
               <div className="col">
                 <div className="">
                   <p>
-                    Irure deserunt nisi officia laborum ut sunt est tempor nulla
-                    qui proident.
+                    {user.description}
                   </p>
                 </div>
               </div>
@@ -107,7 +108,7 @@ const Profile = () => {
             <div className="row edit-button">
               <div className="col">
                 <div className="">
-                  <Link to="/profile/edit"></Link>
+                  <Link to="/profile/edit">Edit</Link>
                 </div>
               </div>
             </div>
@@ -156,15 +157,15 @@ const Profile = () => {
             <div className="figures">
               <div>
                 <h6>Wins</h6>
-                <p>22</p>
+                <p>{user.wins}</p>
               </div>
               <div>
                 <h6>Losses</h6>
-                <p>22</p>
+                <p>{user.losses}</p>
               </div>
               <div>
                 <h6>Total games</h6>
-                <p>22</p>
+                <p>{user.total}</p>
               </div>
               
             </div>
