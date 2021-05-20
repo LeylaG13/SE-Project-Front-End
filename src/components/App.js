@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ProfileProvider } from "../context/ProfileContext";
 import { LoginProvider } from "../context/LoginContext";
 import { GameProvider } from "../context/GameContext";
+import { CardsProvider } from "../context/CardsContext";
 
 import "../style.css";
 import Home from "../pages/Home";
@@ -33,7 +34,9 @@ export default class App extends Component {
             </ProfileProvider>
             <Route path="/menu" component={Menu} />
             <GameProvider>
-              <Route path="/draft" component={Draft} />
+              <CardsProvider>
+                <Route path="/draft" component={Draft} />
+              </CardsProvider>
             </GameProvider>
           </LoginProvider>
         </Switch>

@@ -1,0 +1,12 @@
+.card {
+  
+  width: 150px;
+  font-size: 0.6rem;
+  color: black;
+  /* background-color: black; */
+}
+
+.card:hover {
+  background-color: rgb(201, 156, 231);
+  color: white;
+}
