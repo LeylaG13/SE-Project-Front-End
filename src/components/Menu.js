@@ -7,7 +7,7 @@ const Menu = () => {
   const [active, setActive] = useState("");
 
   const onClick = (e, id) => {
-    if (id == e.target.id) {
+    if (id === e.target.id) {
       setActive(id);
     }
   };
@@ -67,7 +67,7 @@ const Menu = () => {
         className="circular ui icon button"
         id="menubutton"
         onClick={() => {
-          if (menu == 0) {
+          if (menu === 0) {
             setMenu(1);
           } else {
             setMenu(0);

@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { ProfileProvider } from "../context/ProfileContext";
 import { LoginProvider } from "../context/LoginContext";
+import { GameProvider } from "../context/GameContext";
+import { CardsProvider } from "../context/CardsContext";
 
 import "../style.css";
 import Home from "../pages/Home";
@@ -13,13 +15,14 @@ import GamePage from "../gamepage/GamePage";
 import Profile from "../profile/Profile";
 import Menu from "./Menu";
 import ProfileEdit from "../profile/ProfileEdit";
+import Draft from "./Draft";
 
 export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <LoginProvider> /
+          <LoginProvider>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
             <Route exact path="/leaderboard" component={Rank} />
@@ -30,6 +33,11 @@ export default class App extends Component {
               <Route exact path="/profile/edit" component={ProfileEdit} />
             </ProfileProvider>
             <Route path="/menu" component={Menu} />
+            <GameProvider>
+              <CardsProvider>
+                <Route path="/draft" component={Draft} />
+              </CardsProvider>
+            </GameProvider>
           </LoginProvider>
         </Switch>
       </BrowserRouter>
