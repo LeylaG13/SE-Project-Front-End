@@ -15,7 +15,7 @@ import {
 } from "recharts";
 import { Link } from "react-router-dom";
 
-const Profile = () => {
+const ProfileEdit = () => {
   const [user, setUser] = useContext(ProfileContext);
 
   const data = [
@@ -63,12 +63,12 @@ const Profile = () => {
     },
   ];
 
-  const handleChange = (event)=>{
+  const handleChange = (event) => {
     let newState = Object.assign({}, user); // creating a copy of the state
     newState[event.target.name] = event.target.value; // changing the value we want
     setUser(newState); // passing it to state
     console.log(event.target.value);
-  }
+  };
 
   const complete = (e) => {
     e.preventDefault();
@@ -90,7 +90,12 @@ const Profile = () => {
               <div className="row name">
                 <div className="col">
                   <div>
-                    <input name="name" className="name-edit" value={user.name} onChange={handleChange} />
+                    <input
+                      name="name"
+                      className="name-edit"
+                      value={user.name}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -116,7 +121,9 @@ const Profile = () => {
               <div className="row ">
                 <div className="col">
                   <div className="">
-                    <Link to="/profile" className="edit-button">Complete</Link>
+                    <Link to="/profile" className="edit-button">
+                      Complete
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -178,7 +185,7 @@ const Profile = () => {
                   <p>{user.total}</p>
                 </div>
               </div>
-              
+
               <div className="figure-wrappers">
                 <div>
                   <h6>Total Points</h6>
@@ -201,4 +208,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileEdit;
