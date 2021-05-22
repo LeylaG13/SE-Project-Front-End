@@ -55,6 +55,9 @@ const GamePage = () => {
     glob++;
   }
   // const [player, setPlayer] = useState("");
+  const [pointsRed, setPointsRed] = useState(0);
+  const [pointsBlue, setPointsBlue] = useState(0);
+  const [chosenCard, setChosenCard] = useState({});
   const [team, setTeam] = useState("");
   const [disabled, setDisabled] = useState("");
   const [numBlueSpy, setNumBlueSpy] = useState(0);
@@ -121,6 +124,43 @@ const GamePage = () => {
   //     });
   // }, []);
 
+  useEffect(() => {
+    if (Object.keys(chosenCard).length !== 0) {
+      if (chosenCard.color === "black") {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 100);
+          setPointsRed(pointsRed + 450);
+        } else {
+          setPointsRed(pointsRed - 100);
+          setPointsBlue(pointsBlue + 450);
+        }
+      } else if (chosenCard.color === team) {
+        if (team === "blue") {
+          console.log("I am blue");
+          setPointsBlue(pointsBlue + 50);
+        } else {
+          console.log("I am red");
+
+          setPointsRed(pointsRed + 50);
+        }
+      } else if (chosenCard.color === "grey") {
+      } else {
+        if (team === "blue") {
+          console.log("I am blue");
+
+          setPointsBlue(pointsBlue - 25);
+          setPointsRed(pointsRed + 25);
+        } else {
+          console.log("I am red");
+
+          setPointsRed(pointsRed - 25);
+          setPointsBlue(pointsBlue + 25);
+        }
+      }
+    }
+  }, [chosenCard]);
+
+  console.log(chosenCard);
   const handleMoves = (e) => {
     setMoves(Number(e.target.value));
   };
@@ -159,26 +199,34 @@ const GamePage = () => {
       <Menu />
       <h1> Room #1</h1>
       <button
-        class={`redbutton ui inverted small blue button ${disabled}`}
+        class={`redbutton ui ${
+          player === "spymaster" && team === "blue" ? "" : `inverted`
+        } small blue button  ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "blue")}
       >
         Join as spymaster
       </button>
       <button
-        class={`redbutton  ui inverted small blue button ${disabled}`}
+        class={`redbutton  ui ${
+          player === "operative" && team === "blue" ? "" : `inverted`
+        } small blue button ${disabled}`}
         id="rightbutton"
         onClick={(e) => onClickTeam("operative", "blue")}
       >
         Join as operative
       </button>
       <button
-        class={`bluebutton  ui inverted small pink button ${disabled}`}
+        class={`bluebutton  ui ${
+          player === "spymaster" && team === "red" ? "" : `inverted`
+        } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "red")}
       >
         Join as spymaster
       </button>
       <button
-        class={`bluebutton  ui inverted small pink button ${disabled}`}
+        class={`bluebutton  ui ${
+          player === "operative" && team === "red" ? "" : `inverted`
+        } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("operative", "red")}
       >
         Join as operative
@@ -192,6 +240,7 @@ const GamePage = () => {
           <div className="game-info one">
             <h4>Team Blue</h4>
             <p>Words guessed: </p>
+            <p>Points earned: {pointsBlue} </p>
             <p>Operatives: {numBlueOperative}</p>
             <p>Spymasters: {numBlueSpy}</p>
           </div>
@@ -203,26 +252,36 @@ const GamePage = () => {
             word={allCards[0].word}
             color={allCards[0].color}
             number={numbers[0]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[1].word}
             color={allCards[1].color}
             number={numbers[1]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[2].word}
             color={allCards[2].color}
             number={numbers[2]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[3].word}
             color={allCards[3].color}
             number={numbers[3]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[4].word}
             color={allCards[4].color}
             number={numbers[4]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
         </div>
 
@@ -232,26 +291,36 @@ const GamePage = () => {
             word={allCards[5].word}
             color={allCards[5].color}
             number={numbers[5]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[6].word}
             color={allCards[6].color}
             number={numbers[6]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[7].word}
             color={allCards[7].color}
             number={numbers[7]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[8].word}
             color={allCards[8].color}
             number={numbers[8]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[9].word}
             color={allCards[9].color}
             number={numbers[9]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
         </div>
 
@@ -261,26 +330,36 @@ const GamePage = () => {
             word={allCards[10].word}
             color={allCards[10].color}
             number={numbers[10]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[11].word}
             color={allCards[11].color}
             number={numbers[11]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[12].word}
             color={allCards[12].color}
             number={numbers[12]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[13].word}
             color={allCards[13].color}
             number={numbers[13]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[14].word}
             color={allCards[14].color}
             number={numbers[14]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
         </div>
 
@@ -290,26 +369,36 @@ const GamePage = () => {
             word={allCards[15].word}
             color={allCards[15].color}
             number={numbers[15]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[16].word}
             color={allCards[16].color}
             number={numbers[16]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[17].word}
             color={allCards[17].color}
             number={numbers[17]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[18].word}
             color={allCards[18].color}
             number={numbers[18]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[19].word}
             color={allCards[19].color}
             number={numbers[19]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
         </div>
 
@@ -320,26 +409,36 @@ const GamePage = () => {
             word={allCards[20].word}
             color={allCards[20].color}
             number={numbers[20]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[21].word}
             color={allCards[21].color}
             number={numbers[21]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[22].word}
             color={allCards[22].color}
             number={numbers[22]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[23].word}
             color={allCards[23].color}
             number={numbers[23]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
           <Card
             word={allCards[24].word}
             color={allCards[24].color}
             number={numbers[24]}
+            setChosenCard={setChosenCard}
+            player={player}
           />
         </div>
 
@@ -350,6 +449,7 @@ const GamePage = () => {
           <div className="game-info two">
             <h4>Team Red</h4>
             <p>Words guessed: </p>
+            <p>Points earned: {pointsRed} </p>
             <p>Operatives: {numRedOperative}</p>
             <p>Spymasters: {numRedSpy}</p>
           </div>
