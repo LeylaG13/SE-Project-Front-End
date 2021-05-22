@@ -75,13 +75,33 @@ const GamePage = () => {
   shuffle(numbers);
   shuffle(numbers);
 
-  const [player, setPlayer] = useState("");
+  // const [player, setPlayer] = useState("");
   const [team, setTeam] = useState("");
   const [disabled, setDisabled] = useState("");
   const [numBlueSpy, setNumBlueSpy] = useState(0);
   const [numBlueOperative, setNumBlueOperatives] = useState(0);
   const [numRedSpy, setNumRedSpy] = useState(0);
   const [numRedOperative, setNumberRedOperative] = useState(0);
+  const [player, setPlayer] = useState("");
+  const [whoseTurn, setWhoseTurn] = useState(0);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      msg: "Hello",
+      team: 0, // blue
+    },
+    {
+      id: 2,
+      msg: "You are stupid, go home",
+      team: 1, //red
+    },
+  ]);
+
+  const [hint, setHint] = useState("");
+  const [moves, setMoves] = useState(0);
+
+  const [lastID, setLastID] = useState(2);
+
   // useEffect(() => {
   //   axios.get("http://127.0.0.1:8000/api/generate").then((response) => {
   //     console.log(response.data);
@@ -121,6 +141,21 @@ const GamePage = () => {
   //       console.error(error);
   //     });
   // }, []);
+
+  const handleMoves = (e) => {
+    setMoves(Number(e.target.value));
+  };
+
+  const handleHint = (e) => {
+    setHint(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
+    setWhoseTurn(!whoseTurn);
+    setLastID(lastID + 1);
+  };
 
   const onClickTeam = (playertype, color) => {
     setPlayer(playertype);
@@ -339,14 +374,58 @@ const GamePage = () => {
             <p>Operatives: {numRedOperative}</p>
             <p>Spymasters: {numRedSpy}</p>
           </div>
+          <div className="chatbox">
+            {messages.map((message) => {
+              return (
+                <div
+                  className={`message ${message.team ? "red" : "blue"}`}
+                  key={message.id}
+                >
+                  {message.team ? <p>Team Red: </p> : <p>Team Blue: </p>}
+                  {message.msg}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <label for="hint" class="preg">
           Hint:
         </label>
         <input type="text" id="idhint" name="hint" />
+      </div> */}
+
+      <div className="hintbox">
+        <form className="hintform" onSubmit={handleSubmit}>
+          <div>
+            <label for="hint" class="preg">
+              Hint:
+            </label>
+            <input
+              className="hint"
+              value={hint}
+              type="text"
+              id="idhint"
+              name="hint"
+              onChange={handleHint}
+            />
+          </div>
+          <div>
+            <label for="moves" class="preg">
+              Moves:{" "}
+            </label>
+            <input
+              className="moves"
+              value={moves}
+              type="number"
+              name="moves"
+              onChange={handleMoves}
+            />
+          </div>
+          <button>send</button>
+        </form>
       </div>
     </div>
   );
