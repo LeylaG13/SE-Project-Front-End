@@ -12,6 +12,7 @@ function Register() {
   const [errors, setError] = useState(0);
   const [success, setSuccess] = useState(0);
   // const [click, setClick] = useState(0);
+  const [signedUp, setSignedUp] = useState(false);
 
   var click = 0;
   useEffect(() => {
@@ -26,8 +27,10 @@ function Register() {
           (response) => {
             // setSuccess(1);
             // setEmail(response.data.user.email); // jst in case if response from server is smth different
+            setSignedUp(true);
             console.log(response);
-            <Redirect to="/" />;
+            console.log(setSignedUp);
+            
           },
           (error) => {
             setError(1);
@@ -36,6 +39,11 @@ function Register() {
         );
     }
   }, [click]);
+
+  if(signedUp){
+    console.log('Redirecting..')
+    return <Redirect to='/signin' />
+  }
 
   // const onRegisterClick = (e) => {
   //   // e.preventDefault();
