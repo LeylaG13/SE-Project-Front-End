@@ -57,13 +57,23 @@ const images = [
   ch25,
 ];
 
-const Card = ({ word, color, number }) => {
+const Card = ({ word, color, number, setChosenCard, player }) => {
   const [click, setClick] = useState(0);
+  var card = { word: word, color: color };
+  var word_class;
+  if (player === "spymaster") {
+    word_class = `words ${color}_word`;
+  } else {
+    word_class = "words";
+  }
   var word_side = (
     <div
-      className="words"
+      className={word_class}
       onClick={(e) => {
-        setClick(1);
+        if (player == "operative") {
+          setClick(1);
+          setChosenCard(card);
+        }
       }}
     >
       <p>{word}</p>
