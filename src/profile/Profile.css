@@ -83,11 +83,17 @@ body {
   width: 100%;
 }
 
-
-
 .shape {
   /* padding: 15px; */
   border-radius: 30px;
+}
+
+.edit-button{
+  background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+padding: 10px;
 }
 
 
@@ -101,8 +107,29 @@ body {
   display: flex;
   margin: 20px 0;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   align-items:center;
+  flex-wrap: wrap;
+}
+
+.figures h6{
+  font-size: 1.5rem;
+}
+
+.figures > .figure-wrappers{
+  margin-bottom: 20px;
+}
+
+.figure-wrappers div{
+  width: 150px;
+}
+
+
+.figure-wrappers{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
 }
 

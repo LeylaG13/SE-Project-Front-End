@@ -40,6 +40,7 @@ const allCards = [
 
 const GamePage = () => {
   const [player, setPlayer] = useState("");
+  const [whoseTurn, setWhoseTurn] = useState(0);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -50,8 +51,13 @@ const GamePage = () => {
       id: 2,
       msg: "You are stupid, go home",
       team: 1, //red
-    }
+    },
   ]);
+
+  const [hint, setHint] = useState("");
+  const [moves, setMoves] = useState(0);
+
+  const [lastID, setLastID] = useState(2);
   // useEffect(() => {
   //   axios.get("http://127.0.0.1:8000/api/generate").then((response) => {
   //     console.log(response.data);
@@ -91,6 +97,20 @@ const GamePage = () => {
   //       console.error(error);
   //     });
   // }, []);
+  const handleMoves = (e) => {
+    setMoves(Number(e.target.value));
+  };
+
+  const handleHint = (e) => {
+    setHint(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
+    setWhoseTurn(!whoseTurn);
+    setLastID(lastID + 1);
+  };
 
   return (
     <div id="gamepage">
@@ -229,21 +249,50 @@ const GamePage = () => {
             <p>Spymasters: 1</p>
           </div>
           <div className="chatbox">
-            {messages.map(message=> {
-              return <div className={`message ${message.team ? 'red' : 'blue'}`} key={message.id}>
-                {message.team ? <p>Team Red:   </p> : <p>Team Blue:   </p>}
-                {message.msg}
+            {messages.map((message) => {
+              return (
+                <div
+                  className={`message ${message.team ? "red" : "blue"}`}
+                  key={message.id}
+                >
+                  {message.team ? <p>Team Red: </p> : <p>Team Blue: </p>}
+                  {message.msg}
                 </div>
+              );
             })}
           </div>
         </div>
       </div>
 
-      <div>
-        <label for="hint" class="preg">
-          Hint:
-        </label>
-        <input type="text" id="idhint" name="hint" />
+      <div className="hintbox">
+        <form className="hintform" onSubmit={handleSubmit}>
+          <div>
+            <label for="hint" class="preg">
+              Hint:
+            </label>
+            <input
+              className="hint"
+              value={hint}
+              type="text"
+              id="idhint"
+              name="hint"
+              onChange={handleHint}
+            />
+          </div>
+          <div>
+            <label for="moves" class="preg">
+              Moves:{" "}
+            </label>
+            <input
+              className="moves"
+              value={moves}
+              type="number"
+              name="moves"
+              onChange={handleMoves}
+            />
+          </div>
+          <button>send</button>
+        </form>
       </div>
     </div>
   );
