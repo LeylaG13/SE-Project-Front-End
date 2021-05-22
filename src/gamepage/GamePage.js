@@ -44,7 +44,7 @@ const allCards = [
   { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
   { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
   { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "13", word: "eyeshadow", color: "blue", is_open: 0, game: "khsfhk" },
+  { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
   { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
   { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
   { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
@@ -77,6 +77,7 @@ const GamePage = () => {
 
   const [player, setPlayer] = useState("");
   const [team, setTeam] = useState("");
+  const [disabled, setDisabled] = useState("");
   const [numBlueSpy, setNumBlueSpy] = useState(0);
   const [numBlueOperative, setNumBlueOperatives] = useState(0);
   const [numRedSpy, setNumRedSpy] = useState(0);
@@ -124,6 +125,7 @@ const GamePage = () => {
   const onClickTeam = (playertype, color) => {
     setPlayer(playertype);
     setTeam(color);
+    setDisabled("disabled");
     if (playertype === "spymaster" && color === "blue") {
       setNumBlueSpy(numBlueSpy + 1);
       // numBlueSpy+=1;
@@ -143,26 +145,26 @@ const GamePage = () => {
       <Menu />
       <h1> Room #1</h1>
       <button
-        class="redbutton ui inverted small blue button"
+        class={`redbutton ui inverted small blue button ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "blue")}
       >
         Join as spymaster
       </button>
       <button
-        class="redbutton  ui inverted small blue button"
+        class={`redbutton  ui inverted small blue button ${disabled}`}
         id="rightbutton"
         onClick={(e) => onClickTeam("operative", "blue")}
       >
         Join as operative
       </button>
       <button
-        class="bluebutton  ui inverted small pink button"
+        class={`bluebutton  ui inverted small pink button ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "red")}
       >
         Join as spymaster
       </button>
       <button
-        class="bluebutton  ui inverted small pink button"
+        class={`bluebutton  ui inverted small pink button ${disabled}`}
         onClick={(e) => onClickTeam("operative", "red")}
       >
         Join as operative
