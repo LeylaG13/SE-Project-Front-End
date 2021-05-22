@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Menu from "../components/Menu";
+
+import { LoginContext } from "../context/LoginContext";
+
 
 const Login = (setToken, setUser) => {
   var user = {};
@@ -12,6 +15,7 @@ const Login = (setToken, setUser) => {
   // const [success, setSuccess] = useState(0);
   const [click, setClick] = useState(0);
 
+  const [logedIn, setLogedIn] = useContext(LoginContext);
   // var click = 0;
   useEffect(() => {
     if (Object.keys(email).length !== 0) {
@@ -29,6 +33,7 @@ const Login = (setToken, setUser) => {
             token = response.data.token;
             setUser(user);
             setToken(token);
+            setLogedIn(true);
           },
           (error) => {
             console.log(error);
