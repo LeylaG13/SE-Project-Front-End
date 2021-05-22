@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./GamePage.css";
 
 import icon1 from "../media/cards/icon1.png";
@@ -58,8 +58,14 @@ const images = [
 ];
 
 const Card = ({ word, color, number }) => {
+  const [click, setClick] = useState(0);
   var word_side = (
-    <div className="words">
+    <div
+      className="words"
+      onClick={(e) => {
+        setClick(1);
+      }}
+    >
       <p>{word}</p>
     </div>
   );
@@ -68,7 +74,7 @@ const Card = ({ word, color, number }) => {
       <img src={images[number]} alt={`pic${number}`} />
     </div>
   );
-  return <div> {word_side} </div>;
+  return <div> {click === 0 ? word_side : pciture_side} </div>;
 };
 
 export default Card;
