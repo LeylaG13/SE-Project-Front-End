@@ -36,7 +36,7 @@ const Home = () => {
               </div>
               <div className="row">
                 <div className="col-md-6">
-                  <Link to="/signup" className="button">
+                  <Link to="/signin" className="button">
                     Log In
                   </Link>
                 </div>

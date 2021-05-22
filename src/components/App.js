@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { ProfileProvider } from "../context/ProfileContext";
@@ -18,32 +18,38 @@ import Menu from "./Menu";
 import ProfileEdit from "../profile/ProfileEdit";
 import Draft from "./Draft";
 
-export default class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <LoginProvider>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route exact path="/leaderboard" component={Rank} />
-            <Route path="/signup" component={Register} />
-            <Route path="/signin" component={Login} />
+const App = () => {
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
 
-            <Route path="/gamepage" component={GamePage} />
-            <ProfileProvider>
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/profile/edit" component={ProfileEdit} />
-            </ProfileProvider>
-            <Route path="/menu" component={Menu} />
-            <GameProvider>
-              <CardsProvider>
-                <Route path="/draft" component={Draft} />
-              </CardsProvider>
-            </GameProvider>
-          </LoginProvider>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+  return (
+    <BrowserRouter>
+      <Switch>
+        <LoginProvider>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route exact path="/leaderboard" component={Rank} />
+          <Route path="/signup" component={Register} />
+          {/* <Route path="/signin" component={Login} /> */}
+          <Route
+            path="/signin"
+            component={() => <Login setToken={setToken} setUser={setUser} />}
+          />
+          <Route path="/gamepage" component={GamePage} />
+          <ProfileProvider>
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile/edit" component={ProfileEdit} />
+          </ProfileProvider>
+          <Route path="/menu" component={Menu} />
+          <GameProvider>
+            <CardsProvider>
+              <Route path="/draft" component={Draft} />
+            </CardsProvider>
+          </GameProvider>
+        </LoginProvider>
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
+export default App;
