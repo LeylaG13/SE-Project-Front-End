@@ -10,6 +10,7 @@ import "../style.css";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Register from "../registration/Register";
+import Login from "../Login/Login";
 import Rank from "../ranking/Rank";
 import GamePage from "../gamepage/GamePage";
 import Profile from "../profile/Profile";
@@ -27,6 +28,8 @@ export default class App extends Component {
             <Route path="/about" component={About} />
             <Route exact path="/leaderboard" component={Rank} />
             <Route path="/signup" component={Register} />
+            <Route path="/signin" component={Login} />
+
             <Route path="/gamepage" component={GamePage} />
             <ProfileProvider>
               <Route exact path="/profile" component={Profile} />

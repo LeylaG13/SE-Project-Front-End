@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Menu.css";
 
 const Menu = () => {
   const [menu, setMenu] = useState(0);
+  const [result, setResult] = useState({});
   const [active, setActive] = useState("");
 
   const onClick = (e, id) => {
@@ -18,7 +20,7 @@ const Menu = () => {
   };
 
   const menucomp = (
-    <div className="ui secondary  menu" id="menu">
+    <div className="ui secondary inverted  menu" id="menu">
       <Link
         to="/"
         className={classactive("home")}
