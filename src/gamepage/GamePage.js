@@ -40,6 +40,18 @@ const allCards = [
 
 const GamePage = () => {
   const [player, setPlayer] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      msg: "Hello",
+      team: 0, // blue
+    },
+    {
+      id: 2,
+      msg: "You are stupid, go home",
+      team: 1, //red
+    }
+  ]);
   // useEffect(() => {
   //   axios.get("http://127.0.0.1:8000/api/generate").then((response) => {
   //     console.log(response.data);
@@ -215,6 +227,14 @@ const GamePage = () => {
             <p>Words guessed: 5</p>
             <p>Operatives: 2</p>
             <p>Spymasters: 1</p>
+          </div>
+          <div className="chatbox">
+            {messages.map(message=> {
+              return <div className={`message ${message.team ? 'red' : 'blue'}`} key={message.id}>
+                {message.team ? <p>Team Red:   </p> : <p>Team Blue:   </p>}
+                {message.msg}
+                </div>
+            })}
           </div>
         </div>
       </div>
