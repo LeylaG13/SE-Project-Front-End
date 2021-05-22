@@ -59,7 +59,7 @@ const Draft = () => {
       
       if (card.team === newState.whoseTurn) { // check if the playing team chose their own card
         teams[card.team] += 50;
-        console.log(`team ${newState.whoseTurn} got ${}`);
+        console.log(`team ${newState.whoseTurn} got`);
       } else if (card.team === 2) {
         console.log("neutral card");
       } else if (card.team === 3) {
