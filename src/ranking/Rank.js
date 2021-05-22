@@ -108,7 +108,6 @@ const data = [
   },
 ];
 
-console.log(data);
 const Rank = () => {
   const table_body = (data) => {
     data.map((element, i) => {

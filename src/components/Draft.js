@@ -23,11 +23,7 @@ const Draft = () => {
 
   const handleChange = (e) => {
     let newState = Object.assign({}, gameObj); // creating a copy of the state
-    if (e.target.name === "moves") {
-      newState[e.target.name] = Number(e.target.value); // changing the value we want
-    } else {
-      newState[e.target.name] = e.target.value; // changing the value we want
-    }
+    newState[e.target.name] = e.target.value; // changing the value we want
     setGameObj(newState); // passing it to state
   };
 
@@ -42,27 +38,19 @@ const Draft = () => {
     // startTurn();
   };
 
-  const checkMoves = () => {
-    if (gameObj.moves === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-
-  // card.team = 0,1; 0- blue, 1 - red
   const handleClick = (card) => {
-      let newState = Object.assign({}, gameObj);
+    let newState = Object.assign({}, gameObj);
+    if (newState.moves === 0) {
+      console.log("turn finished");
+    } else {
       newState.moves -= 1;
-      console.log("whoseTurn: ",newState.whoseTurn);
-      
-      if (card.team === newState.whoseTurn) { // check if the playing team chose their own card
+      console.log(newState.whoseTurn);
+      if (card.team === newState.whoseTurn) {
         teams[card.team] += 50;
-        console.log(`team ${newState.whoseTurn} got`);
-      } else if (card.team === 2) {
-        console.log("neutral card");
+        console.log("here1");
       } else if (card.team === 3) {
+        console.log("neutral card");
+      } else if (card.team === 4) {
         console.log("here2");
         teams[newState.whoseTurn] -= 100;
         newState.gameOver = true;
@@ -79,11 +67,7 @@ const Draft = () => {
         }
       }
       setGameObj(newState); // passing it to state
-    
-    if (checkMoves()) { 
-      // endPlayerTurn();
     }
-    
   };
 
   return (

@@ -5,23 +5,23 @@ export const CardsContext = createContext();
 export const CardsProvider = (props) => {
   const [cards, setCards] = useState([
     {
-      id: 0,
+      id: 1,
       team: 0,
       word: "Ship",
     },
     {
-      id: 1,
+      id: 2,
       team: 1,
       word: "Space",
     },
     {
-      id: 2,
+      id: 3,
       team: 2,
       word: "Sink",
     },
     {
-      id: 3,
-      team: 3,
+      id: 4,
+      team: 4,
       word: "Save",
     },
   ]);
