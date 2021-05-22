@@ -105,9 +105,9 @@ const Profile = () => {
             </div>
             <div className="row">
               <div className="col">
-                
-                  <Link className="edit-button" to="/profile/edit">Edit</Link>
-                
+                <Link className="edit-button" to="/profile/edit">
+                  Edit
+                </Link>
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ const Profile = () => {
               <div className="figure-wrappers">
                 <div>
                   <h6>Wins</h6>
-                  <p >{user.wins}</p>
+                  <p>{user.wins}</p>
                 </div>
                 <div>
                   <h6>Losses</h6>

@@ -54,8 +54,6 @@ const GamePage = () => {
     shuffle(numbers);
     glob++;
   }
-  
-
   // const [player, setPlayer] = useState("");
   const [team, setTeam] = useState("");
   const [disabled, setDisabled] = useState("");
@@ -133,11 +131,9 @@ const GamePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(hint !== ''){
-      setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
-      setWhoseTurn(!whoseTurn);
-      setLastID(lastID + 1);
-    }
+    setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
+    setWhoseTurn(!whoseTurn);
+    setLastID(lastID + 1);
   };
 
   const onClickTeam = (playertype, color) => {
@@ -393,8 +389,6 @@ const GamePage = () => {
               name="hint"
               onChange={handleHint}
             />
-          </div>
-          <div>
             <label for="moves" class="preg">
               Moves:{" "}
             </label>
@@ -406,7 +400,7 @@ const GamePage = () => {
               onChange={handleMoves}
             />
           </div>
-          <button>send</button>
+          <button class="ui inverted white button large">Send</button>
         </form>
       </div>
     </div>
