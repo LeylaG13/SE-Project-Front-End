@@ -102,3 +102,17 @@ h4 {
 .two.wide.column {
   margin-top: 6%;
 }
+
+.redbutton {
+  margin-bottom: 1% !important;
+  margin-left: 0.5% !important;
+}
+
+#rightbutton {
+  margin-right: 55% !important;
+}
+
+.bluebutton {
+  margin-bottom: 1% !important;
+  margin-left: 0.5% !important;
+}
