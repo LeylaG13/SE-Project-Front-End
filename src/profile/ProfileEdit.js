@@ -63,17 +63,18 @@ const Profile = () => {
     },
   ];
 
-  const handleChange = (event)=>{
-    let newState = Object.assign({}, user); // creating a copy of the state
-    newState[event.target.name] = event.target.value; // changing the value we want
-    setUser(newState); // passing it to state
+  const handleName = (event) => {
+    setUser({ name: event.target.value });
     console.log(event.target.value);
-  }
+  };
+  const handleDescription = (event) => {
+    setUser({ description: event.target.value });
+    console.log(event.target.value);
+  };
 
   const complete = (e) => {
     e.preventDefault();
 
-    // send to backend
   };
   return (
     <div>
@@ -90,7 +91,7 @@ const Profile = () => {
               <div className="row name">
                 <div className="col">
                   <div>
-                    <input name="name" className="name-edit" value={user.name} onChange={handleChange} />
+                    <input value={user.name} onChange={handleName} />
                   </div>
                 </div>
               </div>
@@ -104,19 +105,17 @@ const Profile = () => {
               <div className="row description">
                 <div className="col">
                   <div className="">
-                    <textarea
-                      name="description"
-                      className="description-edit"
+                    <input
                       value={user.description}
-                      onChange={handleChange}
+                      onChange={handleDescription}
                     />
                   </div>
                 </div>
               </div>
-              <div className="row ">
+              <div className="row edit-button">
                 <div className="col">
                   <div className="">
-                    <Link to="/profile" className="edit-button">Complete</Link>
+                    <Link to="/profile">Complete</Link>
                   </div>
                 </div>
               </div>
@@ -164,33 +163,17 @@ const Profile = () => {
               />
             </AreaChart>
             <div className="figures">
-              <div className="figure-wrappers">
-                <div>
-                  <h6>Wins</h6>
-                  <p>{user.wins}</p>
-                </div>
-                <div>
-                  <h6>Losses</h6>
-                  <p>{user.losses}</p>
-                </div>
-                <div>
-                  <h6>Total games</h6>
-                  <p>{user.total}</p>
-                </div>
+              <div>
+                <h6>Wins</h6>
+                <p>{user.wins}</p>
               </div>
-              <div className="figure-wrappers">
-                <div>
-                  <h6>Total Points</h6>
-                  <p>{user.total}</p>
-                </div>
-                <div>
-                  <h6>Title</h6>
-                  <p>{user.total}</p>
-                </div>
-                <div>
-                  <h6>Rank</h6>
-                  <p>{user.total}</p>
-                </div>
+              <div>
+                <h6>Losses</h6>
+                <p>{user.losses}</p>
+              </div>
+              <div>
+                <h6>Total games</h6>
+                <p>{user.total}</p>
               </div>
             </div>
           </div>
