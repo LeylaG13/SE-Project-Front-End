@@ -3,6 +3,8 @@ import React, { useState, createContext } from 'react';
 
 export const ProfileContext = createContext();
 
+
+// GET THE DATA FROM BACKEND
 export const ProfileProvider = (props) => {
   const [user, setUser] = useState({
     id: 1,
