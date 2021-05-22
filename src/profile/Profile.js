@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { ProfileContext } from "../context/ProfileContext";
+import React, {useContext} from "react";
+import {ProfileContext} from '../context/ProfileContext';
 
 import Menu from "../components/Menu";
 import "./Profile.css";
@@ -99,15 +99,17 @@ const Profile = () => {
             <div className="row description">
               <div className="col">
                 <div className="">
-                  <p>{user.description}</p>
+                  <p>
+                    {user.description}
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row edit-button">
               <div className="col">
-                
-                  <Link className="edit-button" to="/profile/edit">Edit</Link>
-                
+                <div className="">
+                  <Link to="/profile/edit">Edit</Link>
+                </div>
               </div>
             </div>
           </div>
@@ -133,8 +135,8 @@ const Profile = () => {
                   <stop offset="95%" stopColor="#ff0066" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" tick={{ fill: "white" }} />
-              <YAxis tick={{ fill: "white" }} />
+              <XAxis dataKey="name" tick={{ fill: 'white' }} />
+              <YAxis tick={{ fill: 'white' }}/>
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               <Tooltip />
               <Area
@@ -153,34 +155,19 @@ const Profile = () => {
               />
             </AreaChart>
             <div className="figures">
-              <div className="figure-wrappers">
-                <div>
-                  <h6>Wins</h6>
-                  <p>{user.wins}</p>
-                </div>
-                <div>
-                  <h6>Losses</h6>
-                  <p>{user.losses}</p>
-                </div>
-                <div>
-                  <h6>Total games</h6>
-                  <p>{user.total}</p>
-                </div>
+              <div>
+                <h6>Wins</h6>
+                <p>{user.wins}</p>
               </div>
-              <div className="figure-wrappers">
-                <div>
-                  <h6>Total Points</h6>
-                  <p>{user.total}</p>
-                </div>
-                <div>
-                  <h6>Title</h6>
-                  <p>{user.total}</p>
-                </div>
-                <div>
-                  <h6>Rank</h6>
-                  <p>{user.total}</p>
-                </div>
+              <div>
+                <h6>Losses</h6>
+                <p>{user.losses}</p>
               </div>
+              <div>
+                <h6>Total games</h6>
+                <p>{user.total}</p>
+              </div>
+              
             </div>
           </div>
         </div>
