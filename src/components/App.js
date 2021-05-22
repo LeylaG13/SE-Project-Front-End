@@ -19,9 +19,7 @@ import ProfileEdit from "../profile/ProfileEdit";
 import Draft from "./Draft";
 
 const App = () => {
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
-
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -33,7 +31,7 @@ const App = () => {
           {/* <Route path="/signin" component={Login} /> */}
           <Route
             path="/signin"
-            component={() => <Login setToken={setToken} setUser={setUser} />}
+            component={() => <Login/>}
           />
           <Route path="/gamepage" component={GamePage} />
           <ProfileProvider>

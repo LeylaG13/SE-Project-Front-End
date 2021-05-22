@@ -5,17 +5,18 @@ import Menu from "../components/Menu";
 
 import { LoginContext } from "../context/LoginContext";
 
-
-const Login = (setToken, setUser) => {
-  var user = {};
-  var token = "";
+const Login = () => {
+  var user_local = {};
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [errors, setError] = useState(0);
   // const [success, setSuccess] = useState(0);
   const [click, setClick] = useState(0);
 
-  const [logedIn, setLogedIn] = useContext(LoginContext);
+  const { value1, value2, value3 } = useContext(LoginContext);
+  const [logedIn, setLogedIn] = value1;
+  const [token, setToken] = value2;
+  const [user, setUser] = value3;
   // var click = 0;
   useEffect(() => {
     if (Object.keys(email).length !== 0) {
@@ -27,12 +28,11 @@ const Login = (setToken, setUser) => {
         .then(
           (response) => {
             console.log(response.data);
-            user.id = response.data.user.id;
-            user.username = response.data.user.username;
-            user.email = response.data.user.email;
-            token = response.data.token;
-            setUser(user);
-            setToken(token);
+            user_local.id = response.data.user.id;
+            user_local.username = response.data.user.username;
+            user_local.email = response.data.user.email;
+            setUser(user_local);
+            setToken(response.data.token);
             setLogedIn(true);
           },
           (error) => {
@@ -42,10 +42,16 @@ const Login = (setToken, setUser) => {
     }
   }, [click]);
 
+  if(logedIn){
+    console.log('Redirecting..')
+    return <Redirect to='/' />
+  }
+
   const onClick = (event) => {
     // click = 1;
     event.preventDefault();
     setClick(1);
+
   };
 
   return (

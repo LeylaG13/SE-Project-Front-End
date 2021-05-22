@@ -11,7 +11,8 @@ import spy2 from "../media/sp2.png";
 import { LoginContext } from "../context/LoginContext";
 
 const Home = () => {
-  const [logedIn, setLogedIn] = useContext(LoginContext);
+  const {value1, value2, value3}= useContext(LoginContext);
+  const [logedIn, setLogedIn] = value1;
   return (
     <div>
       <div className="test">
