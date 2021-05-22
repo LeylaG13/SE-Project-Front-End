@@ -5,31 +5,6 @@ import Card from "./Card";
 import Menu from "../components/Menu";
 import icon1 from "../media/cards/icon1.png";
 import icon2 from "../media/cards/icon2.png";
-import ch1 from "../media/cards/ch1.png";
-import ch2 from "../media/cards/ch2.png";
-import ch3 from "../media/cards/ch3.png";
-import ch4 from "../media/cards/ch4.png";
-import ch5 from "../media/cards/ch5.png";
-import ch6 from "../media/cards/ch6.png";
-import ch7 from "../media/cards/ch7.png";
-import ch8 from "../media/cards/ch8.png";
-import ch9 from "../media/cards/ch9.png";
-import ch10 from "../media/cards/ch10.png";
-import ch11 from "../media/cards/ch11.png";
-import ch12 from "../media/cards/ch12.png";
-import ch13 from "../media/cards/ch13.png";
-import ch14 from "../media/cards/ch14.png";
-import ch15 from "../media/cards/ch15.png";
-import ch16 from "../media/cards/ch16.png";
-import ch17 from "../media/cards/ch17.png";
-import ch18 from "../media/cards/ch18.png";
-import ch19 from "../media/cards/ch19.png";
-import ch20 from "../media/cards/ch20.png";
-import ch21 from "../media/cards/ch21.png";
-import ch22 from "../media/cards/ch22.png";
-import ch23 from "../media/cards/ch23.png";
-import ch24 from "../media/cards/ch24.png";
-import ch25 from "../media/cards/ch25.png";
 
 const allCards = [
   { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
@@ -63,17 +38,23 @@ const numbers = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   22, 23, 24,
 ];
+
+var glob = 0;
 const GamePage = () => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
   };
 
-  shuffle(allCards);
-  shuffle(allCards);
-  shuffle(allCards);
-  shuffle(numbers);
-  shuffle(numbers);
-  shuffle(numbers);
+  if (glob === 0) {
+    shuffle(allCards);
+    shuffle(allCards);
+    shuffle(allCards);
+    shuffle(numbers);
+    shuffle(numbers);
+    shuffle(numbers);
+    glob++;
+  }
+  
 
   // const [player, setPlayer] = useState("");
   const [team, setTeam] = useState("");
@@ -152,9 +133,11 @@ const GamePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
-    setWhoseTurn(!whoseTurn);
-    setLastID(lastID + 1);
+    if(hint !== ''){
+      setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
+      setWhoseTurn(!whoseTurn);
+      setLastID(lastID + 1);
+    }
   };
 
   const onClickTeam = (playertype, color) => {
@@ -381,7 +364,6 @@ const GamePage = () => {
                   className={`message ${message.team ? "red" : "blue"}`}
                   key={message.id}
                 >
-                  {message.team ? <p>Team Red: </p> : <p>Team Blue: </p>}
                   {message.msg}
                 </div>
               );
