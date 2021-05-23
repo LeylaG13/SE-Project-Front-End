@@ -5,6 +5,8 @@ import Menu from "../components/Menu";
 
 import { LoginContext } from "../context/LoginContext";
 
+import './login.css'
+
 const Login = () => {
   var user_local = {};
   const [email, setEmail] = useState("");
