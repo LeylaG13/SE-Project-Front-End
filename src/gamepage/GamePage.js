@@ -40,7 +40,7 @@ const numbers = [
 ];
 
 var glob = 0;
-const GamePage = () => {
+const GamePage = ({websocket}) => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
   };
@@ -124,7 +124,18 @@ const GamePage = () => {
   //     });
   // }, []);
 
+  const sendMessage=()=>{
+    try {
+        websocket.send("from client") //send data to the server
+    } catch (error) {
+        console.log(error) // catch error
+    }
+}
+
+
+
   useEffect(() => {
+
     if (Object.keys(chosenCard).length !== 0) {
       if (chosenCard.color === "black") {
         if (team === "blue") {
