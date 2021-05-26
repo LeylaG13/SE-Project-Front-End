@@ -77,7 +77,7 @@ const Menu = () => {
         }}
       >
         <i
-          class={`icon ${
+          className={`icon ${
             menu ? `long arrow alternate left` : `long arrow alternate right`
           }`}
         ></i>

@@ -7,6 +7,8 @@ import { LoginContext } from "../context/LoginContext";
 
 import './login.css'
 
+export const validateInput = (str="") => str.includes("@"); // email validation
+
 const Login = () => {
   var user_local = {};
   const [email, setEmail] = useState("");
@@ -64,26 +66,23 @@ const Login = () => {
         <div id="registerdiv">
           <form>
             <div>
-              <label htmlFor="email" className="preg">
-                Email
-              </label>
+              <label htmlFor="email" className="preg">Email</label>
               <input
                 type="email"
-                id="idemail"
+                id="email"
                 name="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               />
             </div>
+            {email && click && !validateInput(email) ? <p>Invalide Email</p>: null}
 
             <div>
-              <label htmlFor="password" className="preg">
-                Password
-              </label>
+              <label htmlFor="password" className="preg">Password</label>
               <input
                 type="password"
-                id="idpassword"
+                id="password"
                 name="password"
                 onChange={(e) => {
                   setPassword(e.target.value);
