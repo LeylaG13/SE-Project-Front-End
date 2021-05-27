@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ProfileContext } from "../context/ProfileContext";
+import { LoginContext } from "../context/LoginContext";
 
 import Menu from "../components/Menu";
 import "./Profile.css";
@@ -23,7 +23,7 @@ const Profile = () => {
   //   { quarter: 4, earnings: 19000 },
   // ];
 
-  const [user, setUser] = useContext(ProfileContext);
+  const [user, setUser] = useContext(LoginContext);
   console.log(user);
 
   const data = [

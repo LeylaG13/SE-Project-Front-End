@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import EndMessage from "./EndMessage";
 import "./GamePage.css";
 import Card from "./Card";
 import Menu from "../components/Menu";
@@ -40,10 +41,62 @@ const numbers = [
 ];
 
 var glob = 0;
+
 const GamePage = ({websocket}) => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
   };
+
+  // const [player, setPlayer] = useState("");
+  const [pointsRed, setPointsRed] = useState(0);
+  // const [alert, setAlert] = useState({});
+  const [pointsBlue, setPointsBlue] = useState(0);
+  const [turnsBlue, setTurnsBlue] = useState(0);
+  const [turnsRed, setTurnsRed] = useState(0);
+  const [chosenCard, setChosenCard] = useState({});
+  const [team, setTeam] = useState("");
+  const [disabled, setDisabled] = useState("");
+  const [numBlueSpy, setNumBlueSpy] = useState(0);
+  const [numBlueOperative, setNumBlueOperatives] = useState(0);
+  const [numRedSpy, setNumRedSpy] = useState(0);
+  const [numRedOperative, setNumberRedOperative] = useState(0);
+  const [endGame, setEndGame] = useState(0);
+  const [player, setPlayer] = useState("");
+  const [whoseTurn, setWhoseTurn] = useState(0);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      msg: "Hello, this it team blue ^_^",
+      team: 0, // blue
+    },
+    {
+      id: 2,
+      msg: "Hello, this is team red :)",
+      team: 1, //red
+    },
+  ]);
+
+  const howManyTurns = () => {
+    var bt = 0;
+    var rt = 0;
+    allCards.forEach((card) => {
+      if (card.color === "blue") {
+        // setTurnsBlue(turnsBlue + 1);
+        bt++;
+      } else if (card.color === "red") {
+        // setTurnsRed(turnsRed + 1);
+        rt++;
+      }
+    });
+    setTurnsBlue(bt);
+    setTurnsRed(rt);
+  };
+
+  const [hint, setHint] = useState("");
+  const [moves, setMoves] = useState(0);
+
+  const [lastID, setLastID] = useState(2);
+
 
   if (glob === 0) {
     shuffle(allCards);
@@ -52,126 +105,25 @@ const GamePage = ({websocket}) => {
     shuffle(numbers);
     shuffle(numbers);
     shuffle(numbers);
+    howManyTurns();
     glob++;
   }
-  // const [player, setPlayer] = useState("");
-  const [pointsRed, setPointsRed] = useState(0);
-  const [pointsBlue, setPointsBlue] = useState(0);
-  const [chosenCard, setChosenCard] = useState({});
-  const [team, setTeam] = useState("");
-  const [disabled, setDisabled] = useState("");
-  const [numBlueSpy, setNumBlueSpy] = useState(0);
-  const [numBlueOperative, setNumBlueOperatives] = useState(0);
-  const [numRedSpy, setNumRedSpy] = useState(0);
-  const [numRedOperative, setNumberRedOperative] = useState(0);
-  const [player, setPlayer] = useState("");
-  const [whoseTurn, setWhoseTurn] = useState(0);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      msg: "Hello",
-      team: 0, // blue
-    },
-    {
-      id: 2,
-      msg: "You are stupid, go home",
-      team: 1, //red
-    },
-  ]);
 
-  const [hint, setHint] = useState("");
-  const [moves, setMoves] = useState(0);
+  var chat = (
+    <div className="chatbox">
+      {messages.map((message) => {
+        return (
+          <div
+            className={`message ${message.team ? "red" : "blue"}`}
+            key={message.id}
+          >
+            {message.msg}
+          </div>
+        );
+      })}
+    </div>
+  );
 
-  const [lastID, setLastID] = useState(2);
-
-  // useEffect(() => {
-  //   axios.get("http://127.0.0.1:8000/api/generate").then((response) => {
-  //     console.log(response.data);
-  //   });
-  // }, []);
-
-  // const [token, setToken] = useState("");
-  // const [allCards, setAllCards] = useState([]);
-
-  // var user = {};
-  // useEffect(() => {
-  //   axios
-  //     .post("http://127.0.0.1:8000/api/signin", {
-  //       email: "hfh@email.com",
-  //       password: "123",
-  //     })
-  //     .then(
-  //       (response) => {
-  //         setToken(response.data.token);
-  //         console.log(response.data.token);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/generate", {
-  //       headers: {
-  //         Authorization: `token ${token}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data.user);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
-  const sendMessage=()=>{
-    try {
-        websocket.send("from client") //send data to the server
-    } catch (error) {
-        console.log(error) // catch error
-    }
-}
-
-
-
-  useEffect(() => {
-
-    if (Object.keys(chosenCard).length !== 0) {
-      if (chosenCard.color === "black") {
-        if (team === "blue") {
-          setPointsBlue(pointsBlue - 100);
-          setPointsRed(pointsRed + 450);
-        } else {
-          setPointsRed(pointsRed - 100);
-          setPointsBlue(pointsBlue + 450);
-        }
-      } else if (chosenCard.color === team) {
-        if (team === "blue") {
-          console.log("I am blue");
-          setPointsBlue(pointsBlue + 50);
-        } else {
-          console.log("I am red");
-
-          setPointsRed(pointsRed + 50);
-        }
-      } else if (chosenCard.color === "grey") {
-      } else {
-        if (team === "blue") {
-          console.log("I am blue");
-
-          setPointsBlue(pointsBlue - 25);
-          setPointsRed(pointsRed + 25);
-        } else {
-          console.log("I am red");
-
-          setPointsRed(pointsRed - 25);
-          setPointsBlue(pointsBlue + 25);
-        }
-      }
-    }
-  }, [chosenCard]);
-
-  console.log(chosenCard);
   const handleMoves = (e) => {
     setMoves(Number(e.target.value));
   };
@@ -182,10 +134,133 @@ const GamePage = ({websocket}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMessages([...messages, { id: lastID + 1, msg: hint, team: whoseTurn }]);
+    var updated_hint = hint.concat(" ");
+    updated_hint = updated_hint.concat(moves);
+    updated_hint = updated_hint.toLocaleUpperCase();
+    setMessages([
+      ...messages,
+      { id: lastID + 1, msg: updated_hint, team: whoseTurn },
+    ]);
     setWhoseTurn(!whoseTurn);
     setLastID(lastID + 1);
   };
+
+  var hintbox = (
+    <div className="hintbox">
+      <form className="hintform" onSubmit={handleSubmit}>
+        <div>
+          <label for="hint" class="preg">
+            Hint:
+          </label>
+          <input
+            className="hint"
+            value={hint}
+            type="text"
+            id="idhint"
+            name="hint"
+            onChange={handleHint}
+          />
+          <label for="moves" class="preg">
+            Moves:{" "}
+          </label>
+          <input
+            className="moves"
+            value={moves}
+            type="number"
+            name="moves"
+            onChange={handleMoves}
+          />
+        </div>
+        <button class="ui inverted white button large">Send</button>
+      </form>
+    </div>
+  );
+
+
+  const sendToSocket = () => {
+    websocket.send(JSON.stringify({
+      'hint': hint,
+      'turnsBlue': turnsBlue,
+      'turnsRed': turnsRed,
+      'chosenCard': chosenCard,
+      'pointsBlue': pointsBlue,
+      'pointsRed': pointsRed,
+      'numBlueSpy': numBlueSpy,
+      'numBlueOperative': numBlueOperative,
+      'numRedSpy': numRedSpy,
+      'numRedOperative': numRedOperative,
+      'messages': messages,
+      'endGame': endGame, 
+      'whoseTurn': whoseTurn
+    }))
+  }
+
+  useEffect(() => {
+    
+
+    if (Object.keys(chosenCard).length !== 0) {
+      if (team === "blue") {
+        setTurnsBlue(turnsBlue - 1);
+      } else if (team === "red") {
+        setTurnsRed(turnsRed - 1);
+      }
+
+      if (chosenCard.color === "black") {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 100);
+          setPointsRed(pointsRed + 450);
+          setTurnsBlue(0);
+        } else {
+          setPointsRed(pointsRed - 100);
+          setPointsBlue(pointsBlue + 450);
+          setTurnsRed(0);
+        }
+      } else if (chosenCard.color === team) {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue + 50);
+        } else {
+          setPointsRed(pointsRed + 50);
+        }
+      } else if (chosenCard.color === "grey") {
+      } else {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 25);
+          setPointsRed(pointsRed + 25);
+        } else {
+          setPointsRed(pointsRed - 25);
+          setPointsBlue(pointsBlue + 25);
+        }
+      }
+    }
+    
+    sendToSocket();
+  }, [chosenCard]);
+
+  useEffect(() => {
+    if (turnsBlue === 0 || turnsRed === 0) {
+      console.log("ENDGAME");
+      var winmessage = "";
+      if (pointsBlue > pointsRed) {
+        winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
+      } else if (pointsBlue < pointsRed) {
+        winmessage = `The game has finished and Red Team won scoring ${pointsRed} points`;
+      } else if (pointsBlue === pointsRed) {
+        winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
+      }
+
+      setEndGame(1);
+      // var alertmessage = {
+      //   type: "success",
+      //   text: winmessage,
+      //   show: true,
+      // };
+      // setAlert(alertmessage);
+    }
+    
+    sendToSocket();
+  }, [turnsBlue, turnsRed]);
+
+  // console.log(chosenCard);
 
   const onClickTeam = (playertype, color) => {
     setPlayer(playertype);
@@ -203,11 +278,12 @@ const GamePage = ({websocket}) => {
     }
 
     // console.log(player, team);
+    sendToSocket();
   };
 
-  return (
-    <div id="gamepage">
-      <Menu />
+  var maingamepage = (
+    <div>
+      {" "}
       <h1> Room #1</h1>
       <button
         class={`redbutton ui ${
@@ -242,7 +318,6 @@ const GamePage = ({websocket}) => {
       >
         Join as operative
       </button>
-
       <div className="ui grid">
         <div className="three wide column">
           <div className="icon-image blue">
@@ -250,10 +325,11 @@ const GamePage = ({websocket}) => {
           </div>
           <div className="game-info one">
             <h4>Team Blue</h4>
-            <p>Words guessed: </p>
-            <p>Points earned: {pointsBlue} </p>
             <p>Operatives: {numBlueOperative}</p>
             <p>Spymasters: {numBlueSpy}</p>
+            <p>Words guessed: </p>
+            <p>Points earned: {pointsBlue} </p>
+            <p>Turns left: {turnsBlue} </p>
           </div>
         </div>
 
@@ -459,61 +535,27 @@ const GamePage = ({websocket}) => {
           </div>
           <div className="game-info two">
             <h4>Team Red</h4>
-            <p>Words guessed: </p>
-            <p>Points earned: {pointsRed} </p>
             <p>Operatives: {numRedOperative}</p>
             <p>Spymasters: {numRedSpy}</p>
+            <p>Words guessed: </p>
+            <p>Points earned: {pointsRed} </p>
+            <p> Turns left: {turnsRed}</p>
           </div>
-          <div className="chatbox">
-            {messages.map((message) => {
-              return (
-                <div
-                  className={`message ${message.team ? "red" : "blue"}`}
-                  key={message.id}
-                >
-                  {message.msg}
-                </div>
-              );
-            })}
-          </div>
+          {chat}
         </div>
       </div>
+      {player === "spymaster" ? hintbox : null}
+    </div>
+  );
 
-      {/* <div>
-        <label for="hint" class="preg">
-          Hint:
-        </label>
-        <input type="text" id="idhint" name="hint" />
-      </div> */}
-
-      <div className="hintbox">
-        <form className="hintform" onSubmit={handleSubmit}>
-          <div>
-            <label for="hint" class="preg">
-              Hint:
-            </label>
-            <input
-              className="hint"
-              value={hint}
-              type="text"
-              id="idhint"
-              name="hint"
-              onChange={handleHint}
-            />
-            <label for="moves" class="preg">
-              Moves:{" "}
-            </label>
-            <input
-              className="moves"
-              value={moves}
-              type="number"
-              name="moves"
-              onChange={handleMoves}
-            />
-          </div>
-          <button class="ui inverted white button large">Send</button>
-        </form>
-      </div>
+  return (
+    <div id="gamepage">
+      <Menu />
+      {endGame === 1 ? (
+        <EndMessage pointsBlue={pointsBlue} pointsRed={pointsRed} />
+      ) : (
+        maingamepage
+      )}
     </div>
   );
 };

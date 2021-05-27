@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from "axios";
 
-import { ProfileProvider } from "../context/ProfileContext";
+import { ProfileProvider, ProfileContext } from "../context/ProfileContext";
 import { GameProvider } from "../context/GameContext";
 import { CardsProvider } from "../context/CardsContext";
 import { LoginContext } from "../context/LoginContext";
@@ -17,7 +17,6 @@ import GamePage from "../gamepage/GamePage";
 import Profile from "../profile/Profile";
 import Menu from "./Menu";
 import ProfileEdit from "../profile/ProfileEdit";
-import Draft from "./Draft";
 import { connection } from "websocket";
 
 const App = () => {
@@ -63,6 +62,10 @@ const App = () => {
         clearTimeout(connectInterval); // clear Interval on on open of websocket connection
     };
 
+    ws.onmessage = (message)=>{
+      console.log(JSON.parse(message.data)); // receiving and parsing JSON data
+    }
+
     // websocket onclose event listener
     ws.onclose = e => {
         console.log(
@@ -106,17 +109,16 @@ const check = () => {
         <Route path="/signup" component={Register} />
         {/* <Route path="/signin" component={Login} /> */}
         <Route path="/signin" component={() => <Login />} />
-        <Route path="/gamepage" component={()=> <GamePage websocket={ws}/>} />
+        <GameProvider>
+          <CardsProvider>
+            <Route path="/gamepage" component={()=> <GamePage websocket={ws}/>} />
+          </CardsProvider>
+        </GameProvider>
         <ProfileProvider>
-          <Route exact path="/profile" component={<Profile user={user}/>} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/profile/edit" component={ProfileEdit} />
         </ProfileProvider>
         <Route path="/menu" component={Menu} />
-        <GameProvider>
-          <CardsProvider>
-            <Route path="/draft" component={Draft} />
-          </CardsProvider>
-        </GameProvider>
       </Switch>
     </BrowserRouter>
   );
