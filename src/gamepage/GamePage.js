@@ -42,7 +42,7 @@ const numbers = [
 
 var glob = 0;
 
-const GamePage = ({websocket}) => {
+const GamePage = () => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
   };
@@ -76,6 +76,10 @@ const GamePage = ({websocket}) => {
     },
   ]);
 
+  const [WS, setWS] = useState(null);
+
+  let timeout = 250; // 250ms
+
   const howManyTurns = () => {
     var bt = 0;
     var rt = 0;
@@ -98,13 +102,18 @@ const GamePage = ({websocket}) => {
   const [lastID, setLastID] = useState(2);
 
 
-  if (glob === 0) {
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(numbers);
-    shuffle(numbers);
-    shuffle(numbers);
+  // if (glob === 0) {
+  //   shuffle(allCards);
+  //   shuffle(allCards);
+  //   shuffle(allCards);
+  //   shuffle(numbers);
+  //   shuffle(numbers);
+  //   shuffle(numbers);
+  //   howManyTurns();
+  //   glob++;
+  // }
+  
+  if(glob == 0){
     howManyTurns();
     glob++;
   }
@@ -149,51 +158,117 @@ const GamePage = ({websocket}) => {
     <div className="hintbox">
       <form className="hintform" onSubmit={handleSubmit}>
         <div>
-          <label for="hint" class="preg">
+          <label htmlFor="hint" className="preg">
             Hint:
           </label>
           <input
             className="hint"
             value={hint}
             type="text"
-            id="idhint"
+            id="hint"
             name="hint"
             onChange={handleHint}
           />
-          <label for="moves" class="preg">
+          <label htmlFor="moves" className="preg">
             Moves:{" "}
           </label>
           <input
             className="moves"
             value={moves}
             type="number"
+            id="moves"
             name="moves"
             onChange={handleMoves}
           />
         </div>
-        <button class="ui inverted white button large">Send</button>
+        <button className="ui inverted white button large">Send</button>
       </form>
     </div>
   );
 
 
   const sendToSocket = () => {
-    websocket.send(JSON.stringify({
-      'hint': hint,
-      'turnsBlue': turnsBlue,
-      'turnsRed': turnsRed,
-      'chosenCard': chosenCard,
-      'pointsBlue': pointsBlue,
-      'pointsRed': pointsRed,
-      'numBlueSpy': numBlueSpy,
-      'numBlueOperative': numBlueOperative,
-      'numRedSpy': numRedSpy,
-      'numRedOperative': numRedOperative,
-      'messages': messages,
-      'endGame': endGame, 
-      'whoseTurn': whoseTurn
-    }))
+    if(WS){
+      // console.log("sent to socket", WS);
+      WS.send(JSON.stringify({
+        'hint': hint,
+        'turnsBlue': turnsBlue,
+        'turnsRed': turnsRed,
+        'chosenCard': chosenCard,
+        'pointsBlue': pointsBlue,
+        'pointsRed': pointsRed,
+        'numBlueSpy': numBlueSpy,
+        'numBlueOperative': numBlueOperative,
+        'numRedSpy': numRedSpy,
+        'numRedOperative': numRedOperative,
+        'messages': messages,
+        'endGame': endGame, 
+        'whoseTurn': whoseTurn
+        // 'message': "hello"
+      }))
+    }else{
+      console.log("WS is null");
+    }
   }
+
+  const connect = () => {
+    var ws = new WebSocket("ws://localhost:8000/ws/api/math/"  );
+    var connectInterval;
+
+    // websocket onopen event listener
+    ws.onopen = () => {
+        console.log("connected websocket main component");
+
+        setWS(ws);
+
+        timeout = 250; // reset timer to 250 on open of websocket connection 
+        clearTimeout(connectInterval); // clear Interval on on open of websocket connection
+    };
+
+    ws.onmessage = (message)=>{
+      let data = JSON.parse(message.data)
+      // setChosenCard(data.chosenCard);
+      // setMessages(data.messages);
+
+      console.log("received:", JSON.parse(message.data)); // receiving and parsing JSON data
+    }
+
+    // websocket onclose event listener
+    ws.onclose = e => {
+        console.log(
+            `Socket is closed. Reconnect will be attempted in ${Math.min(
+                10000 / 1000,
+                (timeout + timeout) / 1000
+            )} second.`,
+            e.reason
+        );
+
+        timeout = timeout + timeout; //increment retry interval
+        connectInterval = setTimeout(check, Math.min(10000, timeout)); //call check function after timeout
+    };
+
+    // websocket onerror event listener
+    ws.onerror = err => {
+        console.error(
+            "Socket encountered error: ",
+            err.message,
+            "Closing socket"
+        );
+
+        ws.close();
+    };
+  };
+
+  /**
+   * utilited by the @function connect to check if the connection is close, if so attempts to reconnect
+   */
+  const check = () => {
+      if (!WS || WS.readyState === WebSocket.CLOSED) connect(); //check if websocket instance is closed, if so call `connect` function.
+  };
+
+  useEffect(()=>{
+    connect();
+  },[0])
 
   useEffect(() => {
     
@@ -247,17 +322,10 @@ const GamePage = ({websocket}) => {
       } else if (pointsBlue === pointsRed) {
         winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
       }
-
       setEndGame(1);
-      // var alertmessage = {
-      //   type: "success",
-      //   text: winmessage,
-      //   show: true,
-      // };
-      // setAlert(alertmessage);
     }
     
-    sendToSocket();
+    // sendToSocket();
   }, [turnsBlue, turnsRed]);
 
   // console.log(chosenCard);
@@ -278,7 +346,7 @@ const GamePage = ({websocket}) => {
     }
 
     // console.log(player, team);
-    sendToSocket();
+    // sendToSocket();
   };
 
   var maingamepage = (
@@ -286,7 +354,7 @@ const GamePage = ({websocket}) => {
       {" "}
       <h1> Room #1</h1>
       <button
-        class={`redbutton ui ${
+        className={`redbutton ui ${
           player === "spymaster" && team === "blue" ? "" : `inverted`
         } small blue button  ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "blue")}
@@ -294,7 +362,7 @@ const GamePage = ({websocket}) => {
         Join as spymaster
       </button>
       <button
-        class={`redbutton  ui ${
+        className={`redbutton  ui ${
           player === "operative" && team === "blue" ? "" : `inverted`
         } small blue button ${disabled}`}
         id="rightbutton"
@@ -303,7 +371,7 @@ const GamePage = ({websocket}) => {
         Join as operative
       </button>
       <button
-        class={`bluebutton  ui ${
+        className={`bluebutton  ui ${
           player === "spymaster" && team === "red" ? "" : `inverted`
         } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "red")}
@@ -311,7 +379,7 @@ const GamePage = ({websocket}) => {
         Join as spymaster
       </button>
       <button
-        class={`bluebutton  ui ${
+        className={`bluebutton  ui ${
           player === "operative" && team === "red" ? "" : `inverted`
         } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("operative", "red")}
