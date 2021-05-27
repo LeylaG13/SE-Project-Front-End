@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, getByText, render } from '@testing-library/react';
 import Login, {validateInput} from '../Login/Login';
 import {LoginProvider} from '../context/LoginContext'
 
@@ -27,17 +27,43 @@ describe("login", ()=> {
   })
 
   test("email field should accept an input", ()=> {
-    const {getByLabelText} = render(<LoginProvider><Login /></LoginProvider>);
+    const { getByText, getByLabelText} = render(<LoginProvider><Login /></LoginProvider>);
     const emailInput = getByLabelText("Email");
     expect(emailInput.value).toMatch("");
+
     fireEvent.change(emailInput, {target: {value: "testing"}});
     expect(emailInput.value).toMatch("testing");
+
+    const logInButton = getByText("Log In");
+
+    fireEvent.click(logInButton);
+    
+    const errorMessage= getByText("Invalide Email");
+    expect(errorMessage).toBeInTheDocument();
+
+    fireEvent.change(emailInput, {target: {value: "testing@"}});
+    expect(emailInput.value).toMatch("testing@");
+
+    fireEvent.click(logInButton);
+    expect(errorMessage).not.toBeInTheDocument();
+
   })
 
-  test("password field should be in the document", ()=> {
-    const {getByLabelText} = render(<LoginProvider><Login /></LoginProvider>);
+  test("should be able to submit form", ()=> {
+    
+    const { getByText, getByLabelText} = render(<LoginProvider><Login /></LoginProvider>);
+    const emailInput = getByLabelText("Email");
     const passwordInput = getByLabelText("Password");
-    expect(passwordInput).toBeInTheDocument();
+    fireEvent.change(emailInput, {target: {value: "sarkhanjafarli12@gmail.com"}});
+    fireEvent.change(passwordInput, {target: {value: "SJefry12"}});
+    const logInButton = getByText("Log In");
+    fireEvent.submit(logInButton);
   })
+
+  // test("password field should be in the document", ()=> {
+  //   const {getByLabelText} = render(<LoginProvider><Login /></LoginProvider>);
+  //   const passwordInput = getByLabelText("Password");
+  //   expect(passwordInput).toBeInTheDocument();
+  // })
 })
 

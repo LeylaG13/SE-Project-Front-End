@@ -92,9 +92,7 @@ const Login = () => {
             <button
               className="ui big inverted button"
               onClick={(e) => onClick(e)}
-            >
-              Log In
-            </button>
+            >Log In</button>
           </form>
         </div>
       </div>

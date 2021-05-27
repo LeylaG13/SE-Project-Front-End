@@ -39,6 +39,7 @@ const App = () => {
         if (response.data.logged_in && !logedIn) {
           setLogedIn(true);
           setUser(response.data.user);
+          setToken(response.data.token); // token
         } else {
           if (!response.data.logged_in && logedIn) {
             setLogedIn(false);
@@ -56,7 +57,6 @@ const App = () => {
     ws.onopen = () => {
         console.log("connected websocket main component");
 
-        // this.setState({ ws: ws });
         setWs(ws);
 
         timeout = 250; // reset timer to 250 on open of websocket connection 
@@ -108,7 +108,7 @@ const check = () => {
         <Route path="/signin" component={() => <Login />} />
         <Route path="/gamepage" component={()=> <GamePage websocket={ws}/>} />
         <ProfileProvider>
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile" component={<Profile user={user}/>} />
           <Route exact path="/profile/edit" component={ProfileEdit} />
         </ProfileProvider>
         <Route path="/menu" component={Menu} />

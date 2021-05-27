@@ -14,7 +14,7 @@ function Register() {
   // const [click, setClick] = useState(0);
   const [signedUp, setSignedUp] = useState(false);
 
-  var click = 0;
+  const [click, setClick] = useState(0);
   useEffect(() => {
     if (Object.keys(email).length !== 0) {
       axios
@@ -58,7 +58,7 @@ function Register() {
   // };
   const onClick = (event) => {
     event.preventDefault();
-    click = 1;
+    setClick(1)
     // setClick(1);
 
     // e.preventDefault();
