@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Alert from "react-popup-alert";
+import EndMessage from "./EndMessage";
 import "./GamePage.css";
 import Card from "./Card";
 import Menu from "../components/Menu";
@@ -45,18 +47,12 @@ const GamePage = () => {
     array.sort(() => Math.random() - 0.2);
   };
 
-  if (glob === 0) {
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(numbers);
-    shuffle(numbers);
-    shuffle(numbers);
-    glob++;
-  }
   // const [player, setPlayer] = useState("");
   const [pointsRed, setPointsRed] = useState(0);
+  const [alert, setAlert] = useState({});
   const [pointsBlue, setPointsBlue] = useState(0);
+  const [turnsBlue, setTurnsBlue] = useState(0);
+  const [turnsRed, setTurnsRed] = useState(0);
   const [chosenCard, setChosenCard] = useState({});
   const [team, setTeam] = useState("");
   const [disabled, setDisabled] = useState("");
@@ -64,20 +60,37 @@ const GamePage = () => {
   const [numBlueOperative, setNumBlueOperatives] = useState(0);
   const [numRedSpy, setNumRedSpy] = useState(0);
   const [numRedOperative, setNumberRedOperative] = useState(0);
+  const [endGame, setEndGame] = useState(0);
   const [player, setPlayer] = useState("");
   const [whoseTurn, setWhoseTurn] = useState(0);
   const [messages, setMessages] = useState([
     {
       id: 1,
-      msg: "Hello",
+      msg: "Hello, this it team blue ^_^",
       team: 0, // blue
     },
     {
       id: 2,
-      msg: "You are stupid, go home",
+      msg: "Hello, this is team red :)",
       team: 1, //red
     },
   ]);
+
+  const howManyTurns = () => {
+    var bt = 0;
+    var rt = 0;
+    allCards.forEach((card) => {
+      if (card.color === "blue") {
+        // setTurnsBlue(turnsBlue + 1);
+        bt++;
+      } else if (card.color === "red") {
+        // setTurnsRed(turnsRed + 1);
+        rt++;
+      }
+    });
+    setTurnsBlue(bt);
+    setTurnsRed(rt);
+  };
 
   const [hint, setHint] = useState("");
   const [moves, setMoves] = useState(0);
@@ -124,43 +137,32 @@ const GamePage = () => {
   //     });
   // }, []);
 
-  useEffect(() => {
-    if (Object.keys(chosenCard).length !== 0) {
-      if (chosenCard.color === "black") {
-        if (team === "blue") {
-          setPointsBlue(pointsBlue - 100);
-          setPointsRed(pointsRed + 450);
-        } else {
-          setPointsRed(pointsRed - 100);
-          setPointsBlue(pointsBlue + 450);
-        }
-      } else if (chosenCard.color === team) {
-        if (team === "blue") {
-          console.log("I am blue");
-          setPointsBlue(pointsBlue + 50);
-        } else {
-          console.log("I am red");
+  if (glob === 0) {
+    shuffle(allCards);
+    shuffle(allCards);
+    shuffle(allCards);
+    shuffle(numbers);
+    shuffle(numbers);
+    shuffle(numbers);
+    howManyTurns();
+    glob++;
+  }
 
-          setPointsRed(pointsRed + 50);
-        }
-      } else if (chosenCard.color === "grey") {
-      } else {
-        if (team === "blue") {
-          console.log("I am blue");
+  var chat = (
+    <div className="chatbox">
+      {messages.map((message) => {
+        return (
+          <div
+            className={`message ${message.team ? "red" : "blue"}`}
+            key={message.id}
+          >
+            {message.msg}
+          </div>
+        );
+      })}
+    </div>
+  );
 
-          setPointsBlue(pointsBlue - 25);
-          setPointsRed(pointsRed + 25);
-        } else {
-          console.log("I am red");
-
-          setPointsRed(pointsRed - 25);
-          setPointsBlue(pointsBlue + 25);
-        }
-      }
-    }
-  }, [chosenCard]);
-
-  console.log(chosenCard);
   const handleMoves = (e) => {
     setMoves(Number(e.target.value));
   };
@@ -175,6 +177,98 @@ const GamePage = () => {
     setWhoseTurn(!whoseTurn);
     setLastID(lastID + 1);
   };
+
+  var hintbox = (
+    <div className="hintbox">
+      <form className="hintform" onSubmit={handleSubmit}>
+        <div>
+          <label for="hint" class="preg">
+            Hint:
+          </label>
+          <input
+            className="hint"
+            value={hint}
+            type="text"
+            id="idhint"
+            name="hint"
+            onChange={handleHint}
+          />
+          <label for="moves" class="preg">
+            Moves:{" "}
+          </label>
+          <input
+            className="moves"
+            value={moves}
+            type="number"
+            name="moves"
+            onChange={handleMoves}
+          />
+        </div>
+        <button class="ui inverted white button large">Send</button>
+      </form>
+    </div>
+  );
+
+  useEffect(() => {
+    if (Object.keys(chosenCard).length !== 0) {
+      if (team === "blue") {
+        setTurnsBlue(turnsBlue - 1);
+      } else if (team === "red") {
+        setTurnsRed(turnsRed - 1);
+      }
+
+      if (chosenCard.color === "black") {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 100);
+          setPointsRed(pointsRed + 450);
+          setTurnsBlue(0);
+        } else {
+          setPointsRed(pointsRed - 100);
+          setPointsBlue(pointsBlue + 450);
+          setTurnsRed(0);
+        }
+      } else if (chosenCard.color === team) {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue + 50);
+        } else {
+          setPointsRed(pointsRed + 50);
+        }
+      } else if (chosenCard.color === "grey") {
+      } else {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 25);
+          setPointsRed(pointsRed + 25);
+        } else {
+          setPointsRed(pointsRed - 25);
+          setPointsBlue(pointsBlue + 25);
+        }
+      }
+    }
+  }, [chosenCard]);
+
+  useEffect(() => {
+    if (turnsBlue === 0 || turnsRed === 0) {
+      console.log("ENDGAME");
+      var winmessage = "";
+      if (pointsBlue > pointsRed) {
+        winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
+      } else if (pointsBlue < pointsRed) {
+        winmessage = `The game has finished and Red Team won scoring ${pointsRed} points`;
+      } else if (pointsBlue === pointsRed) {
+        winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
+      }
+
+      setEndGame(1);
+      var alertmessage = {
+        type: "success",
+        text: winmessage,
+        show: true,
+      };
+      setAlert(alertmessage);
+    }
+  }, [turnsBlue, turnsRed]);
+
+  // console.log(chosenCard);
 
   const onClickTeam = (playertype, color) => {
     setPlayer(playertype);
@@ -194,9 +288,9 @@ const GamePage = () => {
     // console.log(player, team);
   };
 
-  return (
-    <div id="gamepage">
-      <Menu />
+  var maingamepage = (
+    <div>
+      {" "}
       <h1> Room #1</h1>
       <button
         class={`redbutton ui ${
@@ -231,7 +325,6 @@ const GamePage = () => {
       >
         Join as operative
       </button>
-
       <div className="ui grid">
         <div className="three wide column">
           <div className="icon-image blue">
@@ -239,10 +332,11 @@ const GamePage = () => {
           </div>
           <div className="game-info one">
             <h4>Team Blue</h4>
-            <p>Words guessed: </p>
-            <p>Points earned: {pointsBlue} </p>
             <p>Operatives: {numBlueOperative}</p>
             <p>Spymasters: {numBlueSpy}</p>
+            <p>Words guessed: </p>
+            <p>Points earned: {pointsBlue} </p>
+            <p>Turns left: {turnsBlue} </p>
           </div>
         </div>
 
@@ -448,61 +542,27 @@ const GamePage = () => {
           </div>
           <div className="game-info two">
             <h4>Team Red</h4>
-            <p>Words guessed: </p>
-            <p>Points earned: {pointsRed} </p>
             <p>Operatives: {numRedOperative}</p>
             <p>Spymasters: {numRedSpy}</p>
+            <p>Words guessed: </p>
+            <p>Points earned: {pointsRed} </p>
+            <p> Turns left: {turnsRed}</p>
           </div>
-          <div className="chatbox">
-            {messages.map((message) => {
-              return (
-                <div
-                  className={`message ${message.team ? "red" : "blue"}`}
-                  key={message.id}
-                >
-                  {message.msg}
-                </div>
-              );
-            })}
-          </div>
+          {chat}
         </div>
       </div>
+      {player === "spymaster" ? hintbox : null}
+    </div>
+  );
 
-      {/* <div>
-        <label for="hint" class="preg">
-          Hint:
-        </label>
-        <input type="text" id="idhint" name="hint" />
-      </div> */}
-
-      <div className="hintbox">
-        <form className="hintform" onSubmit={handleSubmit}>
-          <div>
-            <label for="hint" class="preg">
-              Hint:
-            </label>
-            <input
-              className="hint"
-              value={hint}
-              type="text"
-              id="idhint"
-              name="hint"
-              onChange={handleHint}
-            />
-            <label for="moves" class="preg">
-              Moves:{" "}
-            </label>
-            <input
-              className="moves"
-              value={moves}
-              type="number"
-              name="moves"
-              onChange={handleMoves}
-            />
-          </div>
-          <button class="ui inverted white button large">Send</button>
-        </form>
-      </div>
+  return (
+    <div id="gamepage">
+      <Menu />
+      {endGame === 1 ? (
+        <EndMessage pointsBlue={pointsBlue} pointsRed={pointsRed} />
+      ) : (
+        maingamepage
+      )}
     </div>
   );
 };

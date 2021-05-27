@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Menu from "../components/Menu";
 import axios from "axios";
@@ -8,11 +8,7 @@ import "../style.css";
 import spy1 from "../media/sp1.png";
 import spy2 from "../media/sp2.png";
 
-import { LoginContext } from "../context/LoginContext";
-
 const Home = () => {
-  const {value1, value2, value3}= useContext(LoginContext);
-  const [logedIn, setLogedIn] = value1;
   return (
     <div>
       <div className="test">
@@ -38,20 +34,18 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
-              {!logedIn ? (
-                <div className="row">
-                  <div className="col-md-6">
-                    <Link to="/signin" className="button">
-                      Log In
-                    </Link>
-                  </div>
-                  <div className="col-md-6">
-                    <Link to="/signup" className="button">
-                      Sign Up
-                    </Link>
-                  </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <Link to="/signin" className="button">
+                    Log In
+                  </Link>
                 </div>
-              ) : null}
+                <div className="col-md-6">
+                  <Link to="/signup" className="button">
+                    Sign Up
+                  </Link>
+                </div>
+              </div>
             </div>
             <div className="col-md-3">
               <div className="image-box2">
