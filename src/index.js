@@ -1,5 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-
-ReactDOM.render(<App />, document.querySelector("#root"));
+import { LoginProvider } from "./context/LoginContext";
+ReactDOM.render(
+  <LoginProvider>
+    {" "}
+    <App />
+  </LoginProvider>,
+  document.querySelector("#root")
+);
