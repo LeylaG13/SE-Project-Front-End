@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
-
+import Avatar from "avataaars";
 import Menu from "../components/Menu";
 import "./Profile.css";
 import avatarImage1 from "../media/avatar1.png";
+import avatars from "./avatars/avatars";
 
 import {
   AreaChart,
@@ -22,8 +23,9 @@ const Profile = () => {
   //   { quarter: 3, earnings: 14250 },
   //   { quarter: 4, earnings: 19000 },
   // ];
-
+  const [avatar, setAvatar] = useState(0);
   const [user, setUser] = useContext(ProfileContext);
+  const [edit, setEdit] = useState(0);
   console.log(user);
 
   const data = [
@@ -71,43 +73,144 @@ const Profile = () => {
     },
   ];
 
-  return (
+  const onClickRight = () => {
+    if (avatar < 19) {
+      setAvatar(avatar + 1);
+    } else {
+      setAvatar(0);
+    }
+    console.log(avatar);
+  };
+
+  const onClickEdit = () => {
+    if (edit === 1) {
+      setEdit(0);
+    } else {
+      setEdit(1);
+    }
+  };
+  const onClickLeft = () => {
+    if (avatar > 0) {
+      setAvatar(avatar - 1);
+    } else if (avatar == 0) {
+      setAvatar(19);
+    } else {
+      setAvatar(0);
+    }
+    console.log(avatar);
+  };
+
+  const handleChange = (event) => {
+    let newState = Object.assign({}, user); // creating a copy of the state
+    newState[event.target.name] = event.target.value; // changing the value we want
+    setUser(newState); // passing it to state
+    console.log(event.target.value);
+  };
+
+  const complete = (e) => {
+    e.preventDefault();
+
+    // send to backend
+  };
+  var avatar_edit_buttons = (
+    <div class="ui buttons">
+      <button
+        className="ui tiny circular icon button avatar_button"
+        onClick={onClickLeft}
+      >
+        <i class="left arrow icon"></i>
+      </button>
+      <button
+        className="ui tiny circular icon button avatar_button"
+        onClick={onClickRight}
+      >
+        <i class="right arrow icon"></i>
+      </button>
+    </div>
+  );
+
+  var final = (
     <div>
+      <div className="row name">
+        <div className="col">
+          <div>
+            <h1>{user.name}</h1> {/* DYNAMIC */}
+          </div>
+        </div>
+      </div>
+      <div className="row email">
+        <div className="col">
+          <div className="">
+            <h2>{user.email}</h2> {/* DYNAMIC */}
+          </div>
+        </div>
+      </div>
+      <div className="row description">
+        <div className="col">
+          <div className="">
+            <p>{user.description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  var editable = (
+    <div>
+      <div className="row name">
+        <div className="col">
+          <div>
+            <input
+              name="name"
+              className="name-edit"
+              value={user.name}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="row email">
+        <div className="col">
+          <div className="">
+            <h2>{user.email}</h2> {/* DYNAMIC */}
+          </div>
+        </div>
+      </div>{" "}
+      <div className="row description">
+        <div className="col">
+          <div className="">
+            <textarea
+              name="description"
+              className="description-edit"
+              value={user.description}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div id="whole_page_div">
       <Menu />
       <div className="container">
         <div className="row">
           <div className="col-md-4 col-s-12 avatar shape">
             <div className="row">
               <div className="col avatar-image">
-                <img src={avatarImage1} alt="user avatar" /> {/* DYNAMIC */}
+                {avatars[avatar]}
+                {edit === 1 ? avatar_edit_buttons : null}
+                {/* <img src={avatarImage1} alt="user avatar" /> DYNAMIC */}
               </div>
             </div>
-            <div className="row name">
-              <div className="col">
-                <div>
-                  <h1>{user.name}</h1> {/* DYNAMIC */}
-                </div>
-              </div>
-            </div>
-            <div className="row email">
-              <div className="col">
-                <div className="">
-                  <h2>{user.email}</h2> {/* DYNAMIC */}
-                </div>
-              </div>
-            </div>
-            <div className="row description">
-              <div className="col">
-                <div className="">
-                  <p>{user.description}</p>
-                </div>
-              </div>
-            </div>
+
+            {edit === 1 ? editable : final}
             <div className="row">
               <div className="col">
-                <Link className="edit-button" to="/profile/edit">
+                <button className="edit-button" onClick={(e) => onClickEdit()}>
                   Edit
-                </Link>
+                </button>
               </div>
             </div>
           </div>

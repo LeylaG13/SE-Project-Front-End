@@ -21,6 +21,7 @@ body {
   width: 200px;
   /* margin-right: 25px; */
   text-align: center;
+  padding-left: 0%;
 }
 
 .stats {
@@ -70,6 +71,7 @@ body {
 }
 
 .avatar-image img {
+  padding-left: 0%;
   width: 100%;
 }
 
@@ -86,6 +88,8 @@ body {
   padding: 10px;
   margin-bottom: 10px;
   width: 100px;
+  margin-left: 0% !important;
+  margin-top: 1% !important;
 }
 
 .shape .chart {
@@ -186,4 +190,16 @@ p {
   resize: none;
   height: 10vh;
   margin: 0 auto;
+}
+
+.avatar-image {
+  padding-left: 0%;
+  /* margin-bottom: 0%; */
+}
+
+.avatar_button {
+  /* z-index: -1; */
+  margin-top: 0% !important;
+  margin-left: 0% !important;
+  margin-right: 50% !important;
 }
