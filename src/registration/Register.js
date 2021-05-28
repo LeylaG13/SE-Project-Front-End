@@ -11,10 +11,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [errors, setError] = useState(0);
   const [success, setSuccess] = useState(0);
-  // const [click, setClick] = useState(0);
-  const [signedUp, setSignedUp] = useState(false);
+  const [click, setClick] = useState(0);
 
-  var click = 0;
+  // var click = 0;
   useEffect(() => {
     if (Object.keys(email).length !== 0) {
       axios
@@ -27,10 +26,8 @@ function Register() {
           (response) => {
             // setSuccess(1);
             // setEmail(response.data.user.email); // jst in case if response from server is smth different
-            setSignedUp(true);
             console.log(response);
-            console.log(setSignedUp);
-            
+            <Redirect to="/" />;
           },
           (error) => {
             setError(1);
@@ -39,11 +36,6 @@ function Register() {
         );
     }
   }, [click]);
-
-  if(signedUp){
-    console.log('Redirecting..')
-    return <Redirect to='/signin' />
-  }
 
   // const onRegisterClick = (e) => {
   //   // e.preventDefault();
@@ -58,10 +50,8 @@ function Register() {
   // };
   const onClick = (event) => {
     event.preventDefault();
-    click = 1;
-    // setClick(1);
-
-    // e.preventDefault();
+    // click = 1;
+    setClick(1);
   };
 
   return (
@@ -89,6 +79,7 @@ function Register() {
                 type="email"
                 id="idemail"
                 name="email"
+                value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -103,6 +94,7 @@ function Register() {
                 type="text"
                 id="idusername"
                 name="username"
+                value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
@@ -116,6 +108,7 @@ function Register() {
               <input
                 type="password"
                 id="idpassword"
+                value={password}
                 name="password"
                 onChange={(e) => {
                   setPassword(e.target.value);

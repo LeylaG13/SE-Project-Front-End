@@ -1,24 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import Menu from "../components/Menu";
 
-import { LoginContext } from "../context/LoginContext";
-
-import './login.css'
-
-const Login = () => {
-  var user_local = {};
+const Login = (setToken, setUser) => {
+  var user = {};
+  var token = "";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [errors, setError] = useState(0);
   // const [success, setSuccess] = useState(0);
   const [click, setClick] = useState(0);
 
-  const { value1, value2, value3 } = useContext(LoginContext);
-  const [logedIn, setLogedIn] = value1;
-  const [token, setToken] = value2;
-  const [user, setUser] = value3;
   // var click = 0;
   useEffect(() => {
     if (Object.keys(email).length !== 0) {
@@ -30,12 +23,12 @@ const Login = () => {
         .then(
           (response) => {
             console.log(response.data);
-            user_local.id = response.data.user.id;
-            user_local.username = response.data.user.username;
-            user_local.email = response.data.user.email;
-            setUser(user_local);
-            setToken(response.data.token);
-            setLogedIn(true);
+            user.id = response.data.user.id;
+            user.username = response.data.user.username;
+            user.email = response.data.user.email;
+            token = response.data.token;
+            setUser(user);
+            setToken(token);
           },
           (error) => {
             console.log(error);
@@ -44,16 +37,10 @@ const Login = () => {
     }
   }, [click]);
 
-  if(logedIn){
-    console.log('Redirecting..')
-    return <Redirect to='/' />
-  }
-
   const onClick = (event) => {
     // click = 1;
     event.preventDefault();
     setClick(1);
-
   };
 
   return (
