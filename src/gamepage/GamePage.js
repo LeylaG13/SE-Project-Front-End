@@ -91,6 +91,11 @@ const GamePage = () => {
   const [player, setPlayer] = useState("");
   const [whoseTurn, setWhoseTurn] = useState(0);
   const [socketSentCounter, setSocketSentCounter] = useState(0);
+  const [turnChanged, setTurnChanged]= useState(true);
+  const [disableTeam, setDisableTeam] = useState();
+  // const [cardsDisabled, setCardsDisabled] = useState("");
+  const [cardsDisabled, setCardsDisabled] = useState(false);
+  // const [dis]
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -180,6 +185,7 @@ const GamePage = () => {
 
   var hintbox = (
     <div className="hintbox">
+      {turnChanged ? <p>Team {team}'s turn now</p> : null}
       <form className="hintform" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="hint" className="preg">
@@ -210,16 +216,42 @@ const GamePage = () => {
     </div>
   );
 
+    useEffect(()=>{
+      if(whoseTurn){
+        setDisableTeam(0); // disable blue team
+        console.log("team 0 (red) will be disabled to touch cards");
+        console.log(team);
+      }else{
+        setDisableTeam(1); // disable red team
+        console.log("team 1 (blue) will be disabled to touch cards");
+        console.log(team);
+      }
+      handleDisable();
+    }, [team])
+
+    const handleDisable = ()=>{
+      if((team === "blue" && disableTeam === 1) || (team === "red" && disableTeam === 0)){
+        // setCardsDisabled("disabled");
+        setCardsDisabled(true);
+        console.log("cards are set to disable");
+      }else{
+        // setCardsDisabled("");
+        setCardsDisabled(false);
+        console.log("cards are NOT disabled");
+      }
+      
+    }
 
   useEffect(()=>{
     sendToSocket();
+
   }, [socketSentCounter]);
 
 
   const sendToSocket = () => {
     if(WS){
       // console.log("sent to socket", WS);
-      console.log("messages sent:", allCards);
+      // console.log("messages sent:", allCards);
       WS.send(JSON.stringify({
         // 'hint': hint,
         'turnsBlue': turnsBlue,
@@ -232,7 +264,7 @@ const GamePage = () => {
         'numRedSpy': numRedSpy,
         'numRedOperative': numRedOperative,
         'endGame': endGame, 
-        // 'whoseTurn': whoseTurn
+        'whoseTurn': whoseTurn,
         'messages': messages,
         // 'message': "hello"
       }))
@@ -257,10 +289,9 @@ const GamePage = () => {
 
     ws.onmessage = (message)=>{
       let data = JSON.parse(message.data)
-      // setChosenCard(data.chosenCard);
-      console.log("messages received: ",data.cards);
+      console.log("received:",data);
+
       setMessages(data.messages);
-      // setChosenCard(data.chosenCard);
       setTurnsBlue(data.turnsBlue);
       setTurnsRed(data.turnsRed)
       setAllCards(data.cards);
@@ -271,7 +302,7 @@ const GamePage = () => {
       setPointsBlue(data.pointsBlue);
       setPointsRed(data.pointsRed);
       setEndGame(data.endGame);
-      // console.log("received data:", data); // receiving and parsing JSON data
+      setWhoseTurn(data.whoseTurn);
     }
 
     // websocket onclose event listener
@@ -336,14 +367,20 @@ const GamePage = () => {
           setPointsRed(pointsRed + 50);
         }
       } else if (chosenCard.color === "grey") {
+        console.log("grey card, no change");
       } else {
         if (team === "blue") {
           setPointsBlue(pointsBlue - 25);
           setPointsRed(pointsRed + 25);
+          setWhoseTurn(0);
+          console.log("change whoseTurn")
         } else {
           setPointsRed(pointsRed - 25);
           setPointsBlue(pointsBlue + 25);
+          setWhoseTurn(1);
+          console.log("change whoseTurn")
         }
+        setTurnChanged(true);
       }
     }
     allCards.forEach((element) => {
@@ -393,6 +430,8 @@ const GamePage = () => {
     // console.log(player, team);
     // sendToSocket();
   };
+
+
 
   var maingamepage = (
     <div>
@@ -455,6 +494,11 @@ const GamePage = () => {
             setChosenCard={setChosenCard}
             player={player}
             is_open={allCards[0].is_open}
+            // disabled={team ==}
+            // className={`${cardsDisabled}`}
+            disabled={cardsDisabled}
+            // disabled ={handleDisable}
+
           />
           <Card
             word={allCards[1].word}

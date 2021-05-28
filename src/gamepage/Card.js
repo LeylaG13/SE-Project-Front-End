@@ -57,7 +57,7 @@ const images = [
   ch25,
 ];
 
-const Card = ({ word, color, number, setChosenCard, is_open, player }) => {
+const Card = ({ word, color, number, setChosenCard, is_open, player, disabled }) => {
 
 
   useEffect(()=>{
@@ -86,7 +86,9 @@ const Card = ({ word, color, number, setChosenCard, is_open, player }) => {
     </div>
   );
   var pciture_side = (
-    <div className={`icon-image ${color}`}>
+    <div className={`icon-image ${color}`} disabled={disabled} style={{
+      opacity: disabled ? 0.25 : 1,
+    }}>
       <img src={images[number]} alt={`pic${number}`} />
     </div>
   );
