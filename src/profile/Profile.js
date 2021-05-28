@@ -195,8 +195,8 @@ const Profile = () => {
     <div id="whole_page_div">
       <Menu />
       <div className="container">
-        <div className="row">
-          <div className="col-md-4 col-s-12 avatar shape">
+      <div className="row" id="firstrow">
+        <div className="col-md-4 col-s-12 avatar shape">
             <div className="row">
               <div className="col avatar-image">
                 {avatars[avatar]}

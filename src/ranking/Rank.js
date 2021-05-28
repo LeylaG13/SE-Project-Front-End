@@ -130,7 +130,7 @@ const Rank = () => {
   return (
     <div>
       <Menu />
-      <h1> Leader Board</h1>
+      <h1 id="firsth1"> Leader Board</h1>
       <div id="table_div">
         <table className="ui selectable inverted celled table">
           <thead>

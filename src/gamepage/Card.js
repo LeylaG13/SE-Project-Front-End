@@ -57,9 +57,11 @@ const images = [
   ch25,
 ];
 
-const Card = ({ word, color, number, setChosenCard, is_open, player, disabled }) => {
+const Card = ({ word, color, number, setChosenCard, is_open, player, disabled, whoseTurn, team }) => {
 
-
+  if(word === "bus"){
+    console.log("disabled: ",disabled, "word:",word);
+  }
   useEffect(()=>{
     
   }, [is_open]);
@@ -76,9 +78,14 @@ const Card = ({ word, color, number, setChosenCard, is_open, player, disabled })
     <div
       className={word_class}
       onClick={(e) => {
-        if (player == "operative") {
-          setClick(1);
-          setChosenCard(card);
+        if (
+          (whoseTurn === 0 && team === "red") ||
+          (whoseTurn === 1 && team === "blue")
+        ) {
+          if (player === "operative") {
+            setClick(1);
+            setChosenCard(card);
+          }
         }
       }}
     >
@@ -86,13 +93,13 @@ const Card = ({ word, color, number, setChosenCard, is_open, player, disabled })
     </div>
   );
   var pciture_side = (
-    <div className={`icon-image ${color}`} disabled={disabled} style={{
-      opacity: disabled ? 0.25 : 1,
-    }}>
+    <div className={`icon-image ${color}`} >
       <img src={images[number]} alt={`pic${number}`} />
     </div>
   );
-  return <div> {click === 0 && is_open === 0 ? word_side : pciture_side} </div>;
+  return <div disabled={disabled} style={{
+    opacity: disabled ? 0.25 : 1,
+  }}> {click === 0 && is_open === 0 ? word_side : pciture_side} </div>;
 };
 
 export default Card;
