@@ -7,33 +7,33 @@ import Menu from "../components/Menu";
 import icon1 from "../media/cards/icon1.png";
 import icon2 from "../media/cards/icon2.png";
 
-const allCards = [
-  { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
-];
+// const allCards = [
+//   { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
+// ];
 
 const numbers = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -50,6 +50,33 @@ const GamePage = () => {
   // const [player, setPlayer] = useState("");
   const [pointsRed, setPointsRed] = useState(0);
   // const [alert, setAlert] = useState({});
+  const [allCards, setAllCards] = useState([
+    { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
+  ]);
   const [pointsBlue, setPointsBlue] = useState(0);
   const [turnsBlue, setTurnsBlue] = useState(0);
   const [turnsRed, setTurnsRed] = useState(0);
@@ -63,6 +90,7 @@ const GamePage = () => {
   const [endGame, setEndGame] = useState(0);
   const [player, setPlayer] = useState("");
   const [whoseTurn, setWhoseTurn] = useState(0);
+  const [socketSentCounter, setSocketSentCounter] = useState(0);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -101,19 +129,8 @@ const GamePage = () => {
 
   const [lastID, setLastID] = useState(2);
 
-
-  // if (glob === 0) {
-  //   shuffle(allCards);
-  //   shuffle(allCards);
-  //   shuffle(allCards);
-  //   shuffle(numbers);
-  //   shuffle(numbers);
-  //   shuffle(numbers);
-  //   howManyTurns();
-  //   glob++;
-  // }
   
-  if(glob == 0){
+  if(glob === 0){
     howManyTurns();
     glob++;
   }
@@ -146,12 +163,19 @@ const GamePage = () => {
     var updated_hint = hint.concat(" ");
     updated_hint = updated_hint.concat(moves);
     updated_hint = updated_hint.toLocaleUpperCase();
+    // let newState = Object.assign({}, messages); // creating a copy of the state
+    // newState = event.target.value; // changing the value we want
+    // console.log(newState);
+    // setUser(newState); // pas
     setMessages([
       ...messages,
       { id: lastID + 1, msg: updated_hint, team: whoseTurn },
     ]);
     setWhoseTurn(!whoseTurn);
     setLastID(lastID + 1);
+    setSocketSentCounter(prev=>prev+1);
+    // console.log(socketSentCounter);
+    // sendToSocket();
   };
 
   var hintbox = (
@@ -187,23 +211,29 @@ const GamePage = () => {
   );
 
 
+  useEffect(()=>{
+    sendToSocket();
+  }, [socketSentCounter]);
+
+
   const sendToSocket = () => {
     if(WS){
       // console.log("sent to socket", WS);
+      console.log("messages sent:", allCards);
       WS.send(JSON.stringify({
-        'hint': hint,
+        // 'hint': hint,
         'turnsBlue': turnsBlue,
         'turnsRed': turnsRed,
-        'chosenCard': chosenCard,
+        'cards': allCards,
         'pointsBlue': pointsBlue,
         'pointsRed': pointsRed,
         'numBlueSpy': numBlueSpy,
         'numBlueOperative': numBlueOperative,
         'numRedSpy': numRedSpy,
         'numRedOperative': numRedOperative,
-        'messages': messages,
         'endGame': endGame, 
-        'whoseTurn': whoseTurn
+        // 'whoseTurn': whoseTurn
+        'messages': messages,
         // 'message': "hello"
       }))
     }else{
@@ -212,7 +242,7 @@ const GamePage = () => {
   }
 
   const connect = () => {
-    var ws = new WebSocket("ws://localhost:8000/ws/api/math/"  );
+    var ws = new WebSocket("ws://localhost:8000/ws/api/gameroom/");
     var connectInterval;
 
     // websocket onopen event listener
@@ -228,9 +258,20 @@ const GamePage = () => {
     ws.onmessage = (message)=>{
       let data = JSON.parse(message.data)
       // setChosenCard(data.chosenCard);
-      // setMessages(data.messages);
-
-      console.log("received:", JSON.parse(message.data)); // receiving and parsing JSON data
+      console.log("messages received: ",data.cards);
+      setMessages(data.messages);
+      // setChosenCard(data.chosenCard);
+      setTurnsBlue(data.turnsBlue);
+      setTurnsRed(data.turnsRed)
+      setAllCards(data.cards);
+      setNumBlueOperatives(data.numBlueOperative);
+      setNumberRedOperative(data.numRedOperative);
+      setNumBlueSpy(data.numBlueSpy);
+      setNumRedSpy(data.numRedSpy);
+      setPointsBlue(data.pointsBlue);
+      setPointsRed(data.pointsRed);
+      setEndGame(data.endGame);
+      // console.log("received data:", data); // receiving and parsing JSON data
     }
 
     // websocket onclose event listener
@@ -270,9 +311,7 @@ const GamePage = () => {
     connect();
   },[0])
 
-  useEffect(() => {
-    
-
+  useEffect(() => {  
     if (Object.keys(chosenCard).length !== 0) {
       if (team === "blue") {
         setTurnsBlue(turnsBlue - 1);
@@ -307,8 +346,14 @@ const GamePage = () => {
         }
       }
     }
-    
-    sendToSocket();
+    allCards.forEach((element) => {
+      if (element.word === chosenCard.word) {
+        element.is_open = 1;
+      }
+    });
+    setAllCards(allCards);
+    setSocketSentCounter(prev=>prev+1);
+    // sendToSocket();
   }, [chosenCard]);
 
   useEffect(() => {
@@ -344,7 +389,7 @@ const GamePage = () => {
     } else if (playertype === "operative" && color === "blue") {
       setNumBlueOperatives(numBlueOperative + 1);
     }
-
+    setSocketSentCounter(prev=>prev+1);
     // console.log(player, team);
     // sendToSocket();
   };
@@ -409,6 +454,7 @@ const GamePage = () => {
             number={numbers[0]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[0].is_open}
           />
           <Card
             word={allCards[1].word}
@@ -416,6 +462,7 @@ const GamePage = () => {
             number={numbers[1]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[1].is_open}
           />
           <Card
             word={allCards[2].word}
@@ -423,6 +470,7 @@ const GamePage = () => {
             number={numbers[2]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[2].is_open}
           />
           <Card
             word={allCards[3].word}
@@ -430,6 +478,7 @@ const GamePage = () => {
             number={numbers[3]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[3].is_open}
           />
           <Card
             word={allCards[4].word}
@@ -437,6 +486,7 @@ const GamePage = () => {
             number={numbers[4]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[4].is_open}
           />
         </div>
 
@@ -448,6 +498,7 @@ const GamePage = () => {
             number={numbers[5]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[5].is_open}
           />
           <Card
             word={allCards[6].word}
@@ -455,6 +506,7 @@ const GamePage = () => {
             number={numbers[6]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[6].is_open}
           />
           <Card
             word={allCards[7].word}
@@ -462,6 +514,7 @@ const GamePage = () => {
             number={numbers[7]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[7].is_open}
           />
           <Card
             word={allCards[8].word}
@@ -469,6 +522,7 @@ const GamePage = () => {
             number={numbers[8]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[8].is_open}
           />
           <Card
             word={allCards[9].word}
@@ -476,6 +530,7 @@ const GamePage = () => {
             number={numbers[9]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[9].is_open}
           />
         </div>
 
@@ -487,6 +542,7 @@ const GamePage = () => {
             number={numbers[10]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[10].is_open}
           />
           <Card
             word={allCards[11].word}
@@ -494,6 +550,7 @@ const GamePage = () => {
             number={numbers[11]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[11].is_open}
           />
           <Card
             word={allCards[12].word}
@@ -501,6 +558,7 @@ const GamePage = () => {
             number={numbers[12]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[12].is_open}
           />
           <Card
             word={allCards[13].word}
@@ -508,6 +566,7 @@ const GamePage = () => {
             number={numbers[13]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[13].is_open}
           />
           <Card
             word={allCards[14].word}
@@ -515,6 +574,7 @@ const GamePage = () => {
             number={numbers[14]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[14].is_open}
           />
         </div>
 
@@ -526,6 +586,7 @@ const GamePage = () => {
             number={numbers[15]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[15].is_open}
           />
           <Card
             word={allCards[16].word}
@@ -533,6 +594,7 @@ const GamePage = () => {
             number={numbers[16]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[16].is_open}
           />
           <Card
             word={allCards[17].word}
@@ -540,6 +602,7 @@ const GamePage = () => {
             number={numbers[17]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[17].is_open}
           />
           <Card
             word={allCards[18].word}
@@ -547,6 +610,7 @@ const GamePage = () => {
             number={numbers[18]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[18].is_open}
           />
           <Card
             word={allCards[19].word}
@@ -554,6 +618,7 @@ const GamePage = () => {
             number={numbers[19]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[19].is_open}
           />
         </div>
 
@@ -566,6 +631,7 @@ const GamePage = () => {
             number={numbers[20]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[20].is_open}
           />
           <Card
             word={allCards[21].word}
@@ -573,6 +639,7 @@ const GamePage = () => {
             number={numbers[21]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[21].is_open}
           />
           <Card
             word={allCards[22].word}
@@ -580,6 +647,7 @@ const GamePage = () => {
             number={numbers[22]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[22].is_open}
           />
           <Card
             word={allCards[23].word}
@@ -587,6 +655,7 @@ const GamePage = () => {
             number={numbers[23]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[23].is_open}
           />
           <Card
             word={allCards[24].word}
@@ -594,6 +663,7 @@ const GamePage = () => {
             number={numbers[24]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[24].is_open}
           />
         </div>
 
