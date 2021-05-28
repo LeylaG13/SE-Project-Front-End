@@ -148,7 +148,7 @@ const Profile = () => {
       <div className="row description">
         <div className="col">
           <div className="">
-            <p>{user.description}</p>
+            <p>Score: 54913 points</p>
           </div>
         </div>
       </div>
@@ -176,18 +176,6 @@ const Profile = () => {
           </div>
         </div>
       </div>{" "}
-      <div className="row description">
-        <div className="col">
-          <div className="">
-            <textarea
-              name="description"
-              className="description-edit"
-              value={user.description}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-      </div>
     </div>
   );
 
@@ -195,7 +183,7 @@ const Profile = () => {
     <div id="whole_page_div">
       <Menu />
       <div className="container">
-        <div className="row">
+        <div className="row" id="firstrow">
           <div className="col-md-4 col-s-12 avatar shape">
             <div className="row">
               <div className="col avatar-image">
