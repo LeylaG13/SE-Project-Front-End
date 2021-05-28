@@ -18,16 +18,16 @@ import Menu from "../components/Menu";
 const data = [
   {
     number: 0,
-    name: "Name",
+    name: "Chandler",
     total: 631,
     wins: 440,
     losses: 13,
-    rank: "queen",
+    rank: "King",
     score: 749,
   },
   {
     number: 1,
-    name: "Name",
+    name: "Monica",
     total: 456,
     wins: 250,
     losses: 21,
@@ -130,7 +130,7 @@ const Rank = () => {
   return (
     <div>
       <Menu />
-      <h1> Leader Board</h1>
+      <h1 id="firsth1"> Leader Board</h1>
       <div id="table_div">
         <table className="ui selectable inverted celled table">
           <thead>
@@ -147,130 +147,58 @@ const Rank = () => {
           <tbody>
             {/* {meow} */}
             <tr>
-              <td>10</td>
-              <td>Hello</td>
+              <td>1</td>
+              <td>Chandler</td>
+              <td>600</td>
               <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>100</td>
+              <td> KING</td>
+              <td>20000</td>
             </tr>
             <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>2</td>
+              <td>Monica</td>
+              <td>580</td>
+              <td>470</td>
+              <td>110</td>
+              <td>QUEEN</td>
+              <td>18060</td>
             </tr>
             <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>3</td>
+              <td>Rachel</td>
+              <td>535</td>
+              <td>453</td>
+              <td>82</td>
+              <td>LEGEND</td>
+              <td>17658</td>
             </tr>
             <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>4</td>
+              <td>Joey</td>
+              <td>460</td>
+              <td>400</td>
+              <td>60</td>
+              <td> GODLIKE</td>
+              <td>16089</td>
             </tr>
             <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>5</td>
+              <td>Ross</td>
+              <td>302</td>
+              <td>220</td>
+              <td>82</td>
+              <td> MASTER</td>
+              <td>12066</td>
             </tr>
             <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Hello</td>
-              <td>500</td>
-              <td>500</td>
-              <td>0</td>
-              <td> Queen</td>
-              <td>2000</td>
+              <td>6</td>
+              <td>Phoebe</td>
+              <td>300</td>
+              <td>215</td>
+              <td>85</td>
+              <td> ADVANCED</td>
+              <td>11968</td>
             </tr>
           </tbody>
         </table>

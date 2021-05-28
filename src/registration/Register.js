@@ -57,7 +57,7 @@ function Register() {
   return (
     <div>
       <Menu />
-      <h1> Register</h1>
+      <h1 id="firsth1"> Register</h1>
       <div>
         <div id="registerdiv">
           {success === 1 ? (

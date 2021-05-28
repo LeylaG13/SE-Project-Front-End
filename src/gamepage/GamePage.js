@@ -7,33 +7,33 @@ import Menu from "../components/Menu";
 import icon1 from "../media/cards/icon1.png";
 import icon2 from "../media/cards/icon2.png";
 
-const allCards = [
-  { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
-  { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
-  { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
-  { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
-];
+// const allCards = [
+//   { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
+//   { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
+//   { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
+//   { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
+// ];
 
 const numbers = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -41,6 +41,7 @@ const numbers = [
 ];
 
 var glob = 0;
+
 const GamePage = () => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
@@ -48,7 +49,34 @@ const GamePage = () => {
 
   // const [player, setPlayer] = useState("");
   const [pointsRed, setPointsRed] = useState(0);
-  const [alert, setAlert] = useState({});
+  // const [alert, setAlert] = useState({});
+  const [allCards, setAllCards] = useState([
+    { id: "1", word: "bus", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "2", word: "code", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "3", word: "success", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "4", word: "water", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "5", word: "book", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "6", word: "cup", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "7", word: "light", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "8", word: "phone", color: "red", is_open: 0, game: "khsfhk" },
+    { id: "9", word: "wall", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "10", word: "sticker", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "11", word: "cold", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "12", word: "hot", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "13", word: "paper", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "14", word: "pen", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "15", word: "color", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "16", word: "bottle", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "17", word: "talk", color: "blue", is_open: 0, game: "khsfhk" },
+    { id: "18", word: "hair", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "19", word: "computer", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "20", word: "guitar", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "21", word: "singing", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "22", word: "icecream", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "23", word: "painting", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "24", word: "notebook", color: "grey", is_open: 0, game: "khsfhk" },
+    { id: "25", word: "lipstick", color: "black", is_open: 0, game: "khsfhk" },
+  ]);
   const [pointsBlue, setPointsBlue] = useState(0);
   const [turnsBlue, setTurnsBlue] = useState(0);
   const [turnsRed, setTurnsRed] = useState(0);
@@ -62,6 +90,15 @@ const GamePage = () => {
   const [endGame, setEndGame] = useState(0);
   const [player, setPlayer] = useState("");
   const [whoseTurn, setWhoseTurn] = useState(0);
+  const [socketSentCounter, setSocketSentCounter] = useState(0);
+  const [turnChanged, setTurnChanged] = useState(true);
+  const [disableTeam, setDisableTeam] = useState();
+  const [hint, setHint] = useState("");
+  const [moves, setMoves] = useState(0);
+  const [lastID, setLastID] = useState(2);
+  // const [cardsDisabled, setCardsDisabled] = useState("");
+  const [cardsDisabled, setCardsDisabled] = useState(false);
+  // const [dis]
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -74,6 +111,132 @@ const GamePage = () => {
       team: 1, //red
     },
   ]);
+
+  const [WS, setWS] = useState(null);
+
+  // USE EFFECTS --------------------------------------------
+
+  // connect when opened page
+  useEffect(() => {
+    connect();
+  }, [0]);
+
+  useEffect(() => {
+    if (Object.keys(chosenCard).length !== 0) {
+      if (team === "blue") {
+        setTurnsBlue(turnsBlue - 1);
+      } else if (team === "red") {
+        setTurnsRed(turnsRed - 1);
+      }
+
+      if (chosenCard.color === "black") {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 100);
+          setPointsRed(pointsRed + 450);
+          setTurnsBlue(0);
+        } else {
+          setPointsRed(pointsRed - 100);
+          setPointsBlue(pointsBlue + 450);
+          setTurnsRed(0);
+        }
+      } else if (chosenCard.color === team) {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue + 50);
+        } else {
+          setPointsRed(pointsRed + 50);
+        }
+      } else if (chosenCard.color === "grey") {
+        console.log("grey card, no change");
+      } else {
+        if (team === "blue") {
+          setPointsBlue(pointsBlue - 25);
+          setPointsRed(pointsRed + 25);
+          setWhoseTurn(0);
+        } else {
+          setPointsRed(pointsRed - 25);
+          setPointsBlue(pointsBlue + 25);
+          setWhoseTurn(1);
+        }
+        console.log("change whoseTurn");
+        setTurnChanged(true);
+      }
+    }
+    allCards.forEach((element) => {
+      if (element.word === chosenCard.word) {
+        element.is_open = 1;
+      }
+    });
+    setAllCards(allCards);
+    setSocketSentCounter((prev) => prev + 1);
+    // sendToSocket();
+  }, [chosenCard]);
+
+  useEffect(() => {
+    if (turnsBlue === 0 || turnsRed === 0) {
+      console.log("ENDGAME", endGame);
+      var winmessage = "";
+      if (pointsBlue > pointsRed) {
+        winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
+      } else if (pointsBlue < pointsRed) {
+        winmessage = `The game has finished and Red Team won scoring ${pointsRed} points`;
+      } else if (pointsBlue === pointsRed) {
+        winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
+      }
+      setEndGame(1);
+      setSocketSentCounter(prev=>prev+1); 
+    }
+
+    // sendToSocket();
+  }, [turnsBlue, turnsRed]);
+
+
+
+  useEffect(() => {
+    sendToSocket();
+    checkWhoseTurn();
+  }, [socketSentCounter]);
+
+  useEffect(() => {
+    checkWhoseTurn();
+  }, [team]);
+
+  useEffect(() => {
+    handleDisable();
+  }, [disableTeam]);
+
+  useEffect(() => {
+    checkWhoseTurn();
+  }, [whoseTurn]);
+
+
+
+  const checkWhoseTurn = () => {
+    if (whoseTurn) {
+      setDisableTeam(0); // disable blue team
+      console.log("team 0 (red) will be disabled to touch cards", team);
+    } else {
+      setDisableTeam(1); // disable red team
+      console.log("team 1 (blue) will be disabled to touch cards", team);
+    }
+    handleDisable();
+  };
+  const handleDisable = () => {
+    console.log("handle disable data:", team, disableTeam);
+    if (
+      (team === "blue" && disableTeam === 1) ||
+      (team === "red" && disableTeam === 0)
+    ) {
+      // setCardsDisabled("disabled");
+      setCardsDisabled(true);
+      console.log("cards are set to disable");
+    } else {
+      // setCardsDisabled("");
+      setCardsDisabled(false);
+      console.log("cards are NOT disabled");
+    }
+  };
+
+  let timeout = 250; // 250ms
 
   const howManyTurns = () => {
     var bt = 0;
@@ -91,58 +254,7 @@ const GamePage = () => {
     setTurnsRed(rt);
   };
 
-  const [hint, setHint] = useState("");
-  const [moves, setMoves] = useState(0);
-
-  const [lastID, setLastID] = useState(2);
-
-  // useEffect(() => {
-  //   axios.get("http://127.0.0.1:8000/api/generate").then((response) => {
-  //     console.log(response.data);
-  //   });
-  // }, []);
-
-  // const [token, setToken] = useState("");
-  // const [allCards, setAllCards] = useState([]);
-
-  // var user = {};
-  // useEffect(() => {
-  //   axios
-  //     .post("http://127.0.0.1:8000/api/signin", {
-  //       email: "hfh@email.com",
-  //       password: "123",
-  //     })
-  //     .then(
-  //       (response) => {
-  //         setToken(response.data.token);
-  //         console.log(response.data.token);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-
-  //   axios
-  //     .get("http://127.0.0.1:8000/api/generate", {
-  //       headers: {
-  //         Authorization: `token ${token}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data.user);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
   if (glob === 0) {
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(allCards);
-    shuffle(numbers);
-    shuffle(numbers);
-    shuffle(numbers);
     howManyTurns();
     glob++;
   }
@@ -175,103 +287,144 @@ const GamePage = () => {
     var updated_hint = hint.concat(" ");
     updated_hint = updated_hint.concat(moves);
     updated_hint = updated_hint.toLocaleUpperCase();
+    // let newState = Object.assign({}, messages); // creating a copy of the state
+    // newState = event.target.value; // changing the value we want
+    // console.log(newState);
+    // setUser(newState); // pas
     setMessages([
       ...messages,
       { id: lastID + 1, msg: updated_hint, team: whoseTurn },
     ]);
     setWhoseTurn(!whoseTurn);
     setLastID(lastID + 1);
+    setSocketSentCounter((prev) => prev + 1);
+    // console.log(socketSentCounter);
+    // sendToSocket();
   };
 
   var hintbox = (
     <div className="hintbox">
+      {turnChanged ? <p>Team {team}'s turn now</p> : null}
       <form className="hintform" onSubmit={handleSubmit}>
         <div>
-          <label for="hint" class="preg">
+          <label htmlFor="hint" className="preg">
             Hint:
           </label>
           <input
             className="hint"
             value={hint}
             type="text"
-            id="idhint"
+            id="hint"
             name="hint"
             onChange={handleHint}
           />
-          <label for="moves" class="preg">
+          <label htmlFor="moves" className="preg">
             Moves:{" "}
           </label>
           <input
             className="moves"
             value={moves}
             type="number"
+            id="moves"
             name="moves"
             onChange={handleMoves}
           />
         </div>
-        <button class="ui inverted white button large">Send</button>
+        <button className="ui inverted white button large">Send</button>
       </form>
     </div>
   );
 
-  useEffect(() => {
-    if (Object.keys(chosenCard).length !== 0) {
-      if (team === "blue") {
-        setTurnsBlue(turnsBlue - 1);
-      } else if (team === "red") {
-        setTurnsRed(turnsRed - 1);
-      }
-
-      if (chosenCard.color === "black") {
-        if (team === "blue") {
-          setPointsBlue(pointsBlue - 100);
-          setPointsRed(pointsRed + 450);
-          setTurnsBlue(0);
-        } else {
-          setPointsRed(pointsRed - 100);
-          setPointsBlue(pointsBlue + 450);
-          setTurnsRed(0);
-        }
-      } else if (chosenCard.color === team) {
-        if (team === "blue") {
-          setPointsBlue(pointsBlue + 50);
-        } else {
-          setPointsRed(pointsRed + 50);
-        }
-      } else if (chosenCard.color === "grey") {
-      } else {
-        if (team === "blue") {
-          setPointsBlue(pointsBlue - 25);
-          setPointsRed(pointsRed + 25);
-        } else {
-          setPointsRed(pointsRed - 25);
-          setPointsBlue(pointsBlue + 25);
-        }
-      }
+  const sendToSocket = () => {
+    if (WS) {
+      console.log("send whoseTurn:", whoseTurn);
+      WS.send(
+        JSON.stringify({
+          // 'hint': hint,
+          turnsBlue: turnsBlue,
+          turnsRed: turnsRed,
+          cards: allCards,
+          pointsBlue: pointsBlue,
+          pointsRed: pointsRed,
+          numBlueSpy: numBlueSpy,
+          numBlueOperative: numBlueOperative,
+          numRedSpy: numRedSpy,
+          numRedOperative: numRedOperative,
+          endGame: endGame,
+          whoseTurn: whoseTurn,
+          messages: messages,
+          // 'message': "hello"
+        })
+      );
+    } else {
+      console.log("WS is null");
     }
-  }, [chosenCard]);
+  };
 
-  useEffect(() => {
-    if (turnsBlue === 0 || turnsRed === 0) {
-      console.log("ENDGAME");
-      var winmessage = "";
-      if (pointsBlue > pointsRed) {
-        winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
-      } else if (pointsBlue < pointsRed) {
-        winmessage = `The game has finished and Red Team won scoring ${pointsRed} points`;
-      } else if (pointsBlue === pointsRed) {
-        winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
-      }
+  const connect = () => {
+    var ws = new WebSocket("ws://localhost:8000/ws/api/gameroom/");
+    var connectInterval;
 
-      setEndGame(1);
-      var alertmessage = {
-        type: "success",
-        text: winmessage,
-        show: true,
-      };
-      setAlert(alertmessage);
-    }
-  }, [turnsBlue, turnsRed]);
+    // websocket onopen event listener
+    ws.onopen = () => {
+      console.log("connected websocket main component");
+
+      setWS(ws);
+
+      timeout = 250; // reset timer to 250 on open of websocket connection
+      clearTimeout(connectInterval); // clear Interval on on open of websocket connection
+    };
+
+    ws.onmessage = (message) => {
+      let data = JSON.parse(message.data);
+      console.log("received:", data);
+
+      setMessages(data.messages);
+      setTurnsBlue(data.turnsBlue);
+      setTurnsRed(data.turnsRed);
+      setAllCards(data.cards);
+      setNumBlueOperatives(data.numBlueOperative);
+      setNumberRedOperative(data.numRedOperative);
+      setNumBlueSpy(data.numBlueSpy);
+      setNumRedSpy(data.numRedSpy);
+      setPointsBlue(data.pointsBlue);
+      setPointsRed(data.pointsRed);
+      setEndGame(data.endGame);
+      setWhoseTurn(data.whoseTurn);
+    };
+
+    // websocket onclose event listener
+    ws.onclose = (e) => {
+      console.log(
+        `Socket is closed. Reconnect will be attempted in ${Math.min(
+          10000 / 1000,
+          (timeout + timeout) / 1000
+        )} second.`,
+        e.reason
+      );
+
+      timeout = timeout + timeout; //increment retry interval
+      connectInterval = setTimeout(check, Math.min(10000, timeout)); //call check function after timeout
+    };
+
+    // websocket onerror event listener
+    ws.onerror = (err) => {
+      console.error(
+        "Socket encountered error: ",
+        err.message,
+        "Closing socket"
+      );
+
+      ws.close();
+    };
+  };
+
+  /**
+   * utilited by the @function connect to check if the connection is close, if so attempts to reconnect
+   */
+  const check = () => {
+    if (!WS || WS.readyState === WebSocket.CLOSED) connect(); //check if websocket instance is closed, if so call `connect` function.
+  };
 
   // console.log(chosenCard);
 
@@ -289,8 +442,9 @@ const GamePage = () => {
     } else if (playertype === "operative" && color === "blue") {
       setNumBlueOperatives(numBlueOperative + 1);
     }
-
+    setSocketSentCounter((prev) => prev + 1);
     // console.log(player, team);
+    // sendToSocket();
   };
 
   var maingamepage = (
@@ -298,7 +452,7 @@ const GamePage = () => {
       {" "}
       <h1> Room #1</h1>
       <button
-        class={`redbutton ui ${
+        className={`redbutton ui ${
           player === "spymaster" && team === "blue" ? "" : `inverted`
         } small blue button  ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "blue")}
@@ -306,7 +460,7 @@ const GamePage = () => {
         Join as spymaster
       </button>
       <button
-        class={`redbutton  ui ${
+        className={`redbutton  ui ${
           player === "operative" && team === "blue" ? "" : `inverted`
         } small blue button ${disabled}`}
         id="rightbutton"
@@ -315,7 +469,7 @@ const GamePage = () => {
         Join as operative
       </button>
       <button
-        class={`bluebutton  ui ${
+        className={`bluebutton  ui ${
           player === "spymaster" && team === "red" ? "" : `inverted`
         } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("spymaster", "red")}
@@ -323,7 +477,7 @@ const GamePage = () => {
         Join as spymaster
       </button>
       <button
-        class={`bluebutton  ui ${
+        className={`bluebutton  ui ${
           player === "operative" && team === "red" ? "" : `inverted`
         } small pink button ${disabled}`}
         onClick={(e) => onClickTeam("operative", "red")}
@@ -348,156 +502,240 @@ const GamePage = () => {
         {/* First Column */}
         <div className="two wide column">
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
             word={allCards[0].word}
             color={allCards[0].color}
             number={numbers[0]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[0].is_open}
+            // disabled={team ==}
+            // className={`${cardsDisabled}`}
+            disabled={cardsDisabled}
+            // disabled ={handleDisable}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[1].word}
             color={allCards[1].color}
             number={numbers[1]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[1].is_open}
+            disabled={cardsDisabled}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[2].word}
             color={allCards[2].color}
             number={numbers[2]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[2].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[3].word}
             color={allCards[3].color}
             number={numbers[3]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[3].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[4].word}
             color={allCards[4].color}
             number={numbers[4]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[4].is_open}
           />
         </div>
 
         {/* Second Column */}
         <div className="two wide column">
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[5].word}
             color={allCards[5].color}
             number={numbers[5]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[5].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[6].word}
             color={allCards[6].color}
             number={numbers[6]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[6].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[7].word}
             color={allCards[7].color}
             number={numbers[7]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[7].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[8].word}
             color={allCards[8].color}
             number={numbers[8]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[8].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[9].word}
             color={allCards[9].color}
             number={numbers[9]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[9].is_open}
           />
         </div>
 
         {/* Third Column */}
         <div className="two wide column">
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[10].word}
             color={allCards[10].color}
             number={numbers[10]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[10].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[11].word}
             color={allCards[11].color}
             number={numbers[11]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[11].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[12].word}
             color={allCards[12].color}
             number={numbers[12]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[12].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[13].word}
             color={allCards[13].color}
             number={numbers[13]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[13].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[14].word}
             color={allCards[14].color}
             number={numbers[14]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[14].is_open}
           />
         </div>
 
         {/* Fourth Column */}
         <div className="two wide column">
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[15].word}
             color={allCards[15].color}
             number={numbers[15]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[15].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[16].word}
             color={allCards[16].color}
             number={numbers[16]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[16].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[17].word}
             color={allCards[17].color}
             number={numbers[17]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[17].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[18].word}
             color={allCards[18].color}
             number={numbers[18]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[18].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[19].word}
             color={allCards[19].color}
             number={numbers[19]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[19].is_open}
           />
         </div>
 
@@ -505,39 +743,59 @@ const GamePage = () => {
 
         <div className="two wide column">
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[20].word}
             color={allCards[20].color}
             number={numbers[20]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[20].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[21].word}
             color={allCards[21].color}
             number={numbers[21]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[21].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[22].word}
             color={allCards[22].color}
             number={numbers[22]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[22].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[23].word}
             color={allCards[23].color}
             number={numbers[23]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[23].is_open}
           />
           <Card
+            whoseTurn={whoseTurn}
+            team={team}
+            disabled={cardsDisabled}
             word={allCards[24].word}
             color={allCards[24].color}
             number={numbers[24]}
             setChosenCard={setChosenCard}
             player={player}
+            is_open={allCards[24].is_open}
           />
         </div>
 

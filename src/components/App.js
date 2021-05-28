@@ -19,23 +19,29 @@ import ProfileEdit from "../profile/ProfileEdit";
 import Draft from "./Draft";
 
 const App = () => {
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
+  // const [token, setToken] = useState("");
+  // const [user, setUser] = useState({});
+  const [gamePageId, setGamePageId] = useState(0);
 
   return (
     <BrowserRouter>
       <Switch>
         <LoginProvider>
-          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/"
+            component={() => <Home setGamePageId={setGamePageId} />}
+          />
           <Route path="/about" component={About} />
           <Route exact path="/leaderboard" component={Rank} />
           <Route path="/signup" component={Register} />
           {/* <Route path="/signin" component={Login} /> */}
           <Route
             path="/signin"
-            component={() => <Login setToken={setToken} setUser={setUser} />}
+            // component={() => <Login setToken={setToken} setUser={setUser} />}
+            component={Login}
           />
-          <Route path="/gamepage" component={GamePage} />
+          <Route path="/gamepage/:id" component={GamePage} />
           <ProfileProvider>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/profile/edit" component={ProfileEdit} />
