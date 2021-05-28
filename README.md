@@ -1,2 +1,2 @@
 # npx cretae-react-app codenames_front #
-# npm install websocket axios recharts avataaars --save #
+# npm install websocket react-router-dom axios recharts avataaars --save #
