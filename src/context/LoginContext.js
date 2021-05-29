@@ -5,7 +5,10 @@ export const LoginContext = createContext();
 export const LoginProvider = (props) => {
   const [logedIn, setLogedIn] = useState(true);
   const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    username: "Samira",
+    email: "leyla@gmail.com",
+  });
   return (
     <LoginContext.Provider
       value={{
