@@ -24,7 +24,7 @@ const Rank = () => {
       .then((resp) => {
         // console.log(resp.data);
         setData(resp.data);
-        console.log(data);
+        console.log(resp.data);
       })
       .catch((error) => {
         console.error(error);

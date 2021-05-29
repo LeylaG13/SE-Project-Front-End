@@ -59,9 +59,6 @@ const images = [
 
 const Card = ({ word, color, number, setChosenCard, is_open, player, disabled, whoseTurn, team }) => {
 
-  if(word === "bus"){
-    console.log("disabled: ",disabled, "word:",word);
-  }
   useEffect(()=>{
     
   }, [is_open]);
