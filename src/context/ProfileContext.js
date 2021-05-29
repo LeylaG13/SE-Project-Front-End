@@ -1,24 +1,23 @@
-import React, { useState, createContext } from 'react';
-
+import React, { useState, createContext } from "react";
 
 export const ProfileContext = createContext();
 
 export const ProfileProvider = (props) => {
-  const [user, setUser] = useState({
+  const [profileUser, setProfileUser] = useState({
     id: 1,
-    name: "Sarkhan",
-    email: "sarkhanjafarli12@gmail.com",
-    description: "UFAZ - a love hate or abusive relationship?",
+    name: "leyla",
+    email: "leyla@gmail.com",
     wins: 12,
     losses: 22,
     total: 34,
     title: "King",
     rank: 1,
-    points: 223
+    points: 223,
+    score: 3000,
   });
   return (
-    <ProfileContext.Provider value={[user, setUser]}>
+    <ProfileContext.Provider value={[profileUser, setProfileUser]}>
       {props.children}
     </ProfileContext.Provider>
   );
-}
+};

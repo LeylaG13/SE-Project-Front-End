@@ -1,7 +1,10 @@
 import React from "react";
+import { useHistory, Link } from "react-router-dom";
+
 import "./EndMessageStyle.css";
 
 const EndMessage = ({ pointsBlue, pointsRed }) => {
+  let history = useHistory();
   var sign_blue = pointsBlue > 0 ? "+" : "";
   var sign_red = pointsRed > 0 ? "+" : "";
   return (
@@ -16,7 +19,17 @@ const EndMessage = ({ pointsBlue, pointsRed }) => {
           Red Team scored: {sign_red}
           {pointsRed} points
         </h2>
-        <button class="ui inverted huge white button"> Go to Home Page </button>
+        <Link
+          // onClick={(e) => {
+          //   onClicked(e);
+          // }}
+          // href = "/"
+          to="/"
+          className="ui inverted huge white button"
+        >
+          {" "}
+          Go to Home Page{" "}
+        </Link>
       </div>
     </div>
   );
