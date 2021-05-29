@@ -1,3 +1,31 @@
+.main-page h1 {
+  padding-top: 30px !important;
+}
+
+
+.game-info {
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.6rem !important;
+  
+}
+
+.game-info p{
+  font-size: 1rem !important;
+  font-family:'Kanit', sans-serif !important;
+}
+
+.teams-turn {
+  font-size: 1.2rem !important;
+  font-family:'Kanit', sans-serif !important;
+  color: rgb(1, 169, 202);
+}
+
+@media (min-width: 780px) {
+
 #gamepage {
   text-align: center;
 
@@ -51,13 +79,7 @@
   /* Note: backdrop-filter has minimal browser support */
 }
 
-.game-info {
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-right: 10%;
-  color: white;
-  border-radius: 20px;
-}
+
 
 .game-info p {
   margin-bottom: 1%;
@@ -101,21 +123,21 @@ h4 {
 }
 
 .two.wide.column {
-  margin-top: 6%;
+  margin-top: 2%;
 }
 
 .redbutton {
-  margin-bottom: 1% !important;
-  margin-left: 0.5% !important;
+  /* margin-bottom: 1% !important;
+  margin-left: 0.5% !important; */
 }
 
 #rightbutton {
-  margin-right: 55% !important;
+  /* margin-right: 55% !important; */
 }
 
 .bluebutton {
-  margin-bottom: 1% !important;
-  margin-left: 0.5% !important;
+  /* margin-bottom: 1% !important;
+  margin-left: 0.5% !important; */
 }
 
 .words {
@@ -195,7 +217,7 @@ h4 {
 .grey_word,
 .black_word {
   color: white;
-  font-size: larger;
+  font-size: 1.1rem;
   font-family: "Luckiest Guy", cursive;
   margin-left: 0.5% !important;
 }
@@ -204,6 +226,7 @@ h4 {
 .chatbox {
   width: 95%;
   height: 58vh;
+  max-height: 300px;
   margin-top: 20px;
   margin-right: 3px;
   background: rgba(255, 255, 255, 0.25);
@@ -217,7 +240,9 @@ h4 {
 
 .message {
   display: flex;
-  width: 140px;
+  width: 70%;
+  /* max-width: 70%; */
+  /* height: 80%; */
   color: rgb(219, 219, 219);
   font-weight: 600;
   padding: 5px;
@@ -241,19 +266,25 @@ h4 {
   text-align: left;
 }
 .hintbox {
-  width: 800px;
-  margin: 0 auto;
+  /* width: 800px; */
+  max-width: 100%;
+  /* margin: 0 auto; */
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
   color: white;
   display: block;
-  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .hintbox input {
   color: white;
+}
+
+.hintbox .preg{
+  color:#ffffff !important; 
+  font-family: 'Kanit', sans-serif !important;
 }
 
 .hintform div {
@@ -267,9 +298,110 @@ h4 {
 }
 
 .hint {
-  width: 200px;
+  /* width: 200px; */
+  max-width: 100%;
+  display: block;
+}
+
+.form-button{
+  margin: 0 !important;
+  margin-top: 20px !important;
+}
+
+.form-field{
+  /* background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  border: none;
+  border-radius: 50px !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+
+}
+
+label{
+  padding-left: 0;
 }
 
 .moves {
-  width: 40px;
+  width: 80px;
+  display: block;
+}
+
+
+.two.wide.column{
+  max-height: 700px !important;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  max-width: 1400px
+  
+}
+
+.buttons .left{
+  display: flex;
+  max-width: 100%;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.buttons .right{
+  max-width: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+.buttons button{
+  margin:0 !important; 
+}
+
+.main-page{
+  max-width: 100%;
+}
+
+}
+
+
+@media (max-width: 1200px) {
+
+  .game-info{
+    font-size: 0.6rem;
+  }
+  .words{
+    font-size: 0.8rem;
+  }
+  .moves {
+    width: 70px;
+  }
+  .icon-image {
+    width: 70%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 15%;
+    transition: 1.5s;
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .words{
+    font-size: 0.3rem !important;
+  }
+
+  .game-info{
+    font-size: 0.4rem;
+  }
 }

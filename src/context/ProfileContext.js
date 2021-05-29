@@ -10,7 +10,7 @@ export const ProfileProvider = (props) => {
     wins: 12,
     losses: 22,
     total: 34,
-    title: "King",
+    title: "Godlike",
     rank: 1,
     points: 223,
     score: 3000,

@@ -58,20 +58,20 @@ const Profile = () => {
         if (element.username == user.username) {
           console.log(element);
           // console.log(Math.floor(Math.random() * 100000));
-
+          var overall = element.games_won + element.games_lost;
           setProfileUser({
             id: 189,
             name: element.username,
             email: user.email,
             wins: element.games_won,
             losses: element.games_lost,
-            total: element.games_won + element.games_lost,
+            total: overall,
             title: element.rank,
-            rank: 2264,
-            points: 1005600,
+            rank: Math.random() * 1000,
+            points: Math.random() * 100000,
             score: element.score,
           });
-          setUserData(element);
+          // setUserData(element);
         }
       });
     }
@@ -328,15 +328,15 @@ const Profile = () => {
               <div className="figure-wrappers">
                 <div>
                   <h6>Total Points</h6>
-                  <p>{profileUser.total}</p>
+                  <p>{profileUser.points}</p>
                 </div>
                 <div>
                   <h6>Title</h6>
-                  <p>{profileUser.total}</p>
+                  <p>{profileUser.title}</p>
                 </div>
                 <div>
                   <h6>Rank</h6>
-                  <p>{profileUser.total}</p>
+                  <p>{profileUser.rank}</p>
                 </div>
               </div>
             </div>
