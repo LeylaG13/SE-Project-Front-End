@@ -274,7 +274,6 @@ const GamePage = () => {
       ...messages,
       { id: lastID + 1, msg: updated_hint, team: whoseTurn },
     ]);
-    setWhoseTurn(!whoseTurn);
     setLastID(lastID + 1);
     setSocketSentCounter((prev) => prev + 1);
     // console.log(socketSentCounter);
