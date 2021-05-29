@@ -1,0 +1,24 @@
+#menubutton {
+  margin-left: 0% !important;
+  float: left;
+  margin-top: 0.3% !important;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 3px 3px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#menubutton:hover {
+  background: rgba(255, 180, 180, 0.3);
+  border: none;
+}
+
+#menu {
+  margin-top: 0%;
+  margin-bottom: 0%;
+  position: absolute;
+  margin-left: 3%;
+  z-index: 1;
+}
+
+a {
+  color: white;
+}

@@ -1,0 +1,21 @@
+body {
+  background: rgb(183, 9, 76);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7094c",endColorstr="#0091ad",GradientType=1);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

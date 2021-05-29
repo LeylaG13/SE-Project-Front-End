@@ -1,0 +1,43 @@
+body {
+  background: rgb(183, 9, 76);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(183, 9, 76, 1) 0%,
+    rgba(0, 145, 173, 1) 95%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7094c",endColorstr="#0091ad",GradientType=1);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+h1,
+h3 {
+  text-align: center;
+  margin: auto;
+  margin-top: 5% !important;
+  /* margin-bottom: 3.5% !important; */
+  font-family: "Luckiest Guy", cursive;
+  color: white;
+  font-size: 400%;
+}
+
+h3 {
+  font-size: 200%;
+  margin-top: 3%;
+  margin-left: 35%;
+}
