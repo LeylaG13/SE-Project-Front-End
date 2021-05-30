@@ -12,10 +12,11 @@ const Login = () => {
   const [click, setClick] = useState(0);
   let history = useHistory();
 
-  const { value1, value2, value3 } = useContext(LoginContext);
+  const { value1, value2, value3, value4 } = useContext(LoginContext);
   const [logedIn, setLogedIn] = value1;
   const [token, setToken] = value2;
   const [user, setUser] = value3;
+  const [used_id, setUserId] = value4;
 
   // var click = 0;
   useEffect(() => {
@@ -33,6 +34,7 @@ const Login = () => {
             user_local.email = response.data.user.email;
             setUser(user_local);
             setToken(response.data.token);
+            setUserId(response.data.user.id);
             setLogedIn(true);
 
             history.push("/");

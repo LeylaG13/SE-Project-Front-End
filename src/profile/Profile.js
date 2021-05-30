@@ -19,19 +19,24 @@ import {
 
 const Profile = () => {
   const [statsdata, setstatsData] = useState([]);
-  const { value1, value2, value3 } = useContext(LoginContext);
+  const { value1, value2, value3, value4 } = useContext(LoginContext);
   const [logedIn, setLogedIn] = value1;
   const [token, setToken] = value2;
   const [user, setUser] = value3;
+  const [user_id, setUserId] = value4;
   const [userData, setUserData] = useState({});
   // var rand = (Math.floor(Math.random() * 19));
-  const [avatar, setAvatar] = useState(Math.floor(Math.random() * 19));
+  const [avatar, setAvatar] = useState(0);
   const [profileUser, setProfileUser] = useContext(ProfileContext);
   const [edit, setEdit] = useState(0);
-
+  const [onClickEditButtonSave, setOnClickEditButtonSave] = useState(0);
+  // const [avatarNumber, setAvatarNumber] = useState(Math.random() * 19);
+  const [editAvatar, setEditAvatar] = useState(-1);
+  const [userName, setUserName] = useState("");
   var auth = `Token ${
     token !== "" ? token : `a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465`
   } `;
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/leaderboard", {
@@ -44,6 +49,23 @@ const Profile = () => {
       .then((resp) => {
         // console.log(resp.data);
         setstatsData(resp.data);
+        // console.log(resp.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(`http://127.0.0.1:8000/api/user/${user_id}`, {
+        headers: {
+          Authorization: auth,
+          // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+        },
+        mode: "cors",
+      })
+      .then((resp) => {
+        // console.log(resp.data);
+        setAvatar(resp.data.avatar);
         // console.log(resp.data);
       })
       .catch((error) => {
@@ -76,6 +98,38 @@ const Profile = () => {
       });
     }
   }, [statsdata]);
+
+  useEffect(() => {
+    if (editAvatar !== -1 || userName !== "") {
+      if (editAvatar === -1) {
+        setEditAvatar(avatar);
+      }
+      if (userName === "") {
+        setUserName(profileUser.name);
+      }
+
+      axios
+        .patch(
+          `http://127.0.0.1:8000/api/user/${user_id}`,
+          { avatar: avatar, username: profileUser.name },
+          {
+            headers: {
+              Authorization: auth,
+              // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+            },
+            mode: "cors",
+          }
+        )
+        .then((resp) => {
+          console.log("eidted avatar", resp.data);
+          // setstatsData(resp.data);
+          // console.log(resp.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [editAvatar, userName]);
 
   // useEffect(() => {
   //   if (Object.keys(userData).length === 0) {
@@ -151,6 +205,8 @@ const Profile = () => {
 
   const onClickEdit = () => {
     if (edit === 1) {
+      setEditAvatar(avatar);
+      setOnClickEditButtonSave((prev) => prev + 1);
       setEdit(0);
     } else {
       setEdit(1);
@@ -171,14 +227,9 @@ const Profile = () => {
     let newState = Object.assign({}, profileUser); // creating a copy of the state
     newState[event.target.name] = event.target.value; // changing the value we want
     setProfileUser(newState); // passing it to state
-    console.log(event.target.value);
+    setUserName(event.target.value);
   };
 
-  const complete = (e) => {
-    e.preventDefault();
-
-    // send to backend
-  };
   var avatar_edit_buttons = (
     <div class="ui buttons">
       <button
