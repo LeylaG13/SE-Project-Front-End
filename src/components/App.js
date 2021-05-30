@@ -21,7 +21,7 @@ import Draft from "./Draft";
 const App = () => {
   // const [token, setToken] = useState("");
   // const [user, setUser] = useState({});
-  const [gamePageId, setGamePageId] = useState(0);
+  const [gamePageId, setGamePageId] = useState("");
 
   return (
     <BrowserRouter>
@@ -41,7 +41,11 @@ const App = () => {
             // component={() => <Login setToken={setToken} setUser={setUser} />}
             component={Login}
           />
-          <Route path="/gamepage/:id" component={GamePage} />
+          <Route
+            path="/gamepage/:id"
+            component={GamePage}
+            // component={() => <GamePage gamePageId={gamePageId} />}
+          />
           <ProfileProvider>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/profile/edit" component={ProfileEdit} />
