@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const LoginContext = createContext();
 
 export const LoginProvider = (props) => {
-  const [logedIn, setLogedIn] = useState(true);
+  const [logedIn, setLogedIn] = useState(false);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({
     username: "Samira",
