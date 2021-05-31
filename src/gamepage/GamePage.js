@@ -19,7 +19,7 @@ const numbers = [
 
 var glob = 0;
 
-const GamePage = () => {
+const GamePage = ({ gameId }) => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
     return array;
@@ -60,11 +60,11 @@ const GamePage = () => {
     },
   ]);
   const [WS, setWS] = useState(null);
-  const { value1, value2, value3, value4 } = useContext(LoginContext);
-  const [token, setToken] = value2;
-  const [gameId, setGameId] = useState("");
+  // const [gameId, setGameId] = useState("");
   const [teamRedId, setTeamRedId] = useState();
   const [teamBlueId, setTeamBlueId] = useState();
+  const { value1, value2, value3, value4 } = useContext(LoginContext);
+  const [token, setToken] = value2;
   var auth = `Token ${
     token !== "" ? token : `a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465`
   } `;
@@ -77,57 +77,56 @@ const GamePage = () => {
     console.log("use effect connect");
   }, [0]);
 
-  useEffect(() => {
-    //////creating game
-    var idlocal;
-    axios
-      .post(
-        `http://127.0.0.1:8000/api/gameroom-create`,
-        { Status: "Start" },
-        {
-          headers: {
-            Authorization: auth,
-            // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-          },
-          mode: "cors",
-        }
-      )
-      .then((resp) => {
-        console.log(resp.data);
-        idlocal = resp.data.id;
-        setGameId(resp.data.id);
-        // console.log(resp.data.id);
-        // setstatsData(resp.data);
-        // console.log(resp.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  // useEffect(() => {
+  //////creating game
 
-    //////creating team blue
-    // axios
-    //   .post(
-    //     `http://127.0.0.1:8000/api/team-create`,
-    //     { color: "Blue", status: "None", game: idlocal },
-    //     {
-    //       headers: {
-    //         Authorization: auth,
-    //         // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-    //       },
-    //       mode: "cors",
-    //     }
-    //   )
-    //   .then((resp) => {
-    //     console.log(resp.data);
-    //     // setGameId(resp.data.id);
-    //     // console.log(resp.data.id);
-    //     // setstatsData(resp.data);
-    //     // console.log(resp.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-  }, []);
+  // axios
+  //   .post(
+  //     `http://127.0.0.1:8000/api/gameroom-create`,
+  //     { Status: "Start" },
+  //     {
+  //       headers: {
+  //         Authorization: auth,
+  //         // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+  //       },
+  //       mode: "cors",
+  //     }
+  //   )
+  //   .then((resp) => {
+  //     console.log(resp.data);
+  //     setGameId(resp.data.id);
+  //     // console.log(resp.data.id);
+  //     // setstatsData(resp.data);
+  //     // console.log(resp.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+
+  //////creating team blue
+  // axios
+  //   .post(
+  //     `http://127.0.0.1:8000/api/team-create`,
+  //     { color: "Blue", status: "None", game: idlocal },
+  //     {
+  //       headers: {
+  //         Authorization: auth,
+  //         // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+  //       },
+  //       mode: "cors",
+  //     }
+  //   )
+  //   .then((resp) => {
+  //     console.log(resp.data);
+  //     // setGameId(resp.data.id);
+  //     // console.log(resp.data.id);
+  //     // setstatsData(resp.data);
+  //     // console.log(resp.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (gameId !== "") {
