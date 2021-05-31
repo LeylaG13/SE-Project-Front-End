@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { LoginContext } from "../context/LoginContext";
-
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import EndMessage from "./EndMessage";
 import "./GamePage.css";
@@ -11,7 +9,6 @@ import icon2 from "../media/cards/icon2.png";
 import allStaticCards from "./cards";
 import AllColumns from "./AllColumns";
 import Buttons from "./Buttons";
-
 const numbers = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   22, 23, 24,
@@ -19,10 +16,9 @@ const numbers = [
 
 var glob = 0;
 
-const GamePage = ({ gameId }) => {
+const GamePage = () => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
-    return array;
   };
 
   const [pointsRed, setPointsRed] = useState(0);
@@ -60,14 +56,6 @@ const GamePage = ({ gameId }) => {
     },
   ]);
   const [WS, setWS] = useState(null);
-  // const [gameId, setGameId] = useState("");
-  const [teamRedId, setTeamRedId] = useState();
-  const [teamBlueId, setTeamBlueId] = useState();
-  const { value1, value2, value3, value4 } = useContext(LoginContext);
-  const [token, setToken] = value2;
-  var auth = `Token ${
-    token !== "" ? token : `a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465`
-  } `;
 
   // USE EFFECTS --------------------------------------------
 
@@ -76,133 +64,6 @@ const GamePage = ({ gameId }) => {
     connect();
     console.log("use effect connect");
   }, [0]);
-
-  // useEffect(() => {
-  //////creating game
-
-  // axios
-  //   .post(
-  //     `http://127.0.0.1:8000/api/gameroom-create`,
-  //     { Status: "Start" },
-  //     {
-  //       headers: {
-  //         Authorization: auth,
-  //         // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-  //       },
-  //       mode: "cors",
-  //     }
-  //   )
-  //   .then((resp) => {
-  //     console.log(resp.data);
-  //     setGameId(resp.data.id);
-  //     // console.log(resp.data.id);
-  //     // setstatsData(resp.data);
-  //     // console.log(resp.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-  //////creating team blue
-  // axios
-  //   .post(
-  //     `http://127.0.0.1:8000/api/team-create`,
-  //     { color: "Blue", status: "None", game: idlocal },
-  //     {
-  //       headers: {
-  //         Authorization: auth,
-  //         // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-  //       },
-  //       mode: "cors",
-  //     }
-  //   )
-  //   .then((resp) => {
-  //     console.log(resp.data);
-  //     // setGameId(resp.data.id);
-  //     // console.log(resp.data.id);
-  //     // setstatsData(resp.data);
-  //     // console.log(resp.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-  // }, []);
-
-  useEffect(() => {
-    if (gameId !== "") {
-      ///// team id for blue
-      axios
-        .post(
-          `http://127.0.0.1:8000/api/team-create`,
-          { color: "Blue", status: "None", game: gameId },
-          {
-            headers: {
-              Authorization: auth,
-              // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-            },
-            mode: "cors",
-          }
-        )
-        .then((resp) => {
-          console.log("created team blue", resp.data);
-          console.log("blue team id", resp.data.id);
-          setTeamBlueId(resp.data.id);
-          // setGameId(resp.data.id);
-          // console.log(resp.data.id);
-          // setstatsData(resp.data);
-          // console.log(resp.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-
-    /// team id for read
-    axios
-      .post(
-        `http://127.0.0.1:8000/api/team-create`,
-        { color: "Red", status: "None", game: gameId },
-        {
-          headers: {
-            Authorization: auth,
-            // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-          },
-          mode: "cors",
-        }
-      )
-      .then((resp) => {
-        console.log("created team red", resp.data);
-        console.log("red id", resp.data.id);
-        setTeamRedId(resp.data.id);
-        // setGameId(resp.data.id);
-        // console.log(resp.data.id);
-        // setstatsData(resp.data);
-        // console.log(resp.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    //// getting cards
-    axios
-      .get(`http://127.0.0.1:8000/api/cards-get-list/${gameId}`, {
-        headers: {
-          Authorization: auth,
-          // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
-        },
-        mode: "cors",
-      })
-      .then((resp) => {
-        console.log(resp.data);
-        setAllCards(resp.data);
-        // setAvatar(resp.data.avatar);
-        // console.log(resp.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    setAllCards(shuffle(allCards));
-  }, [gameId]);
 
   useEffect(() => {
     console.log("use effect chosen card");
@@ -277,17 +138,17 @@ const GamePage = ({ gameId }) => {
 
   const messageEl = useRef(null);
 
-  // useEffect(() => {
-  //   console.log("use effect socketSentCounter");
-  //   sendToSocket();
-  //   checkWhoseTurn();
-  //   if (messageEl) {
-  //     messageEl.current.addEventListener("DOMNodeInserted", (event) => {
-  //       const { currentTarget: target } = event;
-  //       target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-  //     });
-  //   }
-  // }, [socketSentCounter]);
+  useEffect(() => {
+    console.log("use effect socketSentCounter");
+    sendToSocket();
+    checkWhoseTurn();
+    if (messageEl && messageEl.current) {
+      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  }, [socketSentCounter]);
 
   useEffect(() => {
     console.log("use effect checkWhoseTurn team");
@@ -412,19 +273,19 @@ const GamePage = ({ gameId }) => {
       WS.send(
         JSON.stringify({
           // 'hint': hint,
-          // turnsBlue: turnsBlue,
-          // turnsRed: turnsRed,
-          // cards: allCards,
-          // pointsBlue: pointsBlue,
-          // pointsRed: pointsRed,
-          // numBlueSpy: numBlueSpy,
-          // numBlueOperative: numBlueOperative,
-          // numRedSpy: numRedSpy,
-          // numRedOperative: numRedOperative,
-          // endGame: endGame,
-          // whoseTurn: whoseTurn,
-          // messages: messages,
-          // moves: moves,
+          turnsBlue: turnsBlue,
+          turnsRed: turnsRed,
+          cards: allCards,
+          pointsBlue: pointsBlue,
+          pointsRed: pointsRed,
+          numBlueSpy: numBlueSpy,
+          numBlueOperative: numBlueOperative,
+          numRedSpy: numRedSpy,
+          numRedOperative: numRedOperative,
+          endGame: endGame,
+          whoseTurn: whoseTurn,
+          messages: messages,
+          moves: moves,
           // 'message': "hello"
         })
       );
@@ -451,19 +312,19 @@ const GamePage = ({ gameId }) => {
       let data = JSON.parse(message.data);
       console.log("received:", data);
 
-      // setMessages(data.messages);
-      // setTurnsBlue(data.turnsBlue);
-      // setTurnsRed(data.turnsRed);
-      // setAllCards(data.cards);
-      // setNumBlueOperatives(data.numBlueOperative);
-      // setNumberRedOperative(data.numRedOperative);
-      // setNumBlueSpy(data.numBlueSpy);
-      // setNumRedSpy(data.numRedSpy);
-      // setPointsBlue(data.pointsBlue);
-      // setPointsRed(data.pointsRed);
-      // setEndGame(data.endGame);
-      // setWhoseTurn(data.whoseTurn);
-      // setMoves(data.moves);
+      setMessages(data.messages);
+      setTurnsBlue(data.turnsBlue);
+      setTurnsRed(data.turnsRed);
+      setAllCards(data.cards);
+      setNumBlueOperatives(data.numBlueOperative);
+      setNumberRedOperative(data.numRedOperative);
+      setNumBlueSpy(data.numBlueSpy);
+      setNumRedSpy(data.numRedSpy);
+      setPointsBlue(data.pointsBlue);
+      setPointsRed(data.pointsRed);
+      setEndGame(data.endGame);
+      setWhoseTurn(data.whoseTurn);
+      setMoves(data.moves);
     };
 
     // websocket onclose event listener
@@ -565,8 +426,6 @@ const GamePage = ({ gameId }) => {
         numBlueOperative={numBlueOperative}
         numRedSpy={numRedSpy}
         numRedOperative={numRedOperative}
-        teamRedId={teamRedId}
-        teamBlueId={teamBlueId}
       />
       <div className="ui grid container">
         <div className="three wide column">
@@ -583,17 +442,17 @@ const GamePage = ({ gameId }) => {
           </div>
           {player === "spymaster" ? hintbox : null}
         </div>
-        {gameId === 0 ? null : (
-          <AllColumns
-            whoseTurn={whoseTurn}
-            allCards={allCards}
-            team={team}
-            numbers={numbers}
-            setChosenCard={setChosenCard}
-            player={player}
-            cardsDisabled={cardsDisabled}
-          />
-        )}
+
+        <AllColumns
+          whoseTurn={whoseTurn}
+          allCards={allCards}
+          team={team}
+          numbers={numbers}
+          setChosenCard={setChosenCard}
+          player={player}
+          cardsDisabled={cardsDisabled}
+        />
+
         <div className="three wide column">
           <div className="icon-image red">
             <img src={icon2} alt="icon2" />
