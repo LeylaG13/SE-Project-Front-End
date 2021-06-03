@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import EndMessage from "./EndMessage";
@@ -71,6 +72,7 @@ const GamePage = ({ gameId, setGameId }) => {
   const [user_id, setUserId] = value4;
   var auth = `Token ${token}`;
   let history = useState();
+
   // USE EFFECTS --------------------------------------------
   useEffect(() => {
     if (gameId === 0 || (gameId === "" && logedIn)) {
@@ -79,56 +81,7 @@ const GamePage = ({ gameId, setGameId }) => {
       setLocalGameId(res);
     }
   }, []);
-  // useEffect(() => {
-  //   if (team_glob === 0) {
-  //     console.log("IN USEEFFECT and local is:", localGameId);
-  //     if (localGameId !== 0 && localGameId !== "" && logedIn) {
-  //       if (teamBlueId === "" || teamRedId === "") {
-  //         //////creating team blue
-  //         axios
-  //           .post(
-  //             `http://127.0.0.1:8000/api/team-create`,
-  //             { color: "Blue", status: "None", game: localGameId },
-  //             {
-  //               headers: {
-  //                 Authorization: `Token ${token}`,
-  //               },
-  //               mode: "cors",
-  //             }
-  //           )
-  //           .then((resp) => {
-  //             console.log(resp.data.id);
-  //             setTeamBlueId(resp.data.id);
-  //           })
-  //           .catch((error) => {
-  //             console.error(error);
-  //           });
-
-  //         //////creating team red
-  //         axios
-  //           .post(
-  //             `http://127.0.0.1:8000/api/team-create`,
-  //             { color: "Red", status: "None", game: localGameId },
-  //             {
-  //               headers: {
-  //                 Authorization: `Token ${token}`,
-  //               },
-  //               mode: "cors",
-  //             }
-  //           )
-  //           .then((resp) => {
-  //             console.log(resp.data.id);
-  //             setTeamRedId(resp.data.id);
-  //           })
-  //           .catch((error) => {
-  //             console.error(error);
-  //           });
-  //         team_glob++;
-  //       }
-  //     }
-  //   }
-  // }, [localGameId]);
-
+ 
   // connect when opened page
   useEffect(() => {
     connect();
@@ -136,6 +89,7 @@ const GamePage = ({ gameId, setGameId }) => {
   }, [0]);
 
   useEffect(() => {
+
     if (gameId === 0 || gameId === "") {
       // console.log("gameid", gameId);
       var str = window.location.href;
@@ -147,6 +101,7 @@ const GamePage = ({ gameId, setGameId }) => {
 
   useEffect(() => {
     // console.log("use effect chosen card");
+    console.log("use effect chosen card");
     if (Object.keys(chosenCard).length !== 0) {
       if (team === "blue") {
         setTurnsBlue(turnsBlue - 1);
@@ -220,6 +175,7 @@ const GamePage = ({ gameId, setGameId }) => {
 
   useEffect(() => {
     // console.log("use effect socketSentCounter");
+
     sendToSocket();
     checkWhoseTurn();
     if (messageEl && messageEl.current) {
@@ -506,9 +462,12 @@ const GamePage = ({ gameId, setGameId }) => {
         numBlueOperative={numBlueOperative}
         numRedSpy={numRedSpy}
         numRedOperative={numRedOperative}
+        create_player_id
         playerId={playerId}
         setPlayerId={setPlayerId}
         gameId={gameId}
+
+
       />
       <div className="ui grid container">
         <div className="three wide column">

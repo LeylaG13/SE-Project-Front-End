@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
@@ -25,6 +26,7 @@ const Buttons = ({
   playerId,
   setPlayerId,
   gameId,
+
 }) => {
   const [teamBlueId, setTeamBlueId] = useState();
   const [teamRedId, setTeamRedId] = useState();

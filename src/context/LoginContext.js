@@ -7,6 +7,7 @@ export const LoginProvider = (props) => {
   const [token, setToken] = useState(
     "fc94b6c11b50edb276dc0ef393015958d153d490"
   );
+
   const [user, setUser] = useState({
     username: "Leyla",
     email: "leyla@gmail.com",
