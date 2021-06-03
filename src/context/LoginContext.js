@@ -4,12 +4,15 @@ export const LoginContext = createContext();
 
 export const LoginProvider = (props) => {
   const [logedIn, setLogedIn] = useState(true);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    "fc94b6c11b50edb276dc0ef393015958d153d490"
+  );
+
   const [user, setUser] = useState({
-    username: "Samira",
+    username: "Leyla",
     email: "leyla@gmail.com",
   });
-  const [user_id, setUserId] = useState("9106cdf868dd4872a0e1ccbdaf3f7716");
+  const [user_id, setUserId] = useState("4b53b2e7671a47d6b2ee8f3e44b58c13");
   return (
     <LoginContext.Provider
       value={{

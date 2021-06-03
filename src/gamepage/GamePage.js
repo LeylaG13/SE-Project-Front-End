@@ -1,22 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import EndMessage from "./EndMessage";
 import "./GamePage.css";
-import Column from "./Column";
 import Menu from "../components/Menu";
 import icon1 from "../media/cards/icon1.png";
 import icon2 from "../media/cards/icon2.png";
 import allStaticCards from "./cards";
 import AllColumns from "./AllColumns";
 import Buttons from "./Buttons";
+import { LoginContext } from "../context/LoginContext";
+
 const numbers = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
   22, 23, 24,
 ];
 
+var team_glob = 0;
+
 var glob = 0;
 
-const GamePage = () => {
+const GamePage = ({ gameId, setGameId }) => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
   };
@@ -43,6 +48,10 @@ const GamePage = () => {
   const [moves, setMoves] = useState(1);
   const [lastID, setLastID] = useState(2);
   const [cardsDisabled, setCardsDisabled] = useState(false);
+  const [localGameId, setLocalGameId] = useState(gameId);
+  const [teamBlueIdGame, setTeamBlueIdGame] = useState("");
+  const [teamRedIdGame, setTeamRedIdGame] = useState("");
+  const [playerId, setPlayerId] = useState("");
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -56,16 +65,42 @@ const GamePage = () => {
     },
   ]);
   const [WS, setWS] = useState(null);
+  const { value1, value2, value3, value4 } = useContext(LoginContext);
+  const [logedIn, setLogedIn] = value1;
+  const [token, setToken] = value2;
+  const [user, setUser] = value3;
+  const [user_id, setUserId] = value4;
+  var auth = `Token ${token}`;
+  let history = useState();
 
   // USE EFFECTS --------------------------------------------
-
+  useEffect(() => {
+    if (gameId === 0 || (gameId === "" && logedIn)) {
+      var str = window.location.href;
+      var res = str.slice(31);
+      setLocalGameId(res);
+    }
+  }, []);
+ 
   // connect when opened page
   useEffect(() => {
     connect();
-    console.log("use effect connect");
+    // console.log("use effect connect");
   }, [0]);
 
   useEffect(() => {
+
+    if (gameId === 0 || gameId === "") {
+      // console.log("gameid", gameId);
+      var str = window.location.href;
+      var res = str.slice(31);
+      setLocalGameId(res);
+    }
+    // console.log("local game id", localGameId);
+  }, []);
+
+  useEffect(() => {
+    // console.log("use effect chosen card");
     console.log("use effect chosen card");
     if (Object.keys(chosenCard).length !== 0) {
       if (team === "blue") {
@@ -91,7 +126,7 @@ const GamePage = () => {
           setPointsRed(pointsRed + 50);
         }
       } else if (chosenCard.color === "grey") {
-        console.log("grey card, no change");
+        // console.log("grey card, no change");
       } else {
         if (team === "blue") {
           setPointsBlue(pointsBlue - 25);
@@ -102,7 +137,7 @@ const GamePage = () => {
           setPointsBlue(pointsBlue + 25);
           setWhoseTurn(1);
         }
-        console.log("change whoseTurn");
+        // console.log("change whoseTurn");
         setTurnChanged(true);
       }
     }
@@ -118,9 +153,9 @@ const GamePage = () => {
   }, [chosenCard]);
 
   useEffect(() => {
-    console.log("use ffect turns bue and red");
+    // console.log("use ffect turns bue and red");
     if (turnsBlue === 0 || turnsRed === 0) {
-      console.log("ENDGAME", endGame);
+      // console.log("ENDGAME", endGame);
       var winmessage = "";
       if (pointsBlue > pointsRed) {
         winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
@@ -139,7 +174,8 @@ const GamePage = () => {
   const messageEl = useRef(null);
 
   useEffect(() => {
-    console.log("use effect socketSentCounter");
+    // console.log("use effect socketSentCounter");
+
     sendToSocket();
     checkWhoseTurn();
     if (messageEl && messageEl.current) {
@@ -151,61 +187,61 @@ const GamePage = () => {
   }, [socketSentCounter]);
 
   useEffect(() => {
-    console.log("use effect checkWhoseTurn team");
+    // console.log("use effect checkWhoseTurn team");
     checkWhoseTurn();
   }, [team, whoseTurn]);
 
   useEffect(() => {
-    console.log("use effect handleDisable disableTeam");
+    // console.log("use effect handleDisable disableTeam");
     handleDisable();
   }, [disableTeam]);
 
-  // useEffect(() => {
-  //   console.log("use effect moves");
-  //   if (moves < 0) setMoves(0);
-  //   if (moves === 0) {
-  //     if (team === "blue" && whoseTurn === 1) setWhoseTurn(0);
-  //     else if (team === "red" && whoseTurn === 0) setWhoseTurn(1);
-  //   }
-  // }, [moves]);
+  useEffect(() => {
+    // console.log("use effect moves");
+    if (moves < 0) setMoves(0);
+    if (moves === 0) {
+      if (team === "blue" && whoseTurn === 1) setWhoseTurn(0);
+      else if (team === "red" && whoseTurn === 0) setWhoseTurn(1);
+    }
+  }, [moves]);
 
   const checkWhoseTurn = () => {
-    console.log("checkWhoseTurn function");
-    console.log("whoseTurn value in checkWhoseTurn:", whoseTurn);
+    // console.log("checkWhoseTurn function");
+    // console.log("whoseTurn value in checkWhoseTurn:", whoseTurn);
     if (whoseTurn) {
       setDisableTeam(0); // disable blue team
-      console.log("team 0 (red) will be disabled to touch cards", team);
+      // console.log("team 0 (red) will be disabled to touch cards", team);
     } else {
       setDisableTeam(1); // disable red team
-      console.log("team 1 (blue) will be disabled to touch cards", team);
+      // console.log("team 1 (blue) will be disabled to touch cards", team);
     }
 
     handleDisable();
   };
   const handleDisable = () => {
-    console.log(
-      "handleDisable function: handle disable data:",
-      team,
-      disableTeam
-    );
+    // console.log(
+    //   "handleDisable function: handle disable data:",
+    //   team,
+    //   disableTeam
+    // );
     if (
       (team === "blue" && disableTeam === 1) ||
       (team === "red" && disableTeam === 0)
     ) {
       // setCardsDisabled("disabled");
       setCardsDisabled(true);
-      console.log("cards are set to disable");
+      // console.log("cards are set to disable");
     } else {
       // setCardsDisabled("");
       setCardsDisabled(false);
-      console.log("cards are NOT disabled");
+      // console.log("cards are NOT disabled");
     }
   };
 
   let timeout = 250; // 250ms
 
   const howManyTurns = () => {
-    console.log("howManyTurns function");
+    // console.log("howManyTurns function");
     var bt = 0;
     var rt = 0;
     allCards.forEach((card) => {
@@ -242,17 +278,17 @@ const GamePage = () => {
   );
 
   const handleMoves = (e) => {
-    console.log("handleMoves", Number(e.target.value));
+    // console.log("handleMoves", Number(e.target.value));
     setMoves(Number(e.target.value));
   };
 
   const handleHint = (e) => {
-    console.log("handleHint");
+    // console.log("handleHint");
     setHint(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    console.log("handleSubmit");
+    // console.log("handleSubmit");
     e.preventDefault();
     var updated_hint = hint.concat(" ");
     updated_hint = updated_hint.concat(moves);
@@ -419,13 +455,19 @@ const GamePage = () => {
         setDisabled={setDisabled}
         setNumBlueSpy={setNumBlueSpy}
         setNumBlueOperatives={setNumBlueOperatives}
-        setNumRedSpy={setNumBlueSpy}
+        setNumRedSpy={setNumRedSpy}
         setNumberRedOperative={setNumberRedOperative}
         setSocketSentCounter={setSocketSentCounter}
         numBlueSpy={numBlueSpy}
         numBlueOperative={numBlueOperative}
         numRedSpy={numRedSpy}
         numRedOperative={numRedOperative}
+        create_player_id
+        playerId={playerId}
+        setPlayerId={setPlayerId}
+        gameId={gameId}
+
+
       />
       <div className="ui grid container">
         <div className="three wide column">
@@ -475,11 +517,12 @@ const GamePage = () => {
   return (
     <div id="gamepage">
       <Menu />
-      {endGame === 1 ? (
+      {maingamepage}
+      {/* {endGame === 1 ? (
         <EndMessage pointsBlue={pointsBlue} pointsRed={pointsRed} />
       ) : (
         maingamepage
-      )}
+      )} */}
     </div>
   );
 };

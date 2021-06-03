@@ -19,9 +19,7 @@ import ProfileEdit from "../profile/ProfileEdit";
 import Draft from "./Draft";
 
 const App = () => {
-  // const [token, setToken] = useState("");
-  // const [user, setUser] = useState({});
-  const [gamePageId, setGamePageId] = useState(0);
+  const [gameId, setGameId] = useState(0);
 
   return (
     <BrowserRouter>
@@ -30,7 +28,7 @@ const App = () => {
           <Route
             exact
             path="/"
-            component={() => <Home setGamePageId={setGamePageId} />}
+            component={() => <Home setGameId={setGameId} />}
           />
           <Route path="/about" component={About} />
           <Route exact path="/leaderboard" component={Rank} />
@@ -41,7 +39,11 @@ const App = () => {
             // component={() => <Login setToken={setToken} setUser={setUser} />}
             component={Login}
           />
-          <Route path="/gamepage/:id" component={GamePage} />
+          <Route
+            path="/gamepage/:id"
+            //  component={GamePage}
+            component={() => <GamePage setGameId={setGameId} gameId={gameId} />}
+          />
           <ProfileProvider>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/profile/edit" component={ProfileEdit} />
