@@ -57,11 +57,18 @@ const images = [
   ch25,
 ];
 
-const Card = ({ word, color, number, setChosenCard, is_open, player, disabled, whoseTurn, team }) => {
-
-  useEffect(()=>{
-    
-  }, [is_open]);
+const Card = ({
+  word,
+  color,
+  number,
+  setChosenCard,
+  is_open,
+  player,
+  disabled,
+  whoseTurn,
+  team,
+}) => {
+  useEffect(() => {}, [is_open]);
 
   const [click, setClick] = useState(0);
   var card = { word: word, color: color };
@@ -90,13 +97,21 @@ const Card = ({ word, color, number, setChosenCard, is_open, player, disabled, w
     </div>
   );
   var pciture_side = (
-    <div className={`icon-image ${color}`} >
+    <div className={`icon-image ${color}`}>
       <img src={images[number]} alt={`pic${number}`} />
     </div>
   );
-  return <div disabled={disabled} style={{
-    opacity: disabled ? 0.25 : 1,
-  }}> {click === 0 && is_open === 0 ? word_side : pciture_side} </div>;
+  return (
+    <div
+      disabled={disabled}
+      style={{
+        opacity: disabled ? 0.25 : 1,
+      }}
+    >
+      {" "}
+      {click === 0 && is_open === false ? word_side : pciture_side}{" "}
+    </div>
+  );
 };
 
 export default Card;

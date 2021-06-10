@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import EndMessage from "./EndMessage";
@@ -24,13 +23,16 @@ var glob = 0;
 const GamePage = ({ gameId, setGameId }) => {
   const shuffle = (array) => {
     array.sort(() => Math.random() - 0.2);
+    // array.sort(() => 0.36001203038237617 - num);
+    // array.sort(() => 0.4424653650152064 - num);
+    // array.sort(() => 0.9071157802256138 - num);
   };
 
   const [pointsRed, setPointsRed] = useState(0);
   const [allCards, setAllCards] = useState(allStaticCards);
   const [pointsBlue, setPointsBlue] = useState(0);
-  const [turnsBlue, setTurnsBlue] = useState(0);
-  const [turnsRed, setTurnsRed] = useState(0);
+  const [turnsBlue, setTurnsBlue] = useState(8);
+  const [turnsRed, setTurnsRed] = useState(9);
   const [chosenCard, setChosenCard] = useState({});
   const [team, setTeam] = useState("");
   const [disabled, setDisabled] = useState("");
@@ -53,16 +55,16 @@ const GamePage = ({ gameId, setGameId }) => {
   const [teamRedIdGame, setTeamRedIdGame] = useState("");
   const [playerId, setPlayerId] = useState("");
   const [messages, setMessages] = useState([
-    {
-      id: 1,
-      msg: "Hello, this it team blue ^_^",
-      team: 0, // blue
-    },
-    {
-      id: 2,
-      msg: "Hello, this is team red :)",
-      team: 1, //red
-    },
+    // {
+    //   id: 1,
+    //   msg: "Hello, this it team blue ^_^",
+    //   team: 0, // blue
+    // },
+    // {
+    //   id: 2,
+    //   msg: "Hello, this is team red :)",
+    //   team: 1, //red
+    // },
   ]);
   const [WS, setWS] = useState(null);
   const { value1, value2, value3, value4 } = useContext(LoginContext);
@@ -72,40 +74,81 @@ const GamePage = ({ gameId, setGameId }) => {
   const [user_id, setUserId] = value4;
   var auth = `Token ${token}`;
   let history = useState();
-
   // USE EFFECTS --------------------------------------------
   useEffect(() => {
+    var res = "";
     if (gameId === 0 || (gameId === "" && logedIn)) {
       var str = window.location.href;
-      var res = str.slice(31);
+      res = str.slice(31);
       setLocalGameId(res);
+    } else {
+      res = gameId;
     }
+
+    axios
+      .get(`http://127.0.0.1:8000/api/cards-get-list/${res}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+          // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+        },
+        mode: "cors",
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        var cards_resp = resp.data;
+        shuffle(cards_resp);
+        shuffle(cards_resp);
+        shuffle(cards_resp);
+        shuffle(cards_resp);
+        howManyTurns(cards_resp);
+        setAllCards(cards_resp);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    axios
+      .get(`http://127.0.0.1:8000/api/team-list/${res}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+          // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+        },
+        mode: "cors",
+      })
+      .then((resp) => {
+        // console.log("I AM IN TEAM LIST API");
+        console.log("IN GAME RETRIVE TEAMS", resp.data);
+        // setTeamBlueIdGame(resp.data[0].id);
+        // setTeamRedIdGame(resp.data[1].id);
+      })
+      .catch((error) => {
+        // console.log("I AM IN TEAM LIST API ERROR");
+        console.error(error);
+      });
   }, []);
- 
+
   // connect when opened page
   useEffect(() => {
     connect();
     // console.log("use effect connect");
   }, [0]);
 
-  useEffect(() => {
-
-    if (gameId === 0 || gameId === "") {
-      // console.log("gameid", gameId);
-      var str = window.location.href;
-      var res = str.slice(31);
-      setLocalGameId(res);
-    }
-    // console.log("local game id", localGameId);
-  }, []);
+  // useEffect(() => {
+  //   if (gameId === 0 || gameId === "") {
+  //     // console.log("gameid", gameId);
+  //     var str = window.location.href;
+  //     var res = str.slice(31);
+  //     setLocalGameId(res);
+  //   }
+  //   // console.log("local game id", localGameId);
+  // }, []);
 
   useEffect(() => {
     // console.log("use effect chosen card");
-    console.log("use effect chosen card");
     if (Object.keys(chosenCard).length !== 0) {
-      if (team === "blue") {
+      if (chosenCard.color === "blue") {
         setTurnsBlue(turnsBlue - 1);
-      } else if (team === "red") {
+      } else if (chosenCard.color === "red") {
         setTurnsRed(turnsRed - 1);
       }
 
@@ -126,6 +169,11 @@ const GamePage = ({ gameId, setGameId }) => {
           setPointsRed(pointsRed + 50);
         }
       } else if (chosenCard.color === "grey") {
+        if (team === "blue") {
+          setWhoseTurn(0);
+        } else {
+          setWhoseTurn(1);
+        }
         // console.log("grey card, no change");
       } else {
         if (team === "blue") {
@@ -143,7 +191,7 @@ const GamePage = ({ gameId, setGameId }) => {
     }
     allCards.forEach((element) => {
       if (element.word === chosenCard.word) {
-        element.is_open = 1;
+        element.is_open = true;
       }
     });
     setAllCards(allCards);
@@ -164,7 +212,10 @@ const GamePage = ({ gameId, setGameId }) => {
       } else if (pointsBlue === pointsRed) {
         winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
       }
+      console.log("I AM IN THE ENDGAME USEEFFECt");
       setEndGame(1);
+      setTurnsBlue(0);
+      setTurnsRed(0);
       setSocketSentCounter((prev) => prev + 1);
     }
 
@@ -175,7 +226,6 @@ const GamePage = ({ gameId, setGameId }) => {
 
   useEffect(() => {
     // console.log("use effect socketSentCounter");
-
     sendToSocket();
     checkWhoseTurn();
     if (messageEl && messageEl.current) {
@@ -240,11 +290,11 @@ const GamePage = ({ gameId, setGameId }) => {
 
   let timeout = 250; // 250ms
 
-  const howManyTurns = () => {
+  const howManyTurns = (thecards) => {
     // console.log("howManyTurns function");
     var bt = 0;
     var rt = 0;
-    allCards.forEach((card) => {
+    thecards.forEach((card) => {
       if (card.color === "blue") {
         // setTurnsBlue(turnsBlue + 1);
         bt++;
@@ -258,7 +308,7 @@ const GamePage = ({ gameId, setGameId }) => {
   };
 
   if (glob === 0) {
-    howManyTurns();
+    // howManyTurns();
     glob++;
   }
 
@@ -267,7 +317,7 @@ const GamePage = ({ gameId, setGameId }) => {
       {messages.map((message) => {
         return (
           <div
-            className={`message ${message.team ? "red" : "blue"}`}
+            className={`message ${message.team === 1 ? "blue" : "red"}`}
             key={message.id}
           >
             {message.msg}
@@ -445,7 +495,7 @@ const GamePage = ({ gameId, setGameId }) => {
   var maingamepage = (
     <div className="main-page">
       {" "}
-      <h1> Room #1</h1>
+      <h1> Room #{gameId}</h1>
       <Buttons
         player={player}
         team={team}
@@ -462,12 +512,9 @@ const GamePage = ({ gameId, setGameId }) => {
         numBlueOperative={numBlueOperative}
         numRedSpy={numRedSpy}
         numRedOperative={numRedOperative}
-        create_player_id
         playerId={playerId}
         setPlayerId={setPlayerId}
         gameId={gameId}
-
-
       />
       <div className="ui grid container">
         <div className="three wide column">
@@ -480,7 +527,7 @@ const GamePage = ({ gameId, setGameId }) => {
             <p>Spymasters: {numBlueSpy}</p>
             <p>Words guessed: </p>
             <p>Points earned: {pointsBlue} </p>
-            <p>Turns left: {turnsBlue} </p>
+            <p> Words left: {turnsBlue} </p>
           </div>
           {player === "spymaster" ? hintbox : null}
         </div>
@@ -505,7 +552,7 @@ const GamePage = ({ gameId, setGameId }) => {
             <p>Spymasters: {numRedSpy}</p>
             <p>Words guessed: </p>
             <p>Points earned: {pointsRed} </p>
-            <p> Turns left: {turnsRed}</p>
+            <p> Words left: {turnsRed}</p>
           </div>
           {chat}
         </div>
@@ -517,12 +564,12 @@ const GamePage = ({ gameId, setGameId }) => {
   return (
     <div id="gamepage">
       <Menu />
-      {maingamepage}
-      {/* {endGame === 1 ? (
+      {/* {maingamepage} */}
+      {endGame === 1 && glob === 1 && turnsBlue === 0 && turnsRed === 0 ? (
         <EndMessage pointsBlue={pointsBlue} pointsRed={pointsRed} />
       ) : (
         maingamepage
-      )} */}
+      )}
     </div>
   );
 };

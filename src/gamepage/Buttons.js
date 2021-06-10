@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 import React, { useEffect, useContext, useState } from "react";
 import { LoginContext } from "../context/LoginContext";
@@ -26,7 +25,6 @@ const Buttons = ({
   playerId,
   setPlayerId,
   gameId,
-
 }) => {
   const [teamBlueId, setTeamBlueId] = useState();
   const [teamRedId, setTeamRedId] = useState();
@@ -38,14 +36,42 @@ const Buttons = ({
 
   useEffect(() => {
     var res = gameId;
+    var str = window.location.href;
+    res = str.slice(31);
 
-    if (localGameId === 0 || localGameId === "") {
-      var str = window.location.href;
-      res = str.slice(31);
-      setLocalGameId(res);
-      // console.log("BUTTONS LOCAL ID");
-    } else {
-      if (team_glob === 0) {
+    // if (localGameId === 0 || localGameId === "") {
+    //   var str = window.location.href;
+    //   res = str.slice(31);
+    //   setLocalGameId(res);
+    //   // console.log("BUTTONS LOCAL ID");
+    // } else {
+    axios
+      .get(`http://127.0.0.1:8000/api/team-list/${res}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+          // "Token a49e0e454ef9b7a9011a3c0b0d7a3a46152a9465",
+        },
+        mode: "cors",
+      })
+      .then((resp) => {
+        // console.log("I AM IN TEAM LIST API");
+        // console.log("IN BUTTONS TRYING TO GET TEAM IDS", resp.data[0].id);
+        // setTeamBlueIdGame(resp.data[0].id);
+        // setTeamRedIdGame(resp.data[1].id);
+        if (resp.data.length !== 0) {
+          blue_id = resp.data[0].id;
+          red_id = resp.data[1].id;
+        }
+      })
+      .catch((error) => {
+        // console.log("I AM IN TEAM LIST API ERROR");
+        console.error(error);
+      });
+
+    if (team_glob === 0) {
+      //////creating team blue if it doesnt exist
+
+      if (blue_id === "") {
         axios
           .post(
             `http://127.0.0.1:8000/api/team-create`,
@@ -65,8 +91,10 @@ const Buttons = ({
           .catch((error) => {
             console.error(error);
           });
+      }
 
-        //////creating team red
+      //////creating team red if it doesnt exist
+      if (red_id === "") {
         axios
           .post(
             `http://127.0.0.1:8000/api/team-create`,
@@ -89,11 +117,12 @@ const Buttons = ({
         team_glob++;
       }
     }
-    console.log("IN USE EEFFECR RED", teamRedId);
+    // }
+    // console.log("IN USE EEFFECR RED", teamRedId);
   }, []);
 
-  console.log(teamRedId);
-  console.log(teamBlueId);
+  console.log("Team Blue id: ", blue_id);
+  console.log("Team Red id: ", red_id);
 
   const onClickTeam = (playertype, color) => {
     // console.log("onClickTeam");
