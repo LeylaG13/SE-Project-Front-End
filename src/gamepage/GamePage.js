@@ -118,8 +118,8 @@ const GamePage = ({ gameId, setGameId }) => {
       .then((resp) => {
         // console.log("I AM IN TEAM LIST API");
         console.log("IN GAME RETRIVE TEAMS", resp.data);
-        // setTeamBlueIdGame(resp.data[0].id);
-        // setTeamRedIdGame(resp.data[1].id);
+        setTeamBlueIdGame(resp.data[0].id);
+        setTeamRedIdGame(resp.data[1].id);
       })
       .catch((error) => {
         // console.log("I AM IN TEAM LIST API ERROR");
@@ -201,18 +201,67 @@ const GamePage = ({ gameId, setGameId }) => {
   }, [chosenCard]);
 
   useEffect(() => {
+    var winner = "";
+    var loser = "";
+    var winner_color = "";
+    var loser_color = "";
     // console.log("use ffect turns bue and red");
     if (turnsBlue === 0 || turnsRed === 0) {
       // console.log("ENDGAME", endGame);
       var winmessage = "";
       if (pointsBlue > pointsRed) {
         winmessage = `The game has finished and Blue Team won scoring ${pointsBlue} points`;
+        winner = teamBlueIdGame;
+        loser = teamRedIdGame;
+        winner_color = "Blue";
+        loser_color = "Red";
       } else if (pointsBlue < pointsRed) {
         winmessage = `The game has finished and Red Team won scoring ${pointsRed} points`;
+        winner = teamRedIdGame;
+        loser = teamBlueIdGame;
+        winner_color = "Red";
+        loser_color = "Blue";
       } else if (pointsBlue === pointsRed) {
         winmessage = `The game has finished and both Blue and Red teams won scoring ${pointsRed} points`;
       }
-      console.log("I AM IN THE ENDGAME USEEFFECt");
+      if (glob !== 0) {
+        axios
+          .patch(
+            `http://127.0.0.1:8000/api/team-retrieve-update/${winner}`,
+            { status: "Won", game: gameId, color: winner_color },
+            {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+              mode: "cors",
+            }
+          )
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        axios
+          .patch(
+            `http://127.0.0.1:8000/api/team-retrieve-update/${loser}`,
+            { status: "Lost", game: gameId, color: loser_color },
+            {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+              mode: "cors",
+            }
+          )
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
       setEndGame(1);
       setTurnsBlue(0);
       setTurnsRed(0);
